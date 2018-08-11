@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/icon.ico" type="image/x-icon"/>
-<title>统一用户管理系统</title>
+<title>BTV律师号运营服务平台</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login/login.css" type="text/css"></link>
 <script src="https://cdn.yunshicloud.com/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/login/jQuery.easing.js"></script>
@@ -68,7 +68,7 @@
 				<div id="loginLayout" class="loginLayout">
 					<div id="loginBG" style="display: none;" class="loginBG">&nbsp;</div>
 					<div id="login" style="display: none;" class="login">
-						<h1>统一用户管理系统</h1>
+						<h1>BTV律师号运营服务平台</h1>
 						<input type="text" name="txtName" id="txtName" value="" class="login-input" placeholder="用户名" autofocus onfocus="hideMsg('txtName');"> 
 						<input type="password" name="password" value="" id="password" class="login-input" placeholder="密码" onfocus="hideMsg('password');"> 
 						<input type="button" value="登  录" class="login-submit" onclick="doLogin();">

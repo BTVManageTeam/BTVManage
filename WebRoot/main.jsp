@@ -15,7 +15,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>用户管理</title>
+<title>BTV律师号运营服务平台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <meta HTTP-EQUIV="pragma" CONTENT="no-cache">
 	<meta http-equiv="X-UA-Compatible" content="IE=10">
@@ -87,7 +87,7 @@
 	<div id="sidebar">
 	 <ul>
      
-    <li class="submenu active open"> <a href="#"><i class="icon icon-list-alt"></i> <span>用户管理</span> </a>
+    <li class="submenu active open">
       <ul style="display:block" class="left_nav">
         <li class="first_nav"><a id="firstOnLoad" href="javascript:void(0)" shref="<%=request.getContextPath()%>/users/findall/" onclick="openurl(this)">用户管理</a></li>
         <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/toDepartment/" onclick="openurl(this)">部门管理</a></li>
@@ -102,7 +102,7 @@
 	<div id="content" style="overflow:hidden;"></div>
 	<!--end-main-container-part-->
 	<!--Footer-part-->
-	<div class="row-fluid">
+	<div style="display: none" class="row-fluid">
 		<div id="footer" class="span34" style="color: #666666;">版权所有&copy;北京新奥特云视科技有限公司</div>
 	</div>
 	<!--end-Footer-part-->
