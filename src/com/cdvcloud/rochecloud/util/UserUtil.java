@@ -22,6 +22,22 @@ public class UserUtil {
 	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(UserUtil.class);
 
+
+	/**
+	 * 获取用户信息
+	 *
+	 * @param request
+	 * @param params
+	 *            根据用户字段获取用户信息
+	 * @return
+	 * @throws IOException
+	 */
+	public static String getUserByRequest(HttpServletRequest request, String params) {
+		HttpSession session = request.getSession();
+		String result = String.valueOf(session.getAttribute(params));
+		return result;
+	}
+
 	/**
 	 * 获取用户名称
 	 * 
