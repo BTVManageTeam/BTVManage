@@ -7,7 +7,6 @@ package com.cdvcloud.rochecloud.common;
  * 
  */
 public class Constants {
-
 	/** 成功 */
 	public static final String SERVICE_SUCCESS = "success";
 	/** 失败 */
