@@ -5,12 +5,12 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="txtContent" jdbcType="VARCHAR" property="txtContent" />
-    <result column="userId" jdbcType="INTEGER" property="userId" />
-    <result column="commentId" jdbcType="INTEGER" property="commentId" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="commentId" jdbcType="VARCHAR" property="commentId" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="createUserId" jdbcType="INTEGER" property="createUserId" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="updateUserId" jdbcType="INTEGER" property="updateUserId" />
+    <result column="updateUserId" jdbcType="VARCHAR" property="updateUserId" />
   </resultMap>
   <sql id="Base_Column_List">
     id, status, txtContent, userId, commentId, createTime, createUserId, updateTime, 
@@ -32,8 +32,8 @@
       createUserId, updateTime, updateUserId
       )
     values (#{id,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{txtContent,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=INTEGER}, #{commentId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}
+      #{userId,jdbcType=VARCHAR}, #{commentId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.cdvcloud.rochecloud.domain.BtvCommentReply">
@@ -78,22 +78,22 @@
         #{txtContent,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="commentId != null">
-        #{commentId,jdbcType=INTEGER},
+        #{commentId,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createUserId != null">
-        #{createUserId,jdbcType=INTEGER},
+        #{createUserId,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUserId != null">
-        #{updateUserId,jdbcType=INTEGER},
+        #{updateUserId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -107,22 +107,22 @@
         txtContent = #{txtContent,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        userId = #{userId,jdbcType=INTEGER},
+        userId = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="commentId != null">
-        commentId = #{commentId,jdbcType=INTEGER},
+        commentId = #{commentId,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         createTime = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createUserId != null">
-        createUserId = #{createUserId,jdbcType=INTEGER},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         updateTime = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUserId != null">
-        updateUserId = #{updateUserId,jdbcType=INTEGER},
+        updateUserId = #{updateUserId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -131,12 +131,12 @@
     update btv_commentReply
     set status = #{status,jdbcType=INTEGER},
       txtContent = #{txtContent,jdbcType=VARCHAR},
-      userId = #{userId,jdbcType=INTEGER},
-      commentId = #{commentId,jdbcType=INTEGER},
+      userId = #{userId,jdbcType=VARCHAR},
+      commentId = #{commentId,jdbcType=VARCHAR},
       createTime = #{createTime,jdbcType=TIMESTAMP},
-      createUserId = #{createUserId,jdbcType=INTEGER},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
       updateTime = #{updateTime,jdbcType=TIMESTAMP},
-      updateUserId = #{updateUserId,jdbcType=INTEGER}
+      updateUserId = #{updateUserId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

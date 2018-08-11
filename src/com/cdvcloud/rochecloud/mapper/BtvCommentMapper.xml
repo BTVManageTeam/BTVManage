@@ -8,9 +8,9 @@
     <result column="openId" jdbcType="VARCHAR" property="openId" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="createUserId" jdbcType="INTEGER" property="createUserId" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="updateUserId" jdbcType="INTEGER" property="updateUserId" />
+    <result column="updateUserId" jdbcType="VARCHAR" property="updateUserId" />
   </resultMap>
   <sql id="Base_Column_List">
     id, commentName, commentContent, openId, status, createTime, createUserId, updateTime, 
@@ -33,7 +33,7 @@
       )
     values (#{id,jdbcType=VARCHAR}, #{commentName,jdbcType=VARCHAR}, #{commentContent,jdbcType=VARCHAR}, 
       #{openId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}
+      #{createUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.cdvcloud.rochecloud.domain.BtvComment">
@@ -87,13 +87,13 @@
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createUserId != null">
-        #{createUserId,jdbcType=INTEGER},
+        #{createUserId,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUserId != null">
-        #{updateUserId,jdbcType=INTEGER},
+        #{updateUserId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -116,13 +116,13 @@
         createTime = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createUserId != null">
-        createUserId = #{createUserId,jdbcType=INTEGER},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         updateTime = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUserId != null">
-        updateUserId = #{updateUserId,jdbcType=INTEGER},
+        updateUserId = #{updateUserId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -134,9 +134,9 @@
       openId = #{openId,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       createTime = #{createTime,jdbcType=TIMESTAMP},
-      createUserId = #{createUserId,jdbcType=INTEGER},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
       updateTime = #{updateTime,jdbcType=TIMESTAMP},
-      updateUserId = #{updateUserId,jdbcType=INTEGER}
+      updateUserId = #{updateUserId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

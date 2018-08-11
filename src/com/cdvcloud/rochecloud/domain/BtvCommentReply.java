@@ -9,17 +9,17 @@ public class BtvCommentReply {
 
     private String txtContent;
 
-    private Integer userId;
+    private String userId;
 
-    private Integer commentId;
+    private String commentId;
 
     private Date createTime;
 
-    private Integer createUserId;
+    private String createUserId;
 
     private Date updateTime;
 
-    private Integer updateUserId;
+    private String updateUserId;
 
     public String getId() {
         return id;
@@ -45,19 +45,19 @@ public class BtvCommentReply {
         this.txtContent = txtContent;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public Integer getCommentId() {
+    public String getCommentId() {
         return commentId;
     }
 
-    public void setCommentId(Integer commentId) {
+    public void setCommentId(String commentId) {
         this.commentId = commentId;
     }
 
@@ -69,11 +69,11 @@ public class BtvCommentReply {
         this.createTime = createTime;
     }
 
-    public Integer getCreateUserId() {
+    public String getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Integer createUserId) {
+    public void setCreateUserId(String createUserId) {
         this.createUserId = createUserId;
     }
 
@@ -85,11 +85,11 @@ public class BtvCommentReply {
         this.updateTime = updateTime;
     }
 
-    public Integer getUpdateUserId() {
+    public String getUpdateUserId() {
         return updateUserId;
     }
 
-    public void setUpdateUserId(Integer updateUserId) {
+    public void setUpdateUserId(String updateUserId) {
         this.updateUserId = updateUserId;
     }
 }

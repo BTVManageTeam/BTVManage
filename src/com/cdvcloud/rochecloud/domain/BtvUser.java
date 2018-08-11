@@ -19,11 +19,11 @@ public class BtvUser {
 
     private Date createTime;
 
-    private Integer createUserId;
+    private String createUserId;
 
-    private Integer updateUserId;
+    private String updateUserId;
 
-    private Integer deletestatus;
+    private Integer deleteStatus;
 
     public String getId() {
         return id;
@@ -89,27 +89,27 @@ public class BtvUser {
         this.createTime = createTime;
     }
 
-    public Integer getCreateUserId() {
+    public String getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Integer createUserId) {
+    public void setCreateUserId(String createUserId) {
         this.createUserId = createUserId;
     }
 
-    public Integer getUpdateUserId() {
+    public String getUpdateUserId() {
         return updateUserId;
     }
 
-    public void setUpdateUserId(Integer updateUserId) {
+    public void setUpdateUserId(String updateUserId) {
         this.updateUserId = updateUserId;
     }
 
-    public Integer getDeletestatus() {
-        return deletestatus;
+    public Integer getDeleteStatus() {
+        return deleteStatus;
     }
 
-    public void setDeletestatus(Integer deletestatus) {
-        this.deletestatus = deletestatus;
+    public void setDeleteStatus(Integer deleteStatus) {
+        this.deleteStatus = deleteStatus;
     }
 }

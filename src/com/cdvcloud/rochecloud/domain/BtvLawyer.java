@@ -25,11 +25,11 @@ public class BtvLawyer {
 
     private Date createTime;
 
-    private Integer createUserId;
+    private String createUserId;
 
     private Date updateTime;
 
-    private Integer updateUserId;
+    private String updateUserId;
 
     private Integer userId;
 
@@ -121,11 +121,11 @@ public class BtvLawyer {
         this.createTime = createTime;
     }
 
-    public Integer getCreateUserId() {
+    public String getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Integer createUserId) {
+    public void setCreateUserId(String createUserId) {
         this.createUserId = createUserId;
     }
 
@@ -137,11 +137,11 @@ public class BtvLawyer {
         this.updateTime = updateTime;
     }
 
-    public Integer getUpdateUserId() {
+    public String getUpdateUserId() {
         return updateUserId;
     }
 
-    public void setUpdateUserId(Integer updateUserId) {
+    public void setUpdateUserId(String updateUserId) {
         this.updateUserId = updateUserId;
     }
 
