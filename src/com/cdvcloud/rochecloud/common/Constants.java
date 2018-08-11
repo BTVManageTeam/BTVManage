@@ -36,5 +36,7 @@ public class Constants {
 	public static final String DELIMITER = ",";
 	/** Token配置地址 */
 	public static final String CHECK_TOKEN_URL = "CHECK_TOKEN_URL";
+	/** cas返回的companyCode **/
+	public static final String ROLE_CODE = "role_code";
 
 }

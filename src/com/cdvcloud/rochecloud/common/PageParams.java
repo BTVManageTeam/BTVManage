@@ -1,18 +1,10 @@
 package com.cdvcloud.rochecloud.common;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import com.cdvcloud.rochecloud.util.UUIDUtil;
 
 import javax.servlet.http.HttpServletRequest;
-
-import com.cdvcloud.rochecloud.util.UUIDUtil;
-import com.cdvcloud.rochecloud.util.UserUtil;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 对于前台页面穿过来的值进行判断赋值的工具类
@@ -135,8 +127,8 @@ public class PageParams {
 				}
 			}
 		}
-		String companyName = UserUtil.getUserByRequest(request, Constants.COMPANY_NAME);
-		sqlcount.append(" and ownerBusCode = '").append(companyName).append("'");
+//		String companyName = UserUtil.getUserByRequest(request, Constants.ROLE_CODE);
+//		sqlcount.append(" and ownerBusCode = '").append(companyName).append("'");
 		String sql = sqlcount.toString();
 		return sql;
 	}
@@ -166,8 +158,8 @@ public class PageParams {
 				}
 			}
 		}
-		String companyName = UserUtil.getUserByRequestOld(request, Constants.COMPANY_NAME);
-		sqlcount.append(" and ownerBusCode = '").append(companyName).append("'");
+//		String companyName = UserUtil.getUserByRequest(request, Constants.ROLE_CODE);
+//		sqlcount.append(" and ownerBusCode = '").append(companyName).append("'");
 		String sql = sqlcount.toString();
 		return sql;
 	}
