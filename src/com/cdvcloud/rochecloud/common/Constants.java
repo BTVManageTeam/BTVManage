@@ -26,6 +26,15 @@ public class Constants {
 	public static final String CURRENT_USER_ID = "userId";
 	/** 当前在线用户名 */
 	public static final String CURRENT_USER_NAME = "userName";
-
+	/** 缓存大小 */
+	public static final int BYTE_LENGTH = 1024 * 1024;
+	/** 是否使用网卡绑定 */
+	public static final boolean BIND = false;
+	/** 编码格式 */
+	public static final String CODED_FORMAT = "UTF-8";
+	/** 分隔符 逗号',' */
+	public static final String DELIMITER = ",";
+	/** Token配置地址 */
+	public static final String CHECK_TOKEN_URL = "CHECK_TOKEN_URL";
 
 }
