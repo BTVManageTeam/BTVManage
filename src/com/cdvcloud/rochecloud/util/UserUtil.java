@@ -23,45 +23,6 @@ public class UserUtil {
 	private static final Logger logger = Logger.getLogger(UserUtil.class);
 
 	/**
-	 * 获取用户信息
-	 * 
-	 * @param request
-	 * @param params
-	 *            根据用户字段获取用户信息
-	 * @return
-	 * @throws IOException
-	 */
-	public static String getUserByRequestOld(HttpServletRequest request, String params) {
-		if (Constants.COMPANY_NAME.equals(params)
-				&& ("administrator".equals(request.getRemoteUser()) || "root".equals(request.getRemoteUser()))) {
-			return String.valueOf(request.getSession().getAttribute(Constants.COMPANY_NAME));
-		}
-		AttributePrincipal principal = (AttributePrincipal) request.getUserPrincipal();
-		Map<String, Object> mapUserInfo = principal.getAttributes();
-		String result = StringUtil.decodeString(String.valueOf(mapUserInfo.get(params)));
-		return result;
-	}
-
-	/**
-	 * 获取用户信息
-	 * 
-	 * @param request
-	 * @param params
-	 *            根据用户字段获取用户信息
-	 * @return
-	 * @throws IOException
-	 */
-	public static String getUserByRequest(HttpServletRequest request, String params) {
-		if (Constants.COMPANY_NAME.equals(params)
-				&& ("administrator".equals(request.getRemoteUser()) || "root".equals(request.getRemoteUser()))) {
-			return String.valueOf(request.getSession().getAttribute(Constants.COMPANY_NAME));
-		}
-		HttpSession session = request.getSession();
-		String result = String.valueOf(session.getAttribute(params));
-		return result;
-	}
-
-	/**
 	 * 获取用户名称
 	 * 
 	 * @param request

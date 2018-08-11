@@ -20,5 +20,12 @@ public class Constants {
 	public static final String ROLE_CODE_ADMIN = "admin";
 	/** 角色code-普通用户 */
 	public static final String ROLE_CODE_CONSUMER = "consumer";
+	/**用户登录名*/
+	public static final String LOGIN_ID = "loginId";
+	/**用户主键*/
+	public static final String CURRENT_USER_ID = "userId";
+	/** 当前在线用户名 */
+	public static final String CURRENT_USER_NAME = "userName";
+
 
 }
