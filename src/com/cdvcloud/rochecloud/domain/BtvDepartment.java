@@ -2,7 +2,7 @@ package com.cdvcloud.rochecloud.domain;
 
 import java.util.Date;
 
-public class BtvCepartment {
+public class BtvDepartment {
     private String id;
 
     private String departmentName;

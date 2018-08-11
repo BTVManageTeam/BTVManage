@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cdvcloud.rochecloud.mapper.BtvCepartmentMapper">
-  <resultMap id="BaseResultMap" type="com.cdvcloud.rochecloud.domain.BtvCepartment">
+<mapper namespace="com.cdvcloud.rochecloud.mapper.BtvDepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.cdvcloud.rochecloud.domain.BtvDepartment">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="departmentName" jdbcType="VARCHAR" property="departmentName" />
     <result column="regionName" jdbcType="VARCHAR" property="regionName" />
@@ -26,7 +26,7 @@
     delete from btv_department
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.cdvcloud.rochecloud.domain.BtvCepartment">
+  <insert id="insert" parameterType="com.cdvcloud.rochecloud.domain.BtvDepartment">
     insert into btv_department (id, departmentName, regionName, 
       departmentDescribe, createTime, createUserId, 
       updateTime, updateUserId, userId
@@ -36,7 +36,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cdvcloud.rochecloud.domain.BtvCepartment">
+  <insert id="insertSelective" parameterType="com.cdvcloud.rochecloud.domain.BtvDepartment">
     insert into btv_department
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -97,7 +97,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cdvcloud.rochecloud.domain.BtvCepartment">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdvcloud.rochecloud.domain.BtvDepartment">
     update btv_department
     <set>
       <if test="departmentName != null">
@@ -127,7 +127,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cdvcloud.rochecloud.domain.BtvCepartment">
+  <update id="updateByPrimaryKey" parameterType="com.cdvcloud.rochecloud.domain.BtvDepartment">
     update btv_department
     set departmentName = #{departmentName,jdbcType=VARCHAR},
       regionName = #{regionName,jdbcType=VARCHAR},
