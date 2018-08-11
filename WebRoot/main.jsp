@@ -89,6 +89,7 @@
      
     <li class="submenu active open">
       <ul style="display:block" class="left_nav">
+	    <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/department/" onclick="openurl(this)">律所管理</a></li>
         <li class="first_nav"><a id="firstOnLoad" href="javascript:void(0)" shref="<%=request.getContextPath()%>/users/findall/" onclick="openurl(this)">用户管理</a></li>
         <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/toDepartment/" onclick="openurl(this)">部门管理</a></li>
       </ul>
