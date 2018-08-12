@@ -1,9 +1,12 @@
 package com.cdvcloud.rochecloud.web.controller;
 
 import com.cdvcloud.rochecloud.common.Constants;
+import com.cdvcloud.rochecloud.common.Pages;
 import com.cdvcloud.rochecloud.common.ResponseObject;
 import com.cdvcloud.rochecloud.common.ReturnState;
+import com.cdvcloud.rochecloud.domain.BtvLawyer;
 import com.cdvcloud.rochecloud.domain.BtvOrder;
+import com.cdvcloud.rochecloud.service.LawyerService;
 import com.cdvcloud.rochecloud.service.OrderService;
 import com.cdvcloud.rochecloud.util.*;
 import org.apache.log4j.Logger;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -24,6 +29,8 @@ public class ApiController {
 
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private LawyerService lawyerService;
 
 	/**
 	 * oss上传回调方法
@@ -60,7 +67,8 @@ public class ApiController {
 			logger.info("新增订单入参："+strJson);
 			Map<String,Object> strMap = JsonUtil.readJSON2Map(strJson);
 			BtvOrder btvOrder = new BtvOrder();
-			btvOrder.setOrderId(UUIDUtil.randomUUID());
+			String orderId = UUIDUtil.randomUUID();
+			btvOrder.setOrderId(orderId);
 			btvOrder.setUserName(String.valueOf(strMap.get("userName")));
 			btvOrder.setPhone(String.valueOf(strMap.get("phone")));
 			btvOrder.setPieceName(String.valueOf(strMap.get("piceName")));
@@ -71,16 +79,15 @@ public class ApiController {
 			btvOrder.setServiceStatus(Constants.ZERO);
 			btvOrder.setOpenId(String.valueOf(strMap.get("openId")));
 			btvOrder.setCreateTime(DateUtil.getCurrentDateTime());
-			String strUserId = UserUtil.getUserByRequest(request, Constants.CURRENT_USER_ID);
-			btvOrder.setCreateUserId(strUserId);
+			btvOrder.setCreateUserId(String.valueOf(strMap.get("lawyerId")));
 			long num =orderService.insertOrder(btvOrder);
 			if(num> 0){
 				responseObject.setCode(ReturnState.success.status);
 				responseObject.setMessage(ReturnState.success.detail);
-				responseObject.setData(ReturnState.success.enDetail);
+				responseObject.setData(orderId);
 			}
 		} catch (Exception e) {
-			logger.error("新增部门信息异常！异常信息：" + e.getMessage());
+			logger.error("新增订单信息异常！异常信息：" + e.getMessage());
 		}
 		return responseObject;
 	}
@@ -138,7 +145,7 @@ public class ApiController {
 				responseObject.setData(ReturnState.success.enDetail);
 			}
 		} catch (Exception e) {
-			logger.error("更新部门信息异常！异常信息：" + e.getMessage());
+			logger.error("更新订单信息异常！异常信息：" + e.getMessage());
 		}
 		return responseObject;
 	}
@@ -149,19 +156,84 @@ public class ApiController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "queryOrder")
+	@RequestMapping(value = "queryOrderById")
 	@ResponseBody
-	public ResponseObject queryOrder(HttpServletRequest request,
+	public ResponseObject queryOrderById(HttpServletRequest request,
 									  @RequestParam(value = "id") String id) {
 		ResponseObject responseObject = new ResponseObject(ReturnState.failure.status,ReturnState.failure.detail,ReturnState.failure.enDetail);
 		try {
-			logger.info("更新订单入参："+id);
+			logger.info("更新订单入参：[id="+id+"]");
 			BtvOrder btvOrder1 =orderService.queryOrder(id);
 			responseObject.setCode(ReturnState.success.status);
 			responseObject.setMessage(ReturnState.success.detail);
 			responseObject.setData(btvOrder1);
 		} catch (Exception e) {
-			logger.error("更新部门信息异常！异常信息：" + e.getMessage());
+			logger.error("根据id查询订单信息异常！异常信息：" + e.getMessage());
+		}
+		return responseObject;
+	}
+
+	/**
+	 * 查询订单列表
+	 * @param request
+	 * @param openId
+	 * @return
+	 */
+	@RequestMapping(value = "queryOrderPage")
+	@ResponseBody
+	public ResponseObject queryOrderPage(HttpServletRequest request,
+										 @RequestParam(value = "openId") String openId,
+										@RequestBody String strJson) {
+		ResponseObject responseObject = new ResponseObject(ReturnState.failure.status,ReturnState.failure.detail,ReturnState.failure.enDetail);
+		try {
+			logger.info("分页查询订单入参：[openId="+openId+"],"+strJson);
+			Map<String,Object> strMap = new HashMap<String,Object>();
+			Pages<BtvOrder> page = new Pages<BtvOrder>();
+			page.setNumPerPage(10);
+			page.setCurrentPage(1);
+			String condition = " openId = '"+openId+"'";
+			if(strMap.containsKey("commentStatus")){
+				condition += "and commentStatus = "+Integer.valueOf(String.valueOf(strMap.get("commentStatus")));
+			}
+			if(strMap.containsKey("pageNum")){
+				page.setNumPerPage(Integer.valueOf(String.valueOf(strMap.get("pageNum"))));
+			}
+			if(strMap.containsKey("currentPage")){
+				page.setCurrentPage(Integer.valueOf(String.valueOf(strMap.get("currentPage"))));
+			}
+			page.setCondition(condition);
+			Integer totalNum = orderService.countFindAll(page);
+			page.setTotalNum(totalNum);
+			List<BtvOrder> btvOrderList =orderService.selectFindAll(page);
+			page.setList(btvOrderList);
+			responseObject.setCode(ReturnState.success.status);
+			responseObject.setMessage(ReturnState.success.detail);
+			responseObject.setData(page);
+		} catch (Exception e) {
+			logger.error("分页查询订单信息异常！异常信息：" + e.getMessage());
+		}
+		return responseObject;
+	}
+
+	/**
+	 * 查询律师详情
+	 *
+	 * @param lawyerId
+	 * @return
+	 */
+	@RequestMapping(value = "queryLawyerById")
+	@ResponseBody
+	public ResponseObject queryLawyerById(HttpServletRequest request,
+										 @RequestParam(value = "lawyerId") String lawyerId) {
+		ResponseObject responseObject = new ResponseObject(ReturnState.failure.status,ReturnState.failure.detail,ReturnState.failure.enDetail);
+		try {
+			logger.info("更新订单入参：[lawyerId="+lawyerId+"]");
+			BtvLawyer btvLawyer =lawyerService.queryLawyerById(lawyerId);
+			responseObject.setCode(ReturnState.success.status);
+			responseObject.setMessage(ReturnState.success.detail);
+			responseObject.setData(btvLawyer);
+		} catch (Exception e) {
+			logger.error("根据id查询订单信息异常！异常信息：" + e.getMessage());
 		}
 		return responseObject;
 	}

@@ -1,6 +1,9 @@
 package com.cdvcloud.rochecloud.service;
 
+import com.cdvcloud.rochecloud.common.Pages;
 import com.cdvcloud.rochecloud.domain.BtvOrder;
+
+import java.util.List;
 
 /**
 * @ClassName:
@@ -31,5 +34,18 @@ public interface OrderService {
      */
     BtvOrder queryOrder(String id);
 
+    /**
+     * 分页查询总数
+     * @param page
+     * @return
+     */
+    int countFindAll(Pages<BtvOrder> page);
+
+    /**
+     * 分页查询所有数据
+     * @param page
+     * @return
+     */
+    List<BtvOrder> selectFindAll(Pages<BtvOrder> page);
 
 }

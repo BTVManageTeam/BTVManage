@@ -196,4 +196,31 @@
       updateUserId = #{updateUserId,jdbcType=VARCHAR}
     where orderId = #{orderId,jdbcType=VARCHAR}
   </update>
+
+  <!--按照条件查询总个数-->
+  <select id="countFindAll" parameterType="com.cdvcloud.rochecloud.common.Pages"  resultType="java.lang.Integer">
+    select count(*) from btv_order
+    <where>
+      <if test="condition != null">
+        ${condition}
+      </if>
+    </where>
+  </select>
+
+  <!--分页查询数据-->
+  <select id="selectFindAll" resultMap="BaseResultMap" parameterType="com.cdvcloud.rochecloud.common.Pages">
+    select * from btv_order
+    <where>
+      <if test="condition != null">
+        ${condition}
+      </if>
+    </where>
+    <if test="order!= null &amp;&amp; orderBy!= null">
+      order by ${order} ${orderBy}
+    </if>
+    <if test="currentNum != null &amp;&amp; numPerPage != null">
+      limit #{currentNum}, #{numPerPage}
+    </if>
+  </select>
+
 </mapper>

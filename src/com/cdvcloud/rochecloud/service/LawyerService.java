@@ -37,4 +37,11 @@ public interface LawyerService {
 	 */
 	BtvLawyer findLawyerByUserId(String userId);
 
+	/**
+	 * 根据律师id查询律师详情
+	 * @param lawyerId
+	 * @return
+	 */
+	BtvLawyer queryLawyerById(String lawyerId);
+
 }
