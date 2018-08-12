@@ -10,6 +10,8 @@ import java.io.Serializable;
 public enum ReturnState implements Serializable {
 	//成功
 	success(0, "success", "success"),
+	//失败
+	failure(1, "failure", "failure"),
 	//标识不存在
 	id_not_exist(20001, "Id is not exist", "Id is not exist"),
 	//参数不合法
