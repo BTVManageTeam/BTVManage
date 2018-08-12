@@ -37,4 +37,19 @@ public class UserServiceImpl implements UserService {
 		return btvUserMapper.insertSelective(record);
 	}
 
+	@Override
+	public BtvUser selectByPrimaryKey(String userId) {
+		return btvUserMapper.selectByPrimaryKey(userId);
+	}
+
+	@Override
+	public int updateByPrimaryKeySelective(BtvUser record) {
+		return btvUserMapper.updateByPrimaryKeySelective(record);
+	}
+
+	@Override
+	public int deleteByPrimaryKey(String userId) {
+		return btvUserMapper.deleteByPrimaryKey(userId);
+	}
+
 }

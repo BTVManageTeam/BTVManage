@@ -22,10 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 律所管理控制器
@@ -62,15 +59,30 @@ public class DepartmentController {
 	}
 
 
+	/**
+	 * 律所列表
+	 *
+	 * @param request
+	 * @param page
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "findall/")
-	public String findall(HttpServletRequest request, Pages<Map<String,Object>> page, Model model) {
+	public String findall(HttpServletRequest request, Pages<Map<String, Object>> page, Model model) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		String param = null;
 		try {
 			params = ParamsUtil.getParamsMapWithTrim(request);
 			param = PageParams.getConditionByCAS(request, params);
 			page.setOrder("dept.createTime");
+			String roleCode = UserUtil.getUserByRequest(request, Constants.ROLE_CODE);
+			int code = Integer.valueOf(roleCode);
 			page.setCondition(param);
+			if (code == Constants.ONE) {
+				String strUserId = UserUtil.getUserByRequest(request, Constants.CURRENT_USER_ID);
+				page.setTempParam(strUserId);
+			}
+			model.addAttribute("roleCode",roleCode);
 			Integer totalNum = deparmentService.countFindAllDepartment(page);
 			page.setTotalNum(totalNum);
 
@@ -159,6 +171,7 @@ public class DepartmentController {
 			record.setCreateTime(createTime);
 			record.setUserId(userId);
 			record.setRegionName(regionName);
+			record.setDepartmentDescribe(departmentDescribe);
 			long num = deparmentService.addDepartment(record);
 			if (num > 0) {
 				strResult = "success";
@@ -171,28 +184,82 @@ public class DepartmentController {
 
 
 	/**
-	 * 更新律所
+	 * 跳转至更新律所页面
 	 *
 	 * @param id
-	 * @param name
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "toUpdateDepartment/")
+	public String toAddSection(@RequestParam(value = "id") String id, Model model) {
+		BtvDepartment department = deparmentService.findDeparmentById(id);
+		String userId = department.getUserId();
+		BtvUser user = userService.selectByPrimaryKey(userId);
+		model.addAttribute("department", department);
+		List<String> listStr = new ArrayList<String>();
+		listStr.add("东城区");
+		listStr.add("西城区");
+		listStr.add("朝阳区");
+		listStr.add("崇文区");
+		listStr.add("海淀区");
+		listStr.add("宣武区");
+		listStr.add("丰台区");
+		listStr.add("房山区");
+		listStr.add("大兴区");
+		listStr.add("通州区");
+		listStr.add("顺义区");
+		listStr.add("平谷区");
+		listStr.add("昌平区");
+		listStr.add("怀柔区");
+		listStr.add("延庆县");
+		listStr.add("密云县");
+		listStr.add("石景山区");
+		listStr.add("门头沟区");
+		model.addAttribute("regions", listStr);
+		model.addAttribute("user", user);
+		return "department/updateDepartment";
+	}
+
+	/**
+	 * 更新律所
+	 *
 	 * @return
 	 * @throws MyDefineException
 	 */
-	@RequestMapping(value = "updateDepartment/", produces = {"text/json;charset=UTF-8"})
+	@RequestMapping(value = "updateDepartment/")
 	@ResponseBody
-	public String updateDepartment(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name) throws MyDefineException {
+	public String updateDepartment(HttpServletRequest request) throws MyDefineException {
 		String strResult = "fail";
+		String departmentId = "";
 		try {
+			departmentId = request.getParameter("departmentId");
+			String userId = request.getParameter("userId");
+			String password = request.getParameter("password");
+			String regionName = request.getParameter("regionName");
+			String departmentDescribe = request.getParameter("departmentDescribe");
+
+			String strUserId = UserUtil.getUserByRequest(request, Constants.CURRENT_USER_ID);
+			if (!StringUtil.isEmpty(password)) {
+				BtvUser user = new BtvUser();
+				user.setUserId(userId);
+				user.setPassword(MD5Util.getMd5ToLower(password));
+				user.setUpdateUserId(strUserId);
+				userService.updateByPrimaryKeySelective(user);
+			}
+
 			BtvDepartment btvDepartment = new BtvDepartment();
-			btvDepartment.setDepartmentId(id);
-			btvDepartment.setDepartmentName(name);
+			btvDepartment.setRegionName(regionName);
+			btvDepartment.setDepartmentDescribe(departmentDescribe);
+			btvDepartment.setUpdateTime(DateUtil.getCurrentDateTime());
+			btvDepartment.setUpdateUserId(strUserId);
+			btvDepartment.setDepartmentId(departmentId);
 			long num = deparmentService.updateDepartment(btvDepartment);
 			if (num > 0) {
 				strResult = "success";
 			}
 		} catch (Exception e) {
 			logger.error("更新律所信息异常！异常信息：" + e.getMessage());
-			throw new MyDefineException(StringUtil.format("更新律所信息异常！用户ID {} 名称 {}", id, name));
+			throw new MyDefineException(StringUtil.format("更新律所信息异常！律所ID {} ", departmentId));
 		}
 		return strResult;
 	}
@@ -203,11 +270,12 @@ public class DepartmentController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "removeDepartment/", produces = {"text/json;charset=UTF-8"})
+	@RequestMapping(value = "deleteDepartment/")
 	@ResponseBody
 	public String removeDepartment(HttpServletRequest request, @RequestParam(value = "id") String id) {
 		String strResult = "fail";
 		try {
+			userService.deleteByPrimaryKey(id);
 			long num = deparmentService.removeDepartment(id);
 			if (num > 0) {
 				strResult = "success";

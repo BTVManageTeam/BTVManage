@@ -39,4 +39,25 @@ public interface UserService {
 	 * @return
 	 */
 	int insertSelective(BtvUser record);
+
+	/**
+	 * 根据userID查询用户信息
+	 * @param userId
+	 * @return
+	 */
+	BtvUser selectByPrimaryKey(String userId);
+
+	/**
+	 * 更新用户信息
+	 * @param record
+	 * @return
+	 */
+	int updateByPrimaryKeySelective(BtvUser record);
+
+	/**
+	 * 删除用户
+	 * @param userId
+	 * @return
+	 */
+	int deleteByPrimaryKey(String userId);
 }

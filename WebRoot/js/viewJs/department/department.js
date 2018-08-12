@@ -7,20 +7,20 @@ function toAddDepartment() {
 }
 
 /**
- * 删除用户
+ * 删除律所
  * 
  * @param id
  * @param type
  *            m:素材
  */
-function delUser(id) {
+function delDepartment(id) {
 	var confirm = $.scojs_confirm({
-		content : "您确定要删除此用户吗？",
+		content : "您确定要删除此律所吗？",
 		action : function() {
 			confirm.destroy();
 			$.ajax({
 				type : "POST",
-				url : ctx + "/users/deleteByid/?id=" + id,
+				url : ctx + "/department/deleteDepartment/?id=" + id,
 				success : function(data) {
 					if (data == "success") {
 						$.scojs_message('删除成功!', $.scojs_message.TYPE_OK);
@@ -37,13 +37,13 @@ function delUser(id) {
 	confirm.show();
 }
 /**
- * 修改用户信息
+ * 修改律所信息
  */
-function toUpdateUser(id) {
+function toUpdateDepartment(id) {
 	$.Mark.show();
 	$.ajax({
 		type : 'POST',
-		url : ctx + "/users/toupdateuser/?id=" + id,
+		url : ctx + "/department/toUpdateDepartment/?id=" + id,
 		cache : false,
 		success : function(response) {
 			/*$.Mark.hide();

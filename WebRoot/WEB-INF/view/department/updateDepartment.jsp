@@ -23,51 +23,32 @@ tr{
 	</div>
 	<div class="widget-content tab-content">
 		<div style="float: left;width: 60%">
-			<form id="addDepartmentForm" class="form-horizontal" action="${ctx}/department/addDepartment/">
+			<form id="updateDepartmentForm" class="form-horizontal" action="${ctx}/department/updateDepartment/">
 				<div id="gridPager">
 					<table style="width: 100%; padding: 8px; ">
 						<tr>
 							<td align="right"  width="20%">登录名：</td>
-							<td width="80%"><input type="text" value="" name="accountName" id="accountName" datatype="accountName" nullmsg="请输入登录名" errormsg="登录名为1-20个非手机号任意字符"
-								ajaxurl="<%=request.getContextPath()%>/department/checkAccountName/?operate=add" /> <span style="color: red; font-size: 16px;">*</span>
-								<div class="Validform_checktip"></div>
-							</td>
+							<td><label>${user.accountName}</label></td>
 						</tr>
 						<tr>
 							<td align="right" width="20%">密码：</td>
-							<td width="80%"><input type="password" value="" name="password" id="password" datatype="s1-20" errormsg="密码" /> <span
+							<td width="80%"><input type="password" value="" name="password" id="password"  ignore="ignore" datatype="s1-20" errormsg="密码" /> <span
 									style="color: red; font-size: 16px;">*</span>
 								<div class="Validform_checktip"></div>
 							</td>
 						</tr>
 						<tr>
 							<td align="right">律所名称：</td>
-							<td><input type="text" value="" name="departmentName" id="departmentName" datatype="s1-20" errormsg="请输入律所名称" ignore="ignore" />
-								<div class="Validform_checktip"></div>
+							<td><label>${department.departmentName}</label>
 							</td>
 						</tr>
 						<tr>
 							<td align="right">地域：</td>
 							<td>
 								<select style="width: 215px;" name="regionName" id="regionName">
-									<option value="东城区">东城区</option>
-									<option value="西城区">西城区</option>
-									<option value="朝阳区">朝阳区</option>
-									<option value="崇文区">崇文区</option>
-									<option value="海淀区">海淀区</option>
-									<option value="宣武区">宣武区</option>
-									<option value="丰台区">丰台区</option>
-									<option value="房山区">房山区</option>
-									<option value="大兴区">大兴区</option>
-									<option value="通州区">通州区</option>
-									<option value="顺义区">顺义区</option>
-									<option value="平谷区">平谷区</option>
-									<option value="昌平区">昌平区</option>
-									<option value="怀柔区">怀柔区</option>
-									<option value="延庆县">延庆县</option>
-									<option value="密云县">密云县</option>
-									<option value="石景山区">石景山区</option>
-									<option value="门头沟区">门头沟区</option>
+									<c:forEach items="${regions}" var="region">
+										<option value="${region}"  <c:if test="${department.regionName eq region }">selected="selected" </c:if>>${region}</option>
+									</c:forEach>
 								</select>
 								<span style="color: red; font-size: 16px;">*</span>
 								<div class="Validform_checktip"></div>
@@ -76,7 +57,7 @@ tr{
 						<tr>
 							<td align="right">律所介绍：</td>
 							<td colspan="3"><textarea style="width: 78%; height: 80px;" name="departmentDescribe" id="departmentDescribe" datatype="*1-200" ignore="ignore"
-											errormsg="律所介绍最多200字符"></textarea>
+											errormsg="律所介绍最多200字符">${department.departmentDescribe}</textarea>
 							</td>
 						</tr>
 
@@ -91,6 +72,8 @@ tr{
 						</tr>
 					</table>
 				</div>
+				<input type="hidden" name="departmentId" value="${department.departmentId}">
+				<input type="hidden" name="userId" value="${user.userId}">
 			</form>
 		</div>
 		<div style="float: left;display: none;" id="depdivId">
@@ -100,7 +83,7 @@ tr{
 </div>
 <script>
 	$(function() {
-		$("#addDepartmentForm").Validform({
+		$("#updateDepartmentForm").Validform({
 			tiptype : 4,
 			ajaxPost : true,
 			dataType : 'json',
@@ -123,9 +106,9 @@ tr{
 			callback : function(curform) {
 				console.log(curform);
 				if (curform.responseText == "success") {
-					$.scojs_message('添加律所成功!', $.scojs_message.TYPE_OK);
+					$.scojs_message('更新律所成功!', $.scojs_message.TYPE_OK);
 				} else {
-					$.scojs_message('添加律所失败!', $.scojs_message.TYPE_ERROR);
+					$.scojs_message('更新律所失败!', $.scojs_message.TYPE_ERROR);
 				}
 				giveup('/department/findall/');
 			}

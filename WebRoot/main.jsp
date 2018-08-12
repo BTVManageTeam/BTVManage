@@ -11,6 +11,7 @@
 	String loginId = UserUtil.getUserByRequest(request, "loginId");
 	String userName = UserUtil.getUserByRequest(request, "userName");
 	String userId = UserUtil.getUserByRequest(request, "userId");
+	String role_code = UserUtil.getUserByRequest(request, "role_code");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -89,7 +90,15 @@
      
     <li class="submenu active open">
       <ul style="display:block" class="left_nav">
-	    <li class="first_nav"><a id="firstOnLoad" href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/findall/" onclick="openurl(this)">律所管理</a></li>
+		  <%
+		  	if("1".equals(role_code) || "2".equals(role_code)){
+
+		  %>
+		  <li class="first_nav"><a id="firstOnLoad" href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/findall/" onclick="openurl(this)">律所管理</a></li>
+
+		  <%
+		  	}
+		  %>
         <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/users/findall/" onclick="openurl(this)">用户管理</a></li>
         <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/toDepartment/" onclick="openurl(this)">部门管理</a></li>
       </ul>

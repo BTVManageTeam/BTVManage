@@ -21,9 +21,11 @@
 			<button value="" type="button" onclick="emptyCon()" class="btn-info btn  b_m_bottom clear_btn">清除</button>
 		</form>
 		<form name="myform1" method="post" enctype="multipart/form-data" class="mg1">
-			<span class="mt10 fr">
-				<button type="button" class="btn-info btn  b_m_bottom clear_btn" onclick="giveup('/department/toPage/?page=department/addDepartment')">增加</button>
-			</span>
+			<c:if test="${roleCode == 2 }">
+				<span class="mt10 fr">
+					<button type="button" class="btn-info btn  b_m_bottom clear_btn" onclick="giveup('/department/toPage/?page=department/addDepartment')">增加</button>
+				</span>
+			</c:if>
 		</form>
 		<div style="clear:both;"></div>
 		<table id="generateTable" class="table table-bordered table-striped" style="border-top:1px solid #DDDDDD;border-bottom:1px solid #DDDDDD;">
@@ -52,8 +54,8 @@
 						<td>${user.regionName}</td>
 						<td><fmt:formatDate value="${user.createTime}" pattern="yyyy-MM-dd HH:mm" /></td>
 						<td>
-							<button type="button" id="btnUpdatePwd" class="btn btn-info btn-mini" onclick="toUpdateUser('${user.departmentId}')">修改</button>
-							<button type="button" id="btnDelete" class="btn btn-danger btn-mini" onclick="delUser('${user.departmentId}');">删除</button></td>
+							<button type="button" id="btnUpdatePwd" class="btn btn-info btn-mini" onclick="toUpdateDepartment('${user.departmentId}')">修改</button>
+							<button type="button" id="btnDelete" class="btn btn-danger btn-mini" onclick="delDepartment('${user.departmentId}');">删除</button></td>
 					</tr>
 					<tr>
 						<td class="white_td"></td>

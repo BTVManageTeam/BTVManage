@@ -154,9 +154,13 @@
   <select id="countFindAllDepartment" parameterType="com.cdvcloud.rochecloud.common.Pages"
           resultType="java.lang.Integer">
     select count(dept.departmentId) from btv_department dept,btv_user user where  dept.userId = user.userId
-    <!--<if test="condition != null">-->
-      <!--${condition}-->
-    <!--</if>-->
+    <if test="condition != null">
+      ${condition}
+    </if>
+    and user.deleteStatus = 0
+    <if test="tempParam != null">
+      and user.userId = #{tempParam}
+    </if>
   </select>
 
 
@@ -169,6 +173,9 @@
         ${condition}
       </if>
       and user.deleteStatus = 0
+    <if test="tempParam != null">
+        and user.userId = #{tempParam}
+    </if>
     <if test="order!= null &amp;&amp; orderBy!= null">
       order by ${order} ${orderBy}
     </if>
