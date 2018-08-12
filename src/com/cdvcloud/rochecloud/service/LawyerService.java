@@ -4,10 +4,9 @@ import com.cdvcloud.rochecloud.common.Pages;
 import com.cdvcloud.rochecloud.domain.BtvLawyer;
 
 import java.util.List;
-import java.util.Map;
 
 /**
- * 律师业务处理类
+ * 用户管理业务处理类
  *
  * @author lyh
  */
@@ -73,5 +72,12 @@ public interface LawyerService {
 	 * @return
 	 */
 	int selectByDeptId(String departmentId);
+
+	/**
+	 * 根据律师id查询律师详情
+	 * @param lawyerId
+	 * @return
+	 */
+	BtvLawyer queryLawyerById(String lawyerId);
 
 }
