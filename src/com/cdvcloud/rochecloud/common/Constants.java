@@ -40,5 +40,7 @@ public class Constants {
 	public static final int ZERO = 0;
 	/** 数字1 **/
 	public static final int ONE = 1;
+	/** 数字2 **/
+	public static final int TWO = 2;
 
 }

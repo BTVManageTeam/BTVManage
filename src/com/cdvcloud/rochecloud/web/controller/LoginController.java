@@ -57,12 +57,17 @@ public class LoginController {
 			password = MD5Util.getMd5ToLower(password);
 			user.setPassword(password);
 			user = userService.login(user);
-			LoginData loginData = new LoginData();
+
 			if (user == null) {
+
+				return Constants.SERVICE_ERROR;
+			}else{
+				LoginData loginData = new LoginData();
 				int result = user.getUserType();
 				String userId = user.getUserId();
 				String userName="";
-				if(Constants.ZERO == result){//类型：0 律师
+				//类型：0 律师
+				if(Constants.ZERO == result || Constants.TWO == result){
 					BtvLawyer lawyer =  lawyerService.findLawyerByUserId(userId);
 					userName = lawyer.getLawyerName();
 
@@ -73,9 +78,8 @@ public class LoginController {
 				loginData.setLoginId(loginId);
 				loginData.setUserId(userId);
 				loginData.setUserName(userName);
-				return Constants.SERVICE_ERROR;
+				UserUtil.saveUser2SessionV2(request, loginData);
 			}
-			UserUtil.saveUser2SessionV2(request, loginData);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("登录出现错误![" + e.getMessage() + "]");
