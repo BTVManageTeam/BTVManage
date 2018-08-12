@@ -29,7 +29,7 @@ public class Mail {
 	
 	//将下面内容放到配置文件mail.properties中，方便修改
 	static{
-		InputStream in = Mail.class.getResourceAsStream("/mail1.properties");
+		InputStream in = Mail.class.getResourceAsStream("/mail.properties");
 		  
         Properties p = new Properties();
   		try {
