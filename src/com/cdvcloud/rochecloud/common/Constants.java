@@ -34,7 +34,7 @@ public class Constants {
 	public static final String DELIMITER = ",";
 	/** Token配置地址 */
 	public static final String CHECK_TOKEN_URL = "CHECK_TOKEN_URL";
-	/** cas返回的companyCode **/
+	/** 角色Code(0 ：律师 1：律所 2：超管) **/
 	public static final String ROLE_CODE = "role_code";
 	/**数字0 **/
 	public static final int ZERO = 0;
@@ -42,5 +42,6 @@ public class Constants {
 	public static final int ONE = 1;
 	/** 数字2 **/
 	public static final int TWO = 2;
-
+	/** 验证框架验证通过 **/
+	public static final String VALIDATE_YES = "y";
 }

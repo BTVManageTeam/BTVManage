@@ -3,19 +3,46 @@ package com.cdvcloud.rochecloud.mapper;
 import com.cdvcloud.rochecloud.common.BaseMapper;
 import com.cdvcloud.rochecloud.domain.BtvUser;
 
-public interface BtvUserMapper   extends BaseMapper<BtvUser,String> {
-    int deleteByPrimaryKey(String userId);
+import java.util.List;
+import java.util.Map;
 
-    int insert(BtvUser record);
+public interface BtvUserMapper extends BaseMapper<BtvUser, String> {
+	@Override
+	int deleteByPrimaryKey(String userId);
 
-    int insertSelective(BtvUser record);
+	@Override
+	int insert(BtvUser record);
 
-    BtvUser selectByPrimaryKey(String userId);
+	int insertSelective(BtvUser record);
 
-    int updateByPrimaryKeySelective(BtvUser record);
+	/**
+	 * 根据ID查询
+	 * @param userId
+	 * @return
+	 */
+	@Override
+	BtvUser selectByPrimaryKey(String userId);
 
-    int updateByPrimaryKey(BtvUser record);
+	@Override
+	int updateByPrimaryKeySelective(BtvUser record);
 
-    public BtvUser selectByloginIdAndPas(BtvUser user);
+	@Override
+	int updateByPrimaryKey(BtvUser record);
+
+	/***
+	 * 登录
+	 *
+	 * @param user
+	 * @return
+	 */
+	BtvUser selectByloginIdAndPas(BtvUser user);
+
+	/**
+	 * 校验登录名唯一
+	 *
+	 * @param accountName
+	 * @return
+	 */
+	List<BtvUser> selectByRepeatAccountName(String accountName);
 
 }

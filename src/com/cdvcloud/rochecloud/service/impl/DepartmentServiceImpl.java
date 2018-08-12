@@ -1,10 +1,14 @@
 package com.cdvcloud.rochecloud.service.impl;
 
+import com.cdvcloud.rochecloud.common.Pages;
 import com.cdvcloud.rochecloud.domain.BtvDepartment;
 import com.cdvcloud.rochecloud.mapper.BtvDepartmentMapper;
 import com.cdvcloud.rochecloud.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author:lyh
@@ -74,4 +78,15 @@ public class DepartmentServiceImpl implements DepartmentService {
 	public BtvDepartment findDeparmentByUserId(String userId) {
 		return btvDepartmentMapper.findDeparmentByUserId(userId);
 	}
+
+	@Override
+	public int countFindAllDepartment(Pages<Map<String, Object>> page) {
+		return btvDepartmentMapper.countFindAllDepartment(page);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectFindAllDepartment(Pages<Map<String, Object>> page) {
+		return btvDepartmentMapper.selectFindAllDepartment(page);
+	}
+
 }

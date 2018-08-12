@@ -1,6 +1,10 @@
 package com.cdvcloud.rochecloud.service;
 
+import com.cdvcloud.rochecloud.common.Pages;
 import com.cdvcloud.rochecloud.domain.BtvDepartment;
+
+import java.util.List;
+import java.util.Map;
 
 
 public interface DepartmentService {
@@ -47,4 +51,21 @@ public interface DepartmentService {
 	 * @return
 	 */
 	BtvDepartment findDeparmentByUserId(String userId);
+
+	/**
+	 * 分页总数
+	 *
+	 * @param page
+	 * @return
+	 */
+	int countFindAllDepartment(Pages<Map<String, Object>> page);
+
+	/**
+	 * 分页数据
+	 *
+	 * @param page
+	 * @return
+	 */
+	List<Map<String, Object>> selectFindAllDepartment(Pages<Map<String, Object>> page);
+
 }

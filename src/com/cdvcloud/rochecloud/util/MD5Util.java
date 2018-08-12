@@ -36,63 +36,9 @@ public class MD5Util {
 		}
 	}
 
-	public static String getFileMD5String(File file) {
-		InputStream fis = null;
-		try {
-			fis = new FileInputStream(file);
-			byte[] buffer = new byte[1024];
-			int numRead = 0;
-			while ((numRead = fis.read(buffer)) > 0) {
-				messagedigest.update(buffer, 0, numRead);
-			}
-			return bufferToHex(messagedigest.digest());
-		} catch (FileNotFoundException e) {
-			logger.error("找不到文件：" + file.getPath() + ",异常：" + e.getMessage());
-		} catch (IOException e) {
-			logger.error("IO异常：" + e.getMessage());
-		}finally{
-			if(null !=fis){
-				try {
-					fis.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return null;
-	}
-
-	private static String bufferToHex(byte bytes[]) {
-		return bufferToHex(bytes, 0, bytes.length);
-	}
-
-	private static String bufferToHex(byte bytes[], int m, int n) {
-		StringBuffer stringbuffer = new StringBuffer(2 * n);
-		int k = m + n;
-		for (int l = m; l < k; l++) {
-			appendHexPair(bytes[l], stringbuffer);
-		}
-		return stringbuffer.toString();
-	}
-
-	private static void appendHexPair(byte bt, StringBuffer stringbuffer) {
-		char c0 = hexDigits[(bt & 0xf0) >> 4];// 取字节中高 4 位的数字转换
-		// 为逻辑右移，将符号位一起右移,此处未发现两种符号有何不同
-		char c1 = hexDigits[bt & 0xf];// 取字节中低 4 位的数字转换
-		stringbuffer.append(c0);
-		stringbuffer.append(c1);
-	}
-
-//	public static String toMD5(String str) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-//		MessageDigest md5 = MessageDigest.getInstance("MD5");
-//		BASE64Encoder base64en = new BASE64Encoder();
-//		byte[] a = md5.digest(str.getBytes(Constants.CODED_FORMAT));
-//		return base64en.encode(a);
-//	}
-
 	/**
 	 * oss上传使用的md5加密
-	 * 
+	 *
 	 * @param plainText
 	 * @return
 	 * @throws Exception
@@ -122,25 +68,14 @@ public class MD5Util {
 		return buf.toString();
 
 	}
-	
-	public static String convertToHexString(byte data[]) {
-		StringBuffer strBuffer = new StringBuffer();
-		for (int i = 0; i < data.length; i++) {
-			String strTemp = Integer.toHexString(0xFF & data[i]);
-			if (strTemp.length() == 1) {
-				strTemp = "0" + strTemp;
-			}
-			strBuffer.append(strTemp);
-		}
-		return strBuffer.toString();
-	}
-	
+
+
 	/**
 	 * 得到参数加密后的MD5值
 	 * @param inStr
 	 * @return 32byte MD5 Value
 	 */
-	public static String getMD5(String inStr){
+	private static String getMD5(String inStr){
 		byte[] inStrBytes = inStr.getBytes();
 		try {
 			MessageDigest mdFive = MessageDigest.getInstance("MD5");
@@ -181,10 +116,6 @@ public class MD5Util {
 	}
 	public static void main(String[] args) throws Exception {
 		System.out.println(getMd5ToLower("123456"));
-		//qZJM9SIScHmNRRpEeIOtSw==
-		BASE64Decoder decoder = new BASE64Decoder();
-		String strDest = convertToHexString(decoder.decodeBuffer("qZJM9SIScHmNRRpEeIOtSw=="));
-		System.out.println(strDest);
 	}
 
 }

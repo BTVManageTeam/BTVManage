@@ -1,6 +1,7 @@
 package com.cdvcloud.rochecloud.common;
 
 import com.cdvcloud.rochecloud.util.UUIDUtil;
+import com.cdvcloud.rochecloud.util.UserUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -127,8 +128,13 @@ public class PageParams {
 				}
 			}
 		}
-//		String companyName = UserUtil.getUserByRequest(request, Constants.ROLE_CODE);
-//		sqlcount.append(" and ownerBusCode = '").append(companyName).append("'");
+		String roleCode = UserUtil.getUserByRequest(request, Constants.ROLE_CODE);
+		int code = Integer.valueOf(roleCode);
+		if(code == Constants.ZERO){
+			sqlcount.append(" and userType = 0 ");
+		}else if(code == Constants.ONE){
+			sqlcount.append(" and userType in (0,1) ");
+		}
 		String sql = sqlcount.toString();
 		return sql;
 	}
