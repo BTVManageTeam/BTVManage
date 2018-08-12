@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.cdvcloud.rochecloud.common.LoginData;
 import org.apache.log4j.Logger;
 import org.jasig.cas.client.authentication.AttributePrincipal;
 
@@ -70,25 +71,25 @@ public class UserUtil {
 	 * 保存用户名称和用户ID到session
 	 * 
 	 * @param request
-	 * @param user
+	 * @param loginData
 	 */
-	public static void saveUser2Session(HttpServletRequest request, BtvUser user) {
+	public static void saveUser2Session(HttpServletRequest request, LoginData loginData) {
 		HttpSession session = request.getSession();
-		session.setAttribute(Constants.CURRENT_USER_ID, user.getId());
-		session.setAttribute(Constants.CURRENT_USER_NAME, user.getUserName());
+		session.setAttribute(Constants.CURRENT_USER_ID,loginData.getUserId());
+		session.setAttribute(Constants.CURRENT_USER_NAME,  loginData.getUserName());
 	}
 
 	/**
 	 * 保存用户名称和用户ID到session
 	 *
 	 * @param request
-	 * @param user
+	 * @param loginData
 	 */
-	public static void saveUser2SessionV2(HttpServletRequest request, BtvUser user) {
+	public static void saveUser2SessionV2(HttpServletRequest request, LoginData loginData) {
 		HttpSession session = request.getSession();
-		session.setAttribute(Constants.CURRENT_USER_ID, user.getId());
-		session.setAttribute(Constants.CURRENT_USER_NAME, user.getUserName());
-		session.setAttribute(Constants.LOGIN_ID, user.getAccountName());
+		session.setAttribute(Constants.CURRENT_USER_ID, loginData.getUserId());
+		session.setAttribute(Constants.CURRENT_USER_NAME, loginData.getUserName());
+		session.setAttribute(Constants.LOGIN_ID,loginData.getLoginId());
 	}
 
 	/**

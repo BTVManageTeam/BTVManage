@@ -60,7 +60,7 @@ public class DepartmentController {
 			logger.info("新增部门名称："+name+"parentId:"+pId+" deparmentId: "+id);
 			String strUserId = UserUtil.getUserByRequest(request, Constants.CURRENT_USER_ID);
 			BtvDepartment record = new BtvDepartment();
-			record.setId(pId);
+			record.setDepartmentId(pId);
 			record.setDepartmentName(name);
 			record.setCreateUserId(strUserId);
 			record.setCreateTime(DateUtil.getCurrentDateTime());
@@ -89,8 +89,8 @@ public class DepartmentController {
 		String strResult = "fail";
 		try {
 			BtvDepartment btvDepartment = new BtvDepartment();
-			btvDepartment.setId(id);
-			btvDepartment.setId(name);
+			btvDepartment.setDepartmentId(id);
+			btvDepartment.setDepartmentName(name);
 			long num = deparmentService.updateDepartment(btvDepartment);
 			if(num> 0){
 				strResult = "success";

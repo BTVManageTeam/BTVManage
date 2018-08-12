@@ -1,7 +1,7 @@
 package com.cdvcloud.rochecloud.domain;
 
 public class BtvRrole {
-    private String id;
+    private String roleId;
 
     private String state;
 
@@ -11,12 +11,12 @@ public class BtvRrole {
 
     private String description;
 
-    public String getId() {
-        return id;
+    public String getRoleId() {
+        return roleId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 
     public String getState() {

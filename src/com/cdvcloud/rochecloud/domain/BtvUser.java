@@ -3,19 +3,13 @@ package com.cdvcloud.rochecloud.domain;
 import java.util.Date;
 
 public class BtvUser {
-    private String id;
-
-    private String userName;
+    private String userId;
 
     private String accountName;
 
     private String password;
 
-    private String credentialsSalt;
-
-    private String description;
-
-    private String locked;
+    private Integer userType;
 
     private Date createTime;
 
@@ -25,20 +19,12 @@ public class BtvUser {
 
     private Integer deleteStatus;
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getAccountName() {
@@ -57,28 +43,13 @@ public class BtvUser {
         this.password = password;
     }
 
-    public String getCredentialsSalt() {
-        return credentialsSalt;
+    /**类型：0 律师 1律所*/
+    public Integer getUserType() {
+        return userType;
     }
 
-    public void setCredentialsSalt(String credentialsSalt) {
-        this.credentialsSalt = credentialsSalt;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getLocked() {
-        return locked;
-    }
-
-    public void setLocked(String locked) {
-        this.locked = locked;
+    public void setUserType(Integer userType) {
+        this.userType = userType;
     }
 
     public Date getCreateTime() {
