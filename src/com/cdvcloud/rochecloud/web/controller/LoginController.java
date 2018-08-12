@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.cdvcloud.rochecloud.common.LoginData;
 import com.cdvcloud.rochecloud.domain.BtvDepartment;
 import com.cdvcloud.rochecloud.domain.BtvLawyer;
-import com.cdvcloud.rochecloud.service.DeparmentService;
+import com.cdvcloud.rochecloud.service.DepartmentService;
 import com.cdvcloud.rochecloud.service.LawyerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class LoginController {
 	LawyerService lawyerService;
 
 	@Autowired
-	DeparmentService deparmentService;
+	DepartmentService deparmentService;
 
 	/**
 	 * 登录

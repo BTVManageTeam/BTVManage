@@ -1,15 +1,22 @@
-package com.cdvcloud.rochecloud.service;
+package com.cdvcloud.rochecloud.service.impl;
 
 import com.cdvcloud.rochecloud.domain.BtvDepartment;
 import com.cdvcloud.rochecloud.mapper.BtvDepartmentMapper;
+import com.cdvcloud.rochecloud.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @Author:lyh
+ * @Description:
+ * @Date:Created in 2018/8/12 12:07
+ */
 @Service
-public class DeparmentService {
+public class DepartmentServiceImpl implements DepartmentService {
 
 	@Autowired
 	private BtvDepartmentMapper btvDepartmentMapper;
+
 
 	/**
 	 * 根据Id查询当前部门
@@ -17,6 +24,7 @@ public class DeparmentService {
 	 * @param id 部门Id
 	 * @return
 	 */
+	@Override
 	public BtvDepartment findDeparmentById(String id) {
 		return btvDepartmentMapper.selectByPrimaryKey(id);
 	}
@@ -28,6 +36,7 @@ public class DeparmentService {
 	 * @param record
 	 * @return
 	 */
+	@Override
 	public long addDepartment(BtvDepartment record) {
 		return btvDepartmentMapper.insertSelective(record);
 	}
@@ -38,6 +47,7 @@ public class DeparmentService {
 	 * @param record
 	 * @return
 	 */
+	@Override
 	public long updateDepartment(BtvDepartment record) {
 		return btvDepartmentMapper.updateByPrimaryKeySelective(record);
 	}
@@ -48,6 +58,7 @@ public class DeparmentService {
 	 * @param id
 	 * @return
 	 */
+	@Override
 	public long removeDepartment(String id) {
 		return btvDepartmentMapper.deleteByPrimaryKey(id);
 	}
@@ -55,9 +66,11 @@ public class DeparmentService {
 
 	/**
 	 * 根据用户ID查询部门信息
+	 *
 	 * @param userId
 	 * @return
 	 */
+	@Override
 	public BtvDepartment findDeparmentByUserId(String userId) {
 		return btvDepartmentMapper.findDeparmentByUserId(userId);
 	}

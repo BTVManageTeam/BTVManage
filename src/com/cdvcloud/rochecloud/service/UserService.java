@@ -14,15 +14,10 @@ import java.util.List;
  *
  * @author lyh
  */
-@Service
-public class UserService {
 
-	@Autowired
-	private BtvUserMapper btvUserMapper;
+public interface UserService {
 
-	public BtvUser login(BtvUser user) {
-		return btvUserMapper.selectByloginIdAndPas(user);
-	}
 
+	BtvUser login(BtvUser user);
 
 }

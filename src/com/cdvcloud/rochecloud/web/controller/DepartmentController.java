@@ -3,7 +3,7 @@ package com.cdvcloud.rochecloud.web.controller;
 import com.cdvcloud.rochecloud.common.Constants;
 import com.cdvcloud.rochecloud.domain.BtvDepartment;
 import com.cdvcloud.rochecloud.exception.MyDefineException;
-import com.cdvcloud.rochecloud.service.DeparmentService;
+import com.cdvcloud.rochecloud.service.DepartmentService;
 import com.cdvcloud.rochecloud.util.DateUtil;
 import com.cdvcloud.rochecloud.util.StringUtil;
 import com.cdvcloud.rochecloud.util.UserUtil;
@@ -29,7 +29,7 @@ public class DepartmentController {
 	private static final Logger logger = Logger.getLogger(DepartmentController.class);
 
 	@Autowired
-	DeparmentService deparmentService;
+	DepartmentService deparmentService;
 
 	
 	/**
