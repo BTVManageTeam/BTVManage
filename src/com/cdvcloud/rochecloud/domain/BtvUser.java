@@ -43,11 +43,11 @@ public class BtvUser {
         this.password = password;
     }
 
-    /**类型：0 律师 1律所*/
+    /**类型：0 律师 1律所 2:超管*/
     public Integer getUserType() {
         return userType;
     }
-
+    /**类型：0 律师 1律所 2:超管*/
     public void setUserType(Integer userType) {
         this.userType = userType;
     }

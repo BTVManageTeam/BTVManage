@@ -135,4 +135,14 @@
     password = #{password,jdbcType=VARCHAR}
   </select>
 
+  <!--根据登录名查询所有相同的用户 -->
+  <select id="selectByRepeatAccountName" resultMap="BaseResultMap"
+          parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from btv_user
+    where accountName = #{accountName,jdbcType=VARCHAR} and
+    deleteStatus = 0
+  </select>
+
 </mapper>

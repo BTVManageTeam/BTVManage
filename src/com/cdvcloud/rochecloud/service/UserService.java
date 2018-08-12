@@ -18,6 +18,25 @@ import java.util.List;
 public interface UserService {
 
 
+	/***
+	 * 登录
+	 * @param user
+	 * @return
+	 */
 	BtvUser login(BtvUser user);
 
+	/**
+	 * 校验登录名唯一
+	 * @param accountName
+	 * @return
+	 */
+	List<BtvUser> selectByRepeatAccountName(String accountName);
+
+
+	/**
+	 * 增加用户
+	 * @param record
+	 * @return
+	 */
+	int insertSelective(BtvUser record);
 }

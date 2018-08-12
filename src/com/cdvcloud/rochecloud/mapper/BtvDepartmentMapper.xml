@@ -150,4 +150,31 @@
     where userId = #{userId,jdbcType=VARCHAR}
   </select>
 
+  <!--按条件查询所有总数 -->
+  <select id="countFindAllDepartment" parameterType="com.cdvcloud.rochecloud.common.Pages"
+          resultType="java.lang.Integer">
+    select count(dept.departmentId) from btv_department dept,btv_user user where  dept.userId = user.userId
+    <!--<if test="condition != null">-->
+      <!--${condition}-->
+    <!--</if>-->
+  </select>
+
+
+  <!--按条件查询所有信息 -->
+  <select id="selectFindAllDepartment" resultType="java.util.Map"
+          parameterType="com.cdvcloud.rochecloud.common.Pages">
+    select dept.*,user.accountName from btv_department dept,btv_user user where  dept.userId = user.userId
+
+      <if test="condition != null">
+        ${condition}
+      </if>
+      and user.deleteStatus = 0
+    <if test="order!= null &amp;&amp; orderBy!= null">
+      order by ${order} ${orderBy}
+    </if>
+    <if test="currentNum != null &amp;&amp; numPerPage != null">
+      limit #{currentNum}, #{numPerPage}
+    </if>
+  </select>
+
 </mapper>

@@ -78,6 +78,7 @@ public class LoginController {
 				loginData.setLoginId(loginId);
 				loginData.setUserId(userId);
 				loginData.setUserName(userName);
+				loginData.setUserType(user.getUserType());
 				UserUtil.saveUser2SessionV2(request, loginData);
 			}
 		} catch (Exception e) {

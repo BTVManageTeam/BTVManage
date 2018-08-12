@@ -23,45 +23,60 @@ tr{
 	</div>
 	<div class="widget-content tab-content">
 		<div style="float: left;width: 60%">
-			<form id="addUserForm" class="form-horizontal" action="${ctx}/department/addDepartment/">
+			<form id="addDepartmentForm" class="form-horizontal" action="${ctx}/department/addDepartment/">
 				<div id="gridPager">
 					<table style="width: 100%; padding: 8px; ">
 						<tr>
 							<td align="right"  width="20%">登录名：</td>
-							<td width="80%"><input type="text" value="" name="accountName" id="accountName" datatype="loginId" nullmsg="请输入登录名" errormsg="登录名为1-20个非手机号任意字符"
-								ajaxurl="<%=request.getContextPath()%>/users/checkLoginId/?operate=add" /> <span style="color: red; font-size: 16px;">*</span>
+							<td width="80%"><input type="text" value="" name="accountName" id="accountName" datatype="accountName" nullmsg="请输入登录名" errormsg="登录名为1-20个非手机号任意字符"
+								ajaxurl="<%=request.getContextPath()%>/department/checkAccountName/?operate=add" /> <span style="color: red; font-size: 16px;">*</span>
 								<div class="Validform_checktip"></div>
 							</td>
 						</tr>
 						<tr>
 							<td align="right" width="20%">密码：</td>
-							<td width="80%"><input type="text" value="" name="password" id="password" datatype="s1-20" errormsg="密码" /> <span
+							<td width="80%"><input type="password" value="" name="password" id="password" datatype="s1-20" errormsg="密码" /> <span
 									style="color: red; font-size: 16px;">*</span>
 								<div class="Validform_checktip"></div>
 							</td>
 						</tr>
 						<tr>
 							<td align="right">律所名称：</td>
-							<td><input type="text" value="" name="departmentName" id="departmentName" datatype="m" errormsg="律所名称" ignore="ignore" />
+							<td><input type="text" value="" name="departmentName" id="departmentName" datatype="s1-20" errormsg="请输入律所名称" ignore="ignore" />
 								<div class="Validform_checktip"></div>
 							</td>
 						</tr>
 						<tr>
 							<td align="right">地域：</td>
-							<td><input type="text" value="" name="regionName" id="regionName" datatype="e" errormsg="地域" ignore="ignore" />
-								<div class="Validform_checktip"></div>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">角色：</td>
-							<td><input type="text" value="" name="roleId" id="roleId" datatype="e" errormsg="角色" ignore="ignore" />
+							<td>
+								<select style="width: 215px;" name="regionName" id="regionName">
+									<option value="东城区">东城区</option>
+									<option value="西城区">西城区</option>
+									<option value="朝阳区">朝阳区</option>
+									<option value="崇文区">崇文区</option>
+									<option value="海淀区">海淀区</option>
+									<option value="宣武区">宣武区</option>
+									<option value="丰台区">丰台区</option>
+									<option value="房山区">房山区</option>
+									<option value="大兴区">大兴区</option>
+									<option value="通州区">通州区</option>
+									<option value="顺义区">顺义区</option>
+									<option value="平谷区">平谷区</option>
+									<option value="昌平区">昌平区</option>
+									<option value="怀柔区">怀柔区</option>
+									<option value="延庆县">延庆县</option>
+									<option value="密云县">密云县</option>
+									<option value="石景山区">石景山区</option>
+									<option value="门头沟区">门头沟区</option>
+								</select>
+								<span style="color: red; font-size: 16px;">*</span>
 								<div class="Validform_checktip"></div>
 							</td>
 						</tr>
 						<tr>
 							<td align="right">律所介绍：</td>
-							<td><input type="text" value="" name="departmentDescribe" id="departmentDescribe" datatype="e" errormsg="律所介绍" ignore="ignore" />
-								<div class="Validform_checktip"></div>
+							<td colspan="3"><textarea style="width: 78%; height: 80px;" name="departmentDescribe" id="departmentDescribe" datatype="*1-200" ignore="ignore"
+											errormsg="律所介绍最多200字符"></textarea>
 							</td>
 						</tr>
 
@@ -76,8 +91,6 @@ tr{
 						</tr>
 					</table>
 				</div>
-				<input type="hidden" value="" name="departId" id="departId" />
-				<input type="hidden" value="" name="ownerBusId" id="ownerBusId" />
 			</form>
 		</div>
 		<div style="float: left;display: none;" id="depdivId">
@@ -87,19 +100,17 @@ tr{
 </div>
 <script>
 	$(function() {
-		$("#addUserForm").Validform({
+		$("#addDepartmentForm").Validform({
 			tiptype : 4,
 			ajaxPost : true,
 			dataType : 'json',
 			beforeSubmit:function(){
-				var yunkeyval = $("#complistid").val();
-				$("#ownerBusId").val(yunkeyval);
 				return true;
 			},
 			datatype:{
-				"loginId":function(gets,obj,curform,regxp){
+				"accountName":function(gets,obj,curform,regxp){
 					var reg1=regxp["m"],
-					loginIdVal = $("#loginId").val();
+					loginIdVal = $("#accountName").val();
 					if(null ==loginIdVal || typeof(loginIdVal) == "undefined" || "" == loginIdVal.trim() ||  20 < loginIdVal.trim().length){
 						return false;
 					}
@@ -110,12 +121,13 @@ tr{
 				}	
 			},
 			callback : function(curform) {
+				console.log(curform);
 				if (curform.responseText == "success") {
 					$.scojs_message('添加律所成功!', $.scojs_message.TYPE_OK);
 				} else {
 					$.scojs_message('添加律所失败!', $.scojs_message.TYPE_ERROR);
 				}
-				giveup('/department/departmentList/');
+				giveup('/department/findall/');
 			}
 		});
 	});

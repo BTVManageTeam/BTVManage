@@ -15,9 +15,8 @@ import com.cdvcloud.rochecloud.domain.BtvUser;
 
 /**
  * session用户Util类
- * 
+ *
  * @author Dong
- * 
  */
 public class UserUtil {
 	@SuppressWarnings("unused")
@@ -28,8 +27,7 @@ public class UserUtil {
 	 * 获取用户信息
 	 *
 	 * @param request
-	 * @param params
-	 *            根据用户字段获取用户信息
+	 * @param params  根据用户字段获取用户信息
 	 * @return
 	 * @throws IOException
 	 */
@@ -41,7 +39,7 @@ public class UserUtil {
 
 	/**
 	 * 获取用户名称
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 * @throws IOException
@@ -69,14 +67,14 @@ public class UserUtil {
 
 	/**
 	 * 保存用户名称和用户ID到session
-	 * 
+	 *
 	 * @param request
 	 * @param loginData
 	 */
 	public static void saveUser2Session(HttpServletRequest request, LoginData loginData) {
 		HttpSession session = request.getSession();
-		session.setAttribute(Constants.CURRENT_USER_ID,loginData.getUserId());
-		session.setAttribute(Constants.CURRENT_USER_NAME,  loginData.getUserName());
+		session.setAttribute(Constants.CURRENT_USER_ID, loginData.getUserId());
+		session.setAttribute(Constants.CURRENT_USER_NAME, loginData.getUserName());
 	}
 
 	/**
@@ -89,12 +87,13 @@ public class UserUtil {
 		HttpSession session = request.getSession();
 		session.setAttribute(Constants.CURRENT_USER_ID, loginData.getUserId());
 		session.setAttribute(Constants.CURRENT_USER_NAME, loginData.getUserName());
-		session.setAttribute(Constants.LOGIN_ID,loginData.getLoginId());
+		session.setAttribute(Constants.LOGIN_ID, loginData.getLoginId());
+		session.setAttribute(Constants.ROLE_CODE, loginData.getUserType());
 	}
 
 	/**
 	 * 清空用户名称和用户ID到session
-	 * 
+	 *
 	 * @param request
 	 */
 	public static void removeUserSession(HttpServletRequest request) {
