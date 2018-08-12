@@ -19,14 +19,13 @@ tr{
 <div class="widget-box112">
 	<div class="widget-title">
 		<span class="icon"> <i class="icon-th"></i> </span>
-		<h5>添加所属商</h5>
+		<h5>添加所律所</h5>
 	</div>
 	<div class="widget-content tab-content">
 		<div style="float: left;width: 60%">
 			<form id="addUserForm" class="form-horizontal" action="${ctx}/department/addDepartment/">
 				<div id="gridPager">
 					<table style="width: 100%; padding: 8px; ">
-
 						<tr>
 							<td align="right"  width="20%">登录名：</td>
 							<td width="80%"><input type="text" value="" name="accountName" id="accountName" datatype="loginId" nullmsg="请输入登录名" errormsg="登录名为1-20个非手机号任意字符"
@@ -43,8 +42,7 @@ tr{
 						</tr>
 						<tr>
 							<td align="right">律所名称：</td>
-							<td><input type="text" value="" name="departmentName" id="departmentName" datatype="m" errormsg="律所名称"
-							ajaxurl="<%=request.getContextPath()%>/users/checkUserPhone/?operate=add" ignore="ignore" />
+							<td><input type="text" value="" name="departmentName" id="departmentName" datatype="m" errormsg="律所名称" ignore="ignore" />
 								<div class="Validform_checktip"></div>
 							</td>
 						</tr>
@@ -73,7 +71,7 @@ tr{
 						<tr>
 							<td align="center" colspan="2">
 								<button type="submit" class="btn btn-info" style="width: 120px; margin-right: 50px;">提交</button>
-								<button type="button" onclick="giveup('/users/findall/');" class="btn" style="width: 120px; margin-left: 40px;">取消</button>
+								<button type="button" onclick="giveup('/department/departmentList/');" class="btn" style="width: 120px; margin-left: 40px;">取消</button>
 							</td>
 						</tr>
 					</table>
@@ -113,11 +111,11 @@ tr{
 			},
 			callback : function(curform) {
 				if (curform.responseText == "success") {
-					$.scojs_message('添加用户成功!', $.scojs_message.TYPE_OK);
+					$.scojs_message('添加律所成功!', $.scojs_message.TYPE_OK);
 				} else {
-					$.scojs_message('添加用户失败!', $.scojs_message.TYPE_ERROR);
+					$.scojs_message('添加律所失败!', $.scojs_message.TYPE_ERROR);
 				}
-				giveup('/users/findall/');
+				giveup('/department/departmentList/');
 			}
 		});
 	});
