@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author:lyh
@@ -27,9 +28,8 @@ public class LawyerServiceImpl implements LawyerService {
 	 * @return
 	 */
 	@Override
-	public int countFindAll(Pages<BtvLawyer> page) {
-//		return btvLawyerMapper.countFindAll(page);
-		return 0;
+	public int countFindAll(Pages<Map<String, Object>> page) {
+		return btvLawyerMapper.countFindAll(page);
 	}
 
 	/**
@@ -39,9 +39,8 @@ public class LawyerServiceImpl implements LawyerService {
 	 * @return
 	 */
 	@Override
-	public List<BtvLawyer> selectFindAll(Pages<BtvLawyer> page) {
-//		return btvLawyerMapper.selectFindAll(page);
-		return null;
+	public List<Map<String, Object>> selectFindAll(Pages<Map<String, Object>> page) {
+		return btvLawyerMapper.selectFindAll(page);
 	}
 
 	/**
@@ -53,6 +52,37 @@ public class LawyerServiceImpl implements LawyerService {
 	@Override
 	public BtvLawyer findLawyerByUserId(String userId) {
 		return btvLawyerMapper.findLawyerByUserId(userId);
+	}
+
+	/**
+	 * 新增律师
+	 *
+	 * @param record
+	 * @return
+	 */
+	@Override
+	public int insertSelective(BtvLawyer record) {
+		return btvLawyerMapper.insertSelective(record);
+	}
+
+	@Override
+	public BtvLawyer selectByPrimaryKey(String lawyerId) {
+		return btvLawyerMapper.selectByPrimaryKey(lawyerId);
+	}
+
+	@Override
+	public int updateByPrimaryKeySelective(BtvLawyer record) {
+		return btvLawyerMapper.updateByPrimaryKeySelective(record);
+	}
+
+	@Override
+	public int deleteByPrimaryKey(String lawyerId) {
+		return btvLawyerMapper.deleteByPrimaryKey(lawyerId);
+	}
+
+	@Override
+	public int selectByDeptId(String departmentId) {
+		return btvLawyerMapper.selectByDeptId(departmentId);
 	}
 
 }

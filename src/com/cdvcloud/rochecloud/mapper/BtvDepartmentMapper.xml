@@ -184,4 +184,16 @@
     </if>
   </select>
 
+
+  <!--按条件查询所有信息 -->
+  <select id="findAllDepartment" resultMap="BaseResultMap" parameterType="java.util.Map">
+     select * from btv_department
+    <where>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+
 </mapper>

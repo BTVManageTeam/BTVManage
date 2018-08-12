@@ -1,34 +1,24 @@
 
 /**
- * 跳转至添加部门界面
- */
-function toAddDepartment() {
-    giveup('/department/addDepartment/');
-}
-
-/**
- * 删除律所
+ * 删除律师
  * 
  * @param id
  * @param type
  *            m:素材
  */
-function delDepartment(id) {
+function delLawyer(id) {
 	var confirm = $.scojs_confirm({
-		content : "您确定要删除此律所吗？",
+		content : "您确定要删除此律师吗？",
 		action : function() {
 			confirm.destroy();
 			$.ajax({
 				type : "POST",
-				url : ctx + "/department/deleteDepartment/?id=" + id,
+				url : ctx + "/lawyer/deleteLawyer/?id=" + id,
 				success : function(data) {
 					if (data == "success") {
 						$.scojs_message('删除成功!', $.scojs_message.TYPE_OK);
 						selectform();
-					} else if(data == "no"){
-						$.scojs_message('律所被占用，请先删除律师!', $.scojs_message.TYPE_ERROR);
-						selectform();
-					}else{
+					} else {
 						$.scojs_message('删除失败!', $.scojs_message.TYPE_ERROR);
 						selectform();
 					}
@@ -40,21 +30,15 @@ function delDepartment(id) {
 	confirm.show();
 }
 /**
- * 修改律所信息
+ * 修改律师信息
  */
-function toUpdateDepartment(id) {
+function toUpdateLawyer(id) {
 	$.Mark.show();
 	$.ajax({
 		type : 'POST',
-		url : ctx + "/department/toUpdateDepartment/?id=" + id,
+		url : ctx + "/lawyer/toUpdateLawyer/?id=" + id,
 		cache : false,
 		success : function(response) {
-			/*$.Mark.hide();
-			$("#content").css("display", "block");
-			$("#contenttwo").remove();
-			$("#contentthree").remove();
-			$("#content").html(response);
-			$.Mark.hide();*/
 			$.Mark.hide();
 			$("#content").css("display", "none");
 			$("#contenttwo").remove();

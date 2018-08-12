@@ -8,6 +8,7 @@ import com.cdvcloud.rochecloud.domain.BtvDepartment;
 import com.cdvcloud.rochecloud.domain.BtvUser;
 import com.cdvcloud.rochecloud.exception.MyDefineException;
 import com.cdvcloud.rochecloud.service.DepartmentService;
+import com.cdvcloud.rochecloud.service.LawyerService;
 import com.cdvcloud.rochecloud.service.UserService;
 import com.cdvcloud.rochecloud.util.DateUtil;
 import com.cdvcloud.rochecloud.util.MD5Util;
@@ -40,6 +41,9 @@ public class DepartmentController {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	LawyerService lawyerService;
 
 
 	@RequestMapping(value = "toPage/")
@@ -78,11 +82,12 @@ public class DepartmentController {
 			String roleCode = UserUtil.getUserByRequest(request, Constants.ROLE_CODE);
 			int code = Integer.valueOf(roleCode);
 			page.setCondition(param);
+			String strUserId = UserUtil.getUserByRequest(request, Constants.CURRENT_USER_ID);
 			if (code == Constants.ONE) {
-				String strUserId = UserUtil.getUserByRequest(request, Constants.CURRENT_USER_ID);
 				page.setTempParam(strUserId);
 			}
-			model.addAttribute("roleCode",roleCode);
+			model.addAttribute("roleCode", roleCode);
+			model.addAttribute("strUserId", strUserId);
 			Integer totalNum = deparmentService.countFindAllDepartment(page);
 			page.setTotalNum(totalNum);
 
@@ -191,7 +196,7 @@ public class DepartmentController {
 	 * @return
 	 */
 	@RequestMapping(value = "toUpdateDepartment/")
-	public String toAddSection(@RequestParam(value = "id") String id, Model model) {
+	public String toUpdateDepartment(@RequestParam(value = "id") String id, Model model) {
 		BtvDepartment department = deparmentService.findDeparmentById(id);
 		String userId = department.getUserId();
 		BtvUser user = userService.selectByPrimaryKey(userId);
@@ -275,7 +280,13 @@ public class DepartmentController {
 	public String removeDepartment(HttpServletRequest request, @RequestParam(value = "id") String id) {
 		String strResult = "fail";
 		try {
-			userService.deleteByPrimaryKey(id);
+			int count = lawyerService.selectByDeptId(id);
+			if (count > 0) {
+				return "no";
+			}
+			BtvDepartment dept = deparmentService.findDeparmentById(id);
+			String userId = dept.getUserId();
+			userService.deleteByPrimaryKey(userId);
 			long num = deparmentService.removeDepartment(id);
 			if (num > 0) {
 				strResult = "success";

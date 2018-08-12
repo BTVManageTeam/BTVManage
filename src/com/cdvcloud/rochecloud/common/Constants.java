@@ -44,4 +44,10 @@ public class Constants {
 	public static final int TWO = 2;
 	/** 验证框架验证通过 **/
 	public static final String VALIDATE_YES = "y";
+	/**字符串0 **/
+	public static final String SZERO = "0";
+	/** 字符串1 **/
+	public static final String SONE = "1";
+	/** 字符串2 **/
+	public static final String STWO = "2";
 }

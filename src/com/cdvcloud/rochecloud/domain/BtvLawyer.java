@@ -35,6 +35,8 @@ public class BtvLawyer {
 
     private String userId;
 
+    private String departmentId;
+
     public String getLawyerId() {
         return lawyerId;
     }
@@ -161,5 +163,13 @@ public class BtvLawyer {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 }

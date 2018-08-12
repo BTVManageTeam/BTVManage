@@ -95,11 +95,19 @@
 
 		  %>
 		  <li class="first_nav"><a id="firstOnLoad" href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/findall/" onclick="openurl(this)">律所管理</a></li>
-
+		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/lawyer/findall/" onclick="openurl(this)">律师管理</a></li>
 		  <%
 		  	}
 		  %>
-        <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/users/findall/" onclick="openurl(this)">用户管理</a></li>
+
+		  <%
+			  if("0".equals(role_code)){
+
+		  %>
+		  <li class="first_nav"><a id="firstOnLoad" href="javascript:void(0)" shref="<%=request.getContextPath()%>/lawyer/findall/" onclick="openurl(this)">律师管理</a></li>
+		  <%
+			  }
+		  %>
         <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/toDepartment/" onclick="openurl(this)">部门管理</a></li>
       </ul>
     </li> 
