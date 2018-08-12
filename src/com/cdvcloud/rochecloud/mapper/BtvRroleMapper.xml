@@ -2,36 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cdvcloud.rochecloud.mapper.BtvRroleMapper">
   <resultMap id="BaseResultMap" type="com.cdvcloud.rochecloud.domain.BtvRrole">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="roleId" jdbcType="VARCHAR" property="roleId" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="roleKey" jdbcType="VARCHAR" property="roleKey" />
     <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, state, name, roleKey, description
+    roleId, state, name, roleKey, description
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from btv_role
-    where id = #{id,jdbcType=VARCHAR}
+    where roleId = #{roleId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from btv_role
-    where id = #{id,jdbcType=VARCHAR}
+    where roleId = #{roleId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.cdvcloud.rochecloud.domain.BtvRrole">
-    insert into btv_role (id, state, name, 
+    insert into btv_role (roleId, state, name, 
       roleKey, description)
-    values (#{id,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+    values (#{roleId,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{roleKey,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cdvcloud.rochecloud.domain.BtvRrole">
     insert into btv_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="roleId != null">
+        roleId,
       </if>
       <if test="state != null">
         state,
@@ -47,8 +47,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         #{state,jdbcType=VARCHAR},
@@ -80,7 +80,7 @@
         description = #{description,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where roleId = #{roleId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cdvcloud.rochecloud.domain.BtvRrole">
     update btv_role
@@ -88,6 +88,6 @@
       name = #{name,jdbcType=VARCHAR},
       roleKey = #{roleKey,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+    where roleId = #{roleId,jdbcType=VARCHAR}
   </update>
 </mapper>

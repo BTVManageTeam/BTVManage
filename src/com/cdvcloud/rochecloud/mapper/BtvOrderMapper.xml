@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cdvcloud.rochecloud.mapper.BtvOrderMapper">
   <resultMap id="BaseResultMap" type="com.cdvcloud.rochecloud.domain.BtvOrder">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="orderId" jdbcType="VARCHAR" property="orderId" />
     <result column="userName" jdbcType="VARCHAR" property="userName" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="pieceName" jdbcType="VARCHAR" property="pieceName" />
@@ -18,26 +18,26 @@
     <result column="updateUserId" jdbcType="VARCHAR" property="updateUserId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, userName, phone, pieceName, pieceUrls, serviceType, score, commentStatus, serviceStatus, 
-    openId, createTime, createUserId, updateTime, updateUserId
+    orderId, userName, phone, pieceName, pieceUrls, serviceType, score, commentStatus, 
+    serviceStatus, openId, createTime, createUserId, updateTime, updateUserId
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from btv_order
-    where id = #{id,jdbcType=VARCHAR}
+    where orderId = #{orderId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from btv_order
-    where id = #{id,jdbcType=VARCHAR}
+    where orderId = #{orderId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.cdvcloud.rochecloud.domain.BtvOrder">
-    insert into btv_order (id, userName, phone, 
+    insert into btv_order (orderId, userName, phone, 
       pieceName, pieceUrls, serviceType, 
       score, commentStatus, serviceStatus, 
       openId, createTime, createUserId, 
       updateTime, updateUserId)
-    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+    values (#{orderId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{pieceName,jdbcType=VARCHAR}, #{pieceUrls,jdbcType=VARCHAR}, #{serviceType,jdbcType=VARCHAR}, 
       #{score,jdbcType=DOUBLE}, #{commentStatus,jdbcType=INTEGER}, #{serviceStatus,jdbcType=INTEGER}, 
       #{openId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, 
@@ -46,8 +46,8 @@
   <insert id="insertSelective" parameterType="com.cdvcloud.rochecloud.domain.BtvOrder">
     insert into btv_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="orderId != null">
+        orderId,
       </if>
       <if test="userName != null">
         userName,
@@ -90,8 +90,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
@@ -177,7 +177,7 @@
         updateUserId = #{updateUserId,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where orderId = #{orderId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cdvcloud.rochecloud.domain.BtvOrder">
     update btv_order
@@ -194,6 +194,6 @@
       createUserId = #{createUserId,jdbcType=VARCHAR},
       updateTime = #{updateTime,jdbcType=TIMESTAMP},
       updateUserId = #{updateUserId,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+    where orderId = #{orderId,jdbcType=VARCHAR}
   </update>
 </mapper>

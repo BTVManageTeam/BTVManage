@@ -1,10 +1,8 @@
 package com.cdvcloud.rochecloud.common;
 
+
 /**
  * 常量类
- * 
- * @author lisheng
- * 
  */
 public class Constants {
 
@@ -38,5 +36,9 @@ public class Constants {
 	public static final String CHECK_TOKEN_URL = "CHECK_TOKEN_URL";
 	/** cas返回的companyCode **/
 	public static final String ROLE_CODE = "role_code";
+	/**数字0 **/
+	public static final int ZERO = 0;
+	/** 数字1 **/
+	public static final int ONE = 1;
 
 }

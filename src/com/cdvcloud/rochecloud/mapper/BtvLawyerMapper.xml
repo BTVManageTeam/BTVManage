@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cdvcloud.rochecloud.mapper.BtvLawyerMapper">
   <resultMap id="BaseResultMap" type="com.cdvcloud.rochecloud.domain.BtvLawyer">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="lawyerId" jdbcType="VARCHAR" property="lawyerId" />
+    <result column="lawyerName" jdbcType="VARCHAR" property="lawyerName" />
     <result column="professionalYear" jdbcType="VARCHAR" property="professionalYear" />
     <result column="speciality" jdbcType="VARCHAR" property="speciality" />
     <result column="region" jdbcType="VARCHAR" property="region" />
@@ -16,41 +17,45 @@
     <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="updateUserId" jdbcType="VARCHAR" property="updateUserId" />
-    <result column="userId" jdbcType="INTEGER" property="userId" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, professionalYear, speciality, region, introduce, portrait, average, serviceNum, 
-    email, phone, createTime, createUserId, updateTime, updateUserId, userId
+    lawyerId, lawyerName, professionalYear, speciality, region, introduce, portrait, 
+    average, serviceNum, email, phone, createTime, createUserId, updateTime, updateUserId, 
+    userId
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from btv_lawyer
-    where id = #{id,jdbcType=VARCHAR}
+    where lawyerId = #{lawyerId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from btv_lawyer
-    where id = #{id,jdbcType=VARCHAR}
+    where lawyerId = #{lawyerId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.cdvcloud.rochecloud.domain.BtvLawyer">
-    insert into btv_lawyer (id, professionalYear, speciality, 
-      region, introduce, portrait, 
-      average, serviceNum, email, 
-      phone, createTime, createUserId, 
-      updateTime, updateUserId, userId
-      )
-    values (#{id,jdbcType=VARCHAR}, #{professionalYear,jdbcType=VARCHAR}, #{speciality,jdbcType=VARCHAR}, 
-      #{region,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, #{portrait,jdbcType=VARCHAR}, 
-      #{average,jdbcType=DOUBLE}, #{serviceNum,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
-      )
+    insert into btv_lawyer (lawyerId, lawyerName, professionalYear, 
+      speciality, region, introduce, 
+      portrait, average, serviceNum, 
+      email, phone, createTime, 
+      createUserId, updateTime, updateUserId, 
+      userId)
+    values (#{lawyerId,jdbcType=VARCHAR}, #{lawyerName,jdbcType=VARCHAR}, #{professionalYear,jdbcType=VARCHAR}, 
+      #{speciality,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, 
+      #{portrait,jdbcType=VARCHAR}, #{average,jdbcType=DOUBLE}, #{serviceNum,jdbcType=INTEGER}, 
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cdvcloud.rochecloud.domain.BtvLawyer">
     insert into btv_lawyer
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="lawyerId != null">
+        lawyerId,
+      </if>
+      <if test="lawyerName != null">
+        lawyerName,
       </if>
       <if test="professionalYear != null">
         professionalYear,
@@ -96,8 +101,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+      <if test="lawyerId != null">
+        #{lawyerId,jdbcType=VARCHAR},
+      </if>
+      <if test="lawyerName != null">
+        #{lawyerName,jdbcType=VARCHAR},
       </if>
       <if test="professionalYear != null">
         #{professionalYear,jdbcType=VARCHAR},
@@ -139,13 +147,16 @@
         #{updateUserId,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.cdvcloud.rochecloud.domain.BtvLawyer">
     update btv_lawyer
     <set>
+      <if test="lawyerName != null">
+        lawyerName = #{lawyerName,jdbcType=VARCHAR},
+      </if>
       <if test="professionalYear != null">
         professionalYear = #{professionalYear,jdbcType=VARCHAR},
       </if>
@@ -186,14 +197,15 @@
         updateUserId = #{updateUserId,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        userId = #{userId,jdbcType=INTEGER},
+        userId = #{userId,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where lawyerId = #{lawyerId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cdvcloud.rochecloud.domain.BtvLawyer">
     update btv_lawyer
-    set professionalYear = #{professionalYear,jdbcType=VARCHAR},
+    set lawyerName = #{lawyerName,jdbcType=VARCHAR},
+      professionalYear = #{professionalYear,jdbcType=VARCHAR},
       speciality = #{speciality,jdbcType=VARCHAR},
       region = #{region,jdbcType=VARCHAR},
       introduce = #{introduce,jdbcType=VARCHAR},
@@ -206,7 +218,17 @@
       createUserId = #{createUserId,jdbcType=VARCHAR},
       updateTime = #{updateTime,jdbcType=TIMESTAMP},
       updateUserId = #{updateUserId,jdbcType=VARCHAR},
-      userId = #{userId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=VARCHAR}
+      userId = #{userId,jdbcType=VARCHAR}
+    where lawyerId = #{lawyerId,jdbcType=VARCHAR}
   </update>
+
+
+  <!--根据loginId查询 -->
+  <select id="findLawyerByUserId" resultMap="BaseResultMap"
+          parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from btv_lawyer
+    where userId = #{userId,jdbcType=VARCHAR}
+  </select>
 </mapper>

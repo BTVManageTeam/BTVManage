@@ -1,18 +1,18 @@
 package com.cdvcloud.rochecloud.domain;
 
 public class BtvUserDep {
-    private String id;
+    private String userDeptId;
 
     private String userId;
 
     private String departmentId;
 
-    public String getId() {
-        return id;
+    public String getUserDeptId() {
+        return userDeptId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserDeptId(String userDeptId) {
+        this.userDeptId = userDeptId;
     }
 
     public String getUserId() {

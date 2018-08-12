@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cdvcloud.rochecloud.mapper.BtvCommentMapper">
   <resultMap id="BaseResultMap" type="com.cdvcloud.rochecloud.domain.BtvComment">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="commentId" jdbcType="VARCHAR" property="commentId" />
     <result column="commentName" jdbcType="VARCHAR" property="commentName" />
     <result column="commentContent" jdbcType="VARCHAR" property="commentContent" />
     <result column="openId" jdbcType="VARCHAR" property="openId" />
@@ -13,25 +13,25 @@
     <result column="updateUserId" jdbcType="VARCHAR" property="updateUserId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, commentName, commentContent, openId, status, createTime, createUserId, updateTime, 
-    updateUserId
+    commentId, commentName, commentContent, openId, status, createTime, createUserId, 
+    updateTime, updateUserId
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from btv_comment
-    where id = #{id,jdbcType=VARCHAR}
+    where commentId = #{commentId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from btv_comment
-    where id = #{id,jdbcType=VARCHAR}
+    where commentId = #{commentId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.cdvcloud.rochecloud.domain.BtvComment">
-    insert into btv_comment (id, commentName, commentContent, 
+    insert into btv_comment (commentId, commentName, commentContent, 
       openId, status, createTime, 
       createUserId, updateTime, updateUserId
       )
-    values (#{id,jdbcType=VARCHAR}, #{commentName,jdbcType=VARCHAR}, #{commentContent,jdbcType=VARCHAR}, 
+    values (#{commentId,jdbcType=VARCHAR}, #{commentName,jdbcType=VARCHAR}, #{commentContent,jdbcType=VARCHAR}, 
       #{openId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{createUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}
       )
@@ -39,8 +39,8 @@
   <insert id="insertSelective" parameterType="com.cdvcloud.rochecloud.domain.BtvComment">
     insert into btv_comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="commentId != null">
+        commentId,
       </if>
       <if test="commentName != null">
         commentName,
@@ -68,8 +68,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+      <if test="commentId != null">
+        #{commentId,jdbcType=VARCHAR},
       </if>
       <if test="commentName != null">
         #{commentName,jdbcType=VARCHAR},
@@ -125,7 +125,7 @@
         updateUserId = #{updateUserId,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where commentId = #{commentId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cdvcloud.rochecloud.domain.BtvComment">
     update btv_comment
@@ -137,6 +137,6 @@
       createUserId = #{createUserId,jdbcType=VARCHAR},
       updateTime = #{updateTime,jdbcType=TIMESTAMP},
       updateUserId = #{updateUserId,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+    where commentId = #{commentId,jdbcType=VARCHAR}
   </update>
 </mapper>

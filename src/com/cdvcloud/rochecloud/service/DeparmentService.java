@@ -13,9 +13,8 @@ public class DeparmentService {
 
 	/**
 	 * 根据Id查询当前部门
-	 * 
-	 * @param id
-	 *            部门Id
+	 *
+	 * @param id 部门Id
 	 * @return
 	 */
 	public BtvDepartment findDeparmentById(String id) {
@@ -25,7 +24,7 @@ public class DeparmentService {
 
 	/**
 	 * 新增部门
-	 * 
+	 *
 	 * @param record
 	 * @return
 	 */
@@ -35,21 +34,31 @@ public class DeparmentService {
 
 	/**
 	 * 更新部门
-	 * 
+	 *
 	 * @param record
 	 * @return
 	 */
 	public long updateDepartment(BtvDepartment record) {
 		return btvDepartmentMapper.updateByPrimaryKeySelective(record);
 	}
-	
+
 	/**
 	 * 删除部门
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
 	public long removeDepartment(String id) {
 		return btvDepartmentMapper.deleteByPrimaryKey(id);
+	}
+
+
+	/**
+	 * 根据用户ID查询部门信息
+	 * @param userId
+	 * @return
+	 */
+	public BtvDepartment findDeparmentByUserId(String userId) {
+		return btvDepartmentMapper.findDeparmentByUserId(userId);
 	}
 }

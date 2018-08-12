@@ -3,7 +3,7 @@ package com.cdvcloud.rochecloud.domain;
 import java.util.Date;
 
 public class BtvDepartment {
-    private String id;
+    private String departmentId;
 
     private String departmentName;
 
@@ -21,12 +21,12 @@ public class BtvDepartment {
 
     private String userId;
 
-    public String getId() {
-        return id;
+    public String getDepartmentId() {
+        return departmentId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 
     public String getDepartmentName() {

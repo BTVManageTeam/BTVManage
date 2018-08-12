@@ -3,7 +3,7 @@ package com.cdvcloud.rochecloud.domain;
 import java.util.Date;
 
 public class BtvCommentReply {
-    private String id;
+    private String replayId;
 
     private Integer status;
 
@@ -21,12 +21,12 @@ public class BtvCommentReply {
 
     private String updateUserId;
 
-    public String getId() {
-        return id;
+    public String getReplayId() {
+        return replayId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setReplayId(String replayId) {
+        this.replayId = replayId;
     }
 
     public Integer getStatus() {

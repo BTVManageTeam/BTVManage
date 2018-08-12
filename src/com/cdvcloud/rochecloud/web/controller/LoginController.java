@@ -2,6 +2,11 @@ package com.cdvcloud.rochecloud.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cdvcloud.rochecloud.common.LoginData;
+import com.cdvcloud.rochecloud.domain.BtvDepartment;
+import com.cdvcloud.rochecloud.domain.BtvLawyer;
+import com.cdvcloud.rochecloud.service.DeparmentService;
+import com.cdvcloud.rochecloud.service.LawyerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +33,12 @@ public class LoginController {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	LawyerService lawyerService;
+
+	@Autowired
+	DeparmentService deparmentService;
+
 	/**
 	 * 登录
 	 *
@@ -46,10 +57,25 @@ public class LoginController {
 			password = MD5Util.getMd5ToLower(password);
 			user.setPassword(password);
 			user = userService.login(user);
+			LoginData loginData = new LoginData();
 			if (user == null) {
+				int result = user.getUserType();
+				String userId = user.getUserId();
+				String userName="";
+				if(Constants.ZERO == result){//类型：0 律师
+					BtvLawyer lawyer =  lawyerService.findLawyerByUserId(userId);
+					userName = lawyer.getLawyerName();
+
+				}else{// 1律所
+					BtvDepartment department =  deparmentService.findDeparmentByUserId(userId);
+					userName = department.getDepartmentName();
+				}
+				loginData.setLoginId(loginId);
+				loginData.setUserId(userId);
+				loginData.setUserName(userName);
 				return Constants.SERVICE_ERROR;
 			}
-			UserUtil.saveUser2SessionV2(request, user);
+			UserUtil.saveUser2SessionV2(request, loginData);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("登录出现错误![" + e.getMessage() + "]");
