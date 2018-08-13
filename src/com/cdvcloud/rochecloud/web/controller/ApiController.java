@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -187,7 +186,7 @@ public class ApiController {
 		ResponseObject responseObject = new ResponseObject(ReturnState.failure.status,ReturnState.failure.detail,ReturnState.failure.enDetail);
 		try {
 			logger.info("分页查询订单入参：[openId="+openId+"],"+strJson);
-			Map<String,Object> strMap = new HashMap<String,Object>();
+			Map<String,Object> strMap = JsonUtil.readJSON2Map(strJson);
 			Pages<BtvOrder> page = new Pages<BtvOrder>();
 			page.setNumPerPage(10);
 			page.setCurrentPage(1);

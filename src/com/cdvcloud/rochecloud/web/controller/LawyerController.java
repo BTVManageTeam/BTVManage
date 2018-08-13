@@ -108,6 +108,43 @@ public class LawyerController {
 		return "lawyer/lawyerList";
 	}
 
+	/**
+	 * 分页展示律师信息-主要为律师对应的服务统计
+	 *
+	 * @param request
+	 * @param page
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "serviceManageList/")
+	public String serviceManageList(HttpServletRequest request, Pages<Map<String, Object>> page, Model model) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		String param = null;
+
+		try {
+			params = ParamsUtil.getParamsMapWithTrim(request);
+			param = PageParams.getConditionByCAS(request, params);
+			page.setOrder("lawyer.createTime");
+			String roleCode = UserUtil.getUserByRequest(request, Constants.ROLE_CODE);
+			int code = Integer.valueOf(roleCode);
+			page.setCondition(param);
+			String strUserId = UserUtil.getUserByRequest(request, Constants.CURRENT_USER_ID);
+			if (code == Constants.ZERO) {
+				page.setTempParam(strUserId);
+			}
+			model.addAttribute("roleCode", roleCode);
+			model.addAttribute("strUserId", strUserId);
+			Integer totalNum = lawyerService.countFindAll(page);
+			page.setTotalNum(totalNum);
+			page.setList(lawyerService.selectFindAll(page));
+		} catch (Exception e) {
+			logger.error("查询信息异常！[" + e.getMessage() + "]");
+		}
+		model.addAttribute("page", page);
+		model.addAttribute("params", params);
+		return "serviceManage/serviceManageList";
+	}
+
 
 	/**
 	 * 新增律师
