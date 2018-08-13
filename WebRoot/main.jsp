@@ -1,6 +1,5 @@
 <%@page import="com.cdvcloud.rochecloud.common.Constants"%>
 <%@page import="com.cdvcloud.rochecloud.util.UserUtil"%>
-<%@page import="com.cdvcloud.auth4user.LoginAuthUtil"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <% 
