@@ -16,6 +16,8 @@ public interface BtvOrderMapper{
 
     int updateByPrimaryKeySelective(BtvOrder record);
 
+    int updateByPrimaryKeyWithBLOBs(BtvOrder record);
+
     int updateByPrimaryKey(BtvOrder record);
 
     /**

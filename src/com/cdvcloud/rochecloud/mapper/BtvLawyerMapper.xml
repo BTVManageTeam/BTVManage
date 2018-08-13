@@ -11,6 +11,7 @@
     <result column="portrait" jdbcType="VARCHAR" property="portrait" />
     <result column="average" jdbcType="DOUBLE" property="average" />
     <result column="serviceNum" jdbcType="INTEGER" property="serviceNum" />
+    <result column="commentNum" jdbcType="INTEGER" property="commentNum" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
@@ -22,8 +23,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     lawyerId, lawyerName, professionalYear, speciality, region, introduce, portrait,
-    average, serviceNum, email, phone, createTime, createUserId, updateTime, updateUserId,
-    userId, departmentId
+    average, serviceNum, commentNum, email, phone, createTime, createUserId, updateTime,
+    updateUserId, userId, departmentId
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
@@ -39,15 +40,17 @@
     insert into btv_lawyer (lawyerId, lawyerName, professionalYear,
     speciality, region, introduce,
     portrait, average, serviceNum,
-    email, phone, createTime,
-    createUserId, updateTime, updateUserId,
-    userId, departmentId)
+    commentNum, email, phone,
+    createTime, createUserId, updateTime,
+    updateUserId, userId, departmentId
+    )
     values (#{lawyerId,jdbcType=VARCHAR}, #{lawyerName,jdbcType=VARCHAR}, #{professionalYear,jdbcType=VARCHAR},
     #{speciality,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR},
     #{portrait,jdbcType=VARCHAR}, #{average,jdbcType=DOUBLE}, #{serviceNum,jdbcType=INTEGER},
-    #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-    #{createUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR},
-    #{userId,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR})
+    #{commentNum,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+    #{updateUserId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}
+    )
   </insert>
   <insert id="insertSelective" parameterType="com.cdvcloud.rochecloud.domain.BtvLawyer">
     insert into btv_lawyer
@@ -78,6 +81,9 @@
       </if>
       <if test="serviceNum != null">
         serviceNum,
+      </if>
+      <if test="commentNum != null">
+        commentNum,
       </if>
       <if test="email != null">
         email,
@@ -132,6 +138,9 @@
       <if test="serviceNum != null">
         #{serviceNum,jdbcType=INTEGER},
       </if>
+      <if test="commentNum != null">
+        #{commentNum,jdbcType=INTEGER},
+      </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
@@ -185,6 +194,9 @@
       <if test="serviceNum != null">
         serviceNum = #{serviceNum,jdbcType=INTEGER},
       </if>
+      <if test="commentNum != null">
+        commentNum = #{commentNum,jdbcType=INTEGER},
+      </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
@@ -222,6 +234,7 @@
       portrait = #{portrait,jdbcType=VARCHAR},
       average = #{average,jdbcType=DOUBLE},
       serviceNum = #{serviceNum,jdbcType=INTEGER},
+      commentNum = #{commentNum,jdbcType=INTEGER},
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       createTime = #{createTime,jdbcType=TIMESTAMP},

@@ -21,6 +21,8 @@ public class BtvLawyer {
 
     private Integer serviceNum;
 
+    private Integer commentNum;
+
     private String email;
 
     private String phone;
@@ -107,6 +109,14 @@ public class BtvLawyer {
 
     public void setServiceNum(Integer serviceNum) {
         this.serviceNum = serviceNum;
+    }
+
+    public Integer getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(Integer commentNum) {
+        this.commentNum = commentNum;
     }
 
     public String getEmail() {
