@@ -32,4 +32,18 @@ public interface BtvOrderMapper{
      * @return
      */
     int countFindAll(Pages<BtvOrder> page);
+
+    /**
+     * 根据律师id查询总个数
+     * @param lawyerId
+     * @return
+     */
+    int countSum(String lawyerId);
+
+    /**
+     * 根据律师id查询总评价分数
+     * @param lawyerId
+     * @return
+     */
+    double countScoreSum(String lawyerId);
 }

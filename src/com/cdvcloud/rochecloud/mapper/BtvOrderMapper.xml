@@ -260,4 +260,14 @@
     </if>
   </select>
 
+  <select id="countSum" parameterType="java.lang.String"  resultType="java.lang.Integer">
+    select count(*) from btv_order
+    where commentStatus = 1 and createUserId = #{orderId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="countScoreSum" parameterType="java.lang.String"  resultType="java.lang.Integer">
+    select sum(score) from btv_order
+    where commentStatus = 1 and createUserId = #{orderId,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

@@ -8,7 +8,7 @@
 <div class="widget-box">
 	<div class="widget-title">
 		<span class="icon"> <i class="icon-th"></i> </span>
-		<h5>律师</h5>
+		<h5>服务管理</h5>
 	</div>
 	<div class="widget-content tab-content">
 		<form id="vmsform" class="mg" action="<%=request.getContextPath()%>/lawyer/serviceManageList/" method="post">

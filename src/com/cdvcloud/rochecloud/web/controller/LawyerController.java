@@ -200,6 +200,9 @@ public class LawyerController {
 			lawyer.setCreateUserId(strUserId);
 			lawyer.setCreateTime(createTime);
 			lawyer.setUserId(userId);
+			lawyer.setAverage(0.0);
+			lawyer.setCommentNum(0);
+			lawyer.setServiceNum(0);
 			long num = lawyerService.insertSelective(lawyer);
 			if (num > 0) {
 				strResult = "success";

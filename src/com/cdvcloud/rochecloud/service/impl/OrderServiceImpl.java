@@ -43,11 +43,18 @@ public class OrderServiceImpl implements OrderService {
                 MailUtil mailUtil =  new MailUtil();
                 String email = btvLawyer.getEmail();
                 String lawyerName = btvLawyer.getLawyerName();
-                Boolean aaa = mailUtil.setMail(email,lawyerName);
-                logger.info("发送邮件状态："+aaa);
+                Boolean mailStatus = mailUtil.setMail(email,lawyerName);
+                logger.info("发送邮件状态："+mailStatus);
+                if(mailStatus){
+                    //将订单信息插入到表中
+                    btvOrderMapper.insert(btvOrder);
+                    //向律师表中更新服务人数
+                    btvLawyer.setServiceNum(btvLawyer.getServiceNum()+1);
+                    return btvLawyerMapper.updateByPrimaryKey(btvLawyer);
+                }
             }
         }
-        return btvOrderMapper.insert(btvOrder);
+        return 0L;
     }
 
     /**
@@ -57,7 +64,22 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public long updateOrder(BtvOrder btvOrder) {
-        return btvOrderMapper.updateByPrimaryKeySelective(btvOrder);
+        //更新订单信息
+        long num = btvOrderMapper.updateByPrimaryKeySelective(btvOrder);
+        //判断如果有分数则执行计算，以及加入评价个数
+        if(!"null".equals(String.valueOf(btvOrder.getScore()))){
+            //根据订单id查询律师id
+            BtvOrder oldBtvOrder = btvOrderMapper.selectByPrimaryKey(btvOrder.getOrderId());
+            //将分数更新到律师表
+            int countNum = btvOrderMapper.countSum(oldBtvOrder.getCreateUserId());
+            double countScoure = btvOrderMapper.countScoreSum(oldBtvOrder.getCreateUserId());
+            BtvLawyer btvLawyer = new BtvLawyer();
+            btvLawyer.setLawyerId(oldBtvOrder.getCreateUserId());
+            btvLawyer.setAverage(countScoure/countNum);
+            btvLawyer.setCommentNum(countNum);
+            btvLawyerMapper.updateByPrimaryKey(btvLawyer);
+        }
+        return num;
     }
 
     /**

@@ -7,7 +7,7 @@
 %>
 <div class="widget-box g_mainc">
 	<div class="widget-title">
-		<h2><a href="javascript:;" id="serviceSituation" shref="<%=request.getContextPath()%>/lawyer/serviceManageList/"  onclick="$.YSContent.openMenuUrl(this)"><i class="icon-retreat"></i>${lawyerName}</a></h2>
+		<h2><a href="javascript:;" id="serviceSituation" shref="<%=request.getContextPath()%>/lawyer/serviceManageList/"  onclick="openurl(this)"><i class="icon-retreat"></i>${lawyerName}</a></h2>
 	</div>
 	<div class="widget-content tab-content g_mainc_main">
 
@@ -57,10 +57,20 @@
 			<tbody>
 				<c:forEach items="${page.list}" var="order" varStatus="i">
 					<tr id="tr${order.orderId}">
-						<td>${i.index+1}</td>
+						<td><div class="lawyer_head">
+							<img src="${order.headUrl}"/>
+						</div>
+						</td>
 						<td>${order.userName}</td>
 						<td>${order.serviceType}</td>
-						<td>${order.score}</td>
+						<td>
+							<c:if test="${order.score== 0.0}">
+								无评论
+							</c:if>
+							<c:if test="${order.score != 0.0}">
+								${order.score}
+							</c:if>
+						</td>
 						<td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd HH:mm" /></td>
 						<td>
 							<c:if test="${order.serviceStatus== 0}">
