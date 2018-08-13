@@ -36,6 +36,8 @@
 			<link rel="stylesheet" href="<%=request.getContextPath()%>/js/catalog/css/screen.css" type="text/css" />
 			<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-switch.css" type="text/css"></link>
 			<link rel="stylesheet" href="<%=request.getContextPath()%>/css/tipso.min.css" />
+			<link rel="stylesheet" href="<%=request.getContextPath()%>/css/viewJs/order/orderList.css" />
+			<link rel="stylesheet" href="<%=request.getContextPath()%>/css/viewJs/common/common.css" />
 			<script>
 		        var ctx = "<%=request.getContextPath()%>";
 		        var baseCtx = "<%=baseCtx%>";
@@ -96,6 +98,7 @@
 		  %>
 		  <li class="first_nav"><a id="firstOnLoad" href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/findall/" onclick="openurl(this)">律所管理</a></li>
 		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/lawyer/findall/" onclick="openurl(this)">律师管理</a></li>
+		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/lawyer/serviceManageList/" onclick="openurl(this)">服务管理</a></li>
 		  <%
 		  	}
 		  %>
@@ -105,10 +108,10 @@
 
 		  %>
 		  <li class="first_nav"><a id="firstOnLoad" href="javascript:void(0)" shref="<%=request.getContextPath()%>/lawyer/findall/" onclick="openurl(this)">律师管理</a></li>
+		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/lawyer/serviceManageList/" onclick="openurl(this)">服务管理</a></li>
 		  <%
 			  }
 		  %>
-        <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/toDepartment/" onclick="openurl(this)">部门管理</a></li>
       </ul>
     </li> 
     </ul>

@@ -38,11 +38,15 @@ public class OrderServiceImpl implements OrderService {
     public long insertOrder(BtvOrder btvOrder) {
         //发送邮件
         BtvLawyer btvLawyer = btvLawyerMapper.selectByPrimaryKey(btvOrder.getCreateUserId());
-        MailUtil mailUtil =  new MailUtil();
-        String email = btvLawyer.getEmail();
-        String lawyerName = btvLawyer.getLawyerName();
-        Boolean aaa = mailUtil.setMail(email,lawyerName);
-        logger.info("发送邮件状态："+aaa);
+        if(btvLawyer != null){
+            if(!"null".equals(String.valueOf(btvLawyer.getEmail()))){
+                MailUtil mailUtil =  new MailUtil();
+                String email = btvLawyer.getEmail();
+                String lawyerName = btvLawyer.getLawyerName();
+                Boolean aaa = mailUtil.setMail(email,lawyerName);
+                logger.info("发送邮件状态："+aaa);
+            }
+        }
         return btvOrderMapper.insert(btvOrder);
     }
 
