@@ -59,4 +59,7 @@ public class Constants {
 	 * 分隔符 逗号','
 	 */
 	public static final String ANGLE_BRACKETS_LEFT = "<";
+	/** 是否成功0：成功；2：失败；1：accesstoken失效过期；3：无效的参数；1000：系统内部错误 */
+	public static final int SUCCESS = 0;
+	public static final int ERROR = 2;
 }

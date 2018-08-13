@@ -21,6 +21,7 @@ import com.cdvcloud.rochecloud.service.AccessTokenService;
 import com.cdvcloud.rochecloud.service.TicketTokenService;
 import com.cdvcloud.rochecloud.util.Configuration;
 import com.cdvcloud.rochecloud.util.StringUtil;
+import com.cdvcloud.rochecloud.util.UUIDUtil;
 import com.cdvcloud.wechat.bean.AccessToken;
 import com.cdvcloud.wechat.bean.Ticket;
 import com.cdvcloud.wechat.util.wechat.WeixinUtil;
@@ -101,20 +102,21 @@ public class ImportWechatTokenJob {
 			}
 		}
 
-				putWechatKeyCache(productId, accessToken, ticket);
+		putWechatKeyCache(productId, accessToken, ticket);
 	}
 
 	private AccessToken initAccessToken(String productId, String appid, String appsecret, AccessToken accessToken) throws Exception {
 		boolean updateFlag = true; //是否更新标记
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(WechatKey.PRODUCTID, productId);
-		AccessTokenM where = null;
+		AccessTokenM where = new AccessTokenM();
+		where.setProductId(productId);
 		AccessTokenM accessTokenM = accessTokenService.findAccessTokenM(where);
-
+		if(null!=accessTokenM&&!StringUtil.isEmpty(accessTokenM.getAccessToken())){
 			int currentHours = Calendar.getInstance(Locale.CHINA).get(Calendar.HOUR_OF_DAY);
 			int dbHours = Integer.parseInt(String.valueOf(accessTokenM.getHours()));
 			Map<String, Object> vo = getWechatKeyByProductId(productId);
-			AccessToken token = (null != vo)?(AccessToken)vo.get("accessToken"):null;
+			AccessToken token = (null != vo && !vo.isEmpty())?(AccessToken)vo.get("accessToken"):null;
 
 
 			if((null == getWechatKeyByProductId(productId)) && ((currentHours-dbHours) >= 1)) {
@@ -130,6 +132,9 @@ public class ImportWechatTokenJob {
 				accessToken.setHours(Integer.parseInt(String.valueOf(accessTokenM.getHours())));
 				accessToken.setProductId(productId);
 			}
+		}else{
+			updateFlag = true;
+		}
 
 		if(updateFlag) {
 			//每次休眠完成后，都需要重新获取access_token，确保信息正确。
@@ -158,6 +163,7 @@ public class ImportWechatTokenJob {
 
 			//接着更新数据库
 			AccessTokenM setParams = new AccessTokenM();
+			setParams.setId(UUIDUtil.randomUUID());
 			setParams.setAccessToken(accessToken.getAccess_token());
 			setParams.setCreateTime(accessToken.getCreate_time());
 			setParams.setExpiresIn(accessToken.getExpires_in());
@@ -182,10 +188,11 @@ public class ImportWechatTokenJob {
 		params.setProductId(productId);
 		TicketTokenM ticketTokenM = ticketTokenService.findTicketTokenM(params);
 
+		if(null!=ticketTokenM && !StringUtil.isEmpty(ticketTokenM.getTicket())){
 			int currentHours = Calendar.getInstance(Locale.CHINA).get(Calendar.HOUR_OF_DAY);
 			int dbHours = Integer.parseInt(String.valueOf(ticketTokenM.getHours()));
 			Map<String, Object> vo = getWechatKeyByProductId(productId);
-			Ticket tk = (null != vo)?(Ticket)vo.get("ticket"):null;
+			Ticket tk = (null != vo && !vo.isEmpty())?(Ticket)vo.get("ticket"):null;
 
 			if((null == vo) && ((currentHours-dbHours) >= 1)) {
 				updateFlag = true; //启动初始化且ticketToken超过一个小时了，需要更新库
@@ -200,6 +207,9 @@ public class ImportWechatTokenJob {
 				ticket.setHours(Integer.parseInt(String.valueOf(ticketTokenM.getHours())));
 				ticket.setProductId(productId);
 			}
+		}else{
+			updateFlag = true;
+		}
 
 		if(updateFlag) {
 			//每次休眠完成后，都需要重新获取ticket，确保信息正确。
@@ -238,6 +248,7 @@ public class ImportWechatTokenJob {
 
 			//接着更新数据库
 			TicketTokenM setParams = new TicketTokenM();
+			setParams.setId(UUIDUtil.randomUUID());
 			setParams.setTicket(ticket.getTicket());
 			setParams.setCreateTime(ticket.getCreate_time());
 			setParams.setExpiresIn(ticket.getExpires_in());
@@ -260,11 +271,11 @@ public class ImportWechatTokenJob {
 		value.put("accessToken", accessToken);
 		value.put("ticket", ticket);
 		wechatKeyMap.put(productId, value);
-		
+
 	}
 
 	private Map<String, Object> getWechatKeyByProductId(String productId) {
-		
+
 		return (ConcurrentHashMap)wechatKeyMap.get(productId);
 	}
 
