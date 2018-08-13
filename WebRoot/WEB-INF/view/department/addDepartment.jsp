@@ -19,7 +19,7 @@ tr{
 <div class="widget-box112">
 	<div class="widget-title">
 		<span class="icon"> <i class="icon-th"></i> </span>
-		<h5>添加所律所</h5>
+		<h5>添加律所</h5>
 	</div>
 	<div class="widget-content tab-content">
 		<div style="float: left;width: 60%">
@@ -42,7 +42,7 @@ tr{
 						</tr>
 						<tr>
 							<td align="right">律所名称：</td>
-							<td><input type="text" value="" name="departmentName" id="departmentName" datatype="s1-20" errormsg="请输入律所名称" ignore="ignore" />
+							<td><input type="text" value="" name="departmentName" id="departmentName" datatype="s1-20" errormsg="请输入律所名称" />
 								<div class="Validform_checktip"></div>
 							</td>
 						</tr>

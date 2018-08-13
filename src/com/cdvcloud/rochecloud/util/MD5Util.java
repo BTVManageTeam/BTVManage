@@ -1,16 +1,9 @@
 package com.cdvcloud.rochecloud.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.log4j.Logger;
-
-import sun.misc.BASE64Decoder;
 
 
 /**

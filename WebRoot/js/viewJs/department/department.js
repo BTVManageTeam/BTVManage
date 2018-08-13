@@ -25,7 +25,10 @@ function delDepartment(id) {
 					if (data == "success") {
 						$.scojs_message('删除成功!', $.scojs_message.TYPE_OK);
 						selectform();
-					} else {
+					} else if(data == "no"){
+						$.scojs_message('律所被占用，请先删除律师!', $.scojs_message.TYPE_ERROR);
+						selectform();
+					}else{
 						$.scojs_message('删除失败!', $.scojs_message.TYPE_ERROR);
 						selectform();
 					}

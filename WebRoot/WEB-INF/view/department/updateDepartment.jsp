@@ -19,7 +19,7 @@ tr{
 <div class="widget-box112">
 	<div class="widget-title">
 		<span class="icon"> <i class="icon-th"></i> </span>
-		<h5>添加所律所</h5>
+		<h5>修改律所</h5>
 	</div>
 	<div class="widget-content tab-content">
 		<div style="float: left;width: 60%">

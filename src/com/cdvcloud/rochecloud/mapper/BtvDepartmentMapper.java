@@ -36,4 +36,11 @@ public interface BtvDepartmentMapper {
 	 * @return
 	 */
 	List<Map<String, Object>> selectFindAllDepartment(Pages<Map<String, Object>> page);
+
+	/**
+	 * 根据userID查询部门，不传参则查询所有
+	 * @param mapUser
+	 * @return
+	 */
+	List<BtvDepartment> findAllDepartment(Map<String,Object> mapUser);
 }

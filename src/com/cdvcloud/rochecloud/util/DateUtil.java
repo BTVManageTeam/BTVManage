@@ -27,6 +27,7 @@ public class DateUtil {
 	public static final String ISO_DATE_FORMAT = "yyyyMMdd";
 	public static final String ISO_EXPANDED_DATE_FORMAT = "yyyy-MM-dd";
 	public static final String DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+	private static SimpleDateFormat _ISODateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static boolean LENIENT_DATE = false;
 	private static final Logger logger = Logger.getLogger(DateUtil.class);
 
@@ -1060,6 +1061,12 @@ public class DateUtil {
 		calendar.add(Calendar.DAY_OF_YEAR, -1);
 		String lastDay = sdf.format(calendar.getTime());
 		return firstDay + "-" + lastDay;
+	}
+	/**
+	 * 返回ISO格式（yyyy-MM-dd HH:mm:ss）的日期字符
+	 */
+	public static String toISODateTimeString(Date date) {
+		return _ISODateTime.format(date);
 	}
 
 	public static void main(String[] args) {

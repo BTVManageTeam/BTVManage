@@ -11,8 +11,6 @@ public class BtvOrder {
 
     private String pieceName;
 
-    private String pieceUrls;
-
     private String serviceType;
 
     private Double score;
@@ -23,6 +21,8 @@ public class BtvOrder {
 
     private String openId;
 
+    private String headUrl;
+
     private Date createTime;
 
     private String createUserId;
@@ -30,6 +30,8 @@ public class BtvOrder {
     private Date updateTime;
 
     private String updateUserId;
+
+    private String pieceUrls;
 
     public String getOrderId() {
         return orderId;
@@ -61,14 +63,6 @@ public class BtvOrder {
 
     public void setPieceName(String pieceName) {
         this.pieceName = pieceName;
-    }
-
-    public String getPieceUrls() {
-        return pieceUrls;
-    }
-
-    public void setPieceUrls(String pieceUrls) {
-        this.pieceUrls = pieceUrls;
     }
 
     public String getServiceType() {
@@ -111,6 +105,14 @@ public class BtvOrder {
         this.openId = openId;
     }
 
+    public String getHeadUrl() {
+        return headUrl;
+    }
+
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -141,5 +143,13 @@ public class BtvOrder {
 
     public void setUpdateUserId(String updateUserId) {
         this.updateUserId = updateUserId;
+    }
+
+    public String getPieceUrls() {
+        return pieceUrls;
+    }
+
+    public void setPieceUrls(String pieceUrls) {
+        this.pieceUrls = pieceUrls;
     }
 }

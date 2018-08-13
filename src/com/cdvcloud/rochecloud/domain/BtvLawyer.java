@@ -21,6 +21,8 @@ public class BtvLawyer {
 
     private Integer serviceNum;
 
+    private Integer commentNum;
+
     private String email;
 
     private String phone;
@@ -34,6 +36,8 @@ public class BtvLawyer {
     private String updateUserId;
 
     private String userId;
+
+    private String departmentId;
 
     public String getLawyerId() {
         return lawyerId;
@@ -107,6 +111,14 @@ public class BtvLawyer {
         this.serviceNum = serviceNum;
     }
 
+    public Integer getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(Integer commentNum) {
+        this.commentNum = commentNum;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -161,5 +173,13 @@ public class BtvLawyer {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 }

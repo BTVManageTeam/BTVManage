@@ -55,7 +55,13 @@
 						<td><fmt:formatDate value="${user.createTime}" pattern="yyyy-MM-dd HH:mm" /></td>
 						<td>
 							<button type="button" id="btnUpdatePwd" class="btn btn-info btn-mini" onclick="toUpdateDepartment('${user.departmentId}')">修改</button>
-							<button type="button" id="btnDelete" class="btn btn-danger btn-mini" onclick="delDepartment('${user.departmentId}');">删除</button></td>
+
+							<c:if test="${strUserId == user.userId}">
+									<button type="button" id="btnDelete" class="btn btn-danger btn-mini" disabled="disabled">删除</button></td>
+							</c:if>
+							<c:if test="${strUserId != user.userId}">
+								<button type="button" id="btnDelete" class="btn btn-danger btn-mini" onclick="delDepartment('${user.departmentId}');">删除</button></td>
+							</c:if>
 					</tr>
 					<tr>
 						<td class="white_td"></td>
