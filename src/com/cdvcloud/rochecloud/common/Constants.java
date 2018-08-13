@@ -44,4 +44,19 @@ public class Constants {
 	public static final int TWO = 2;
 	/** 验证框架验证通过 **/
 	public static final String VALIDATE_YES = "y";
+	/**字符串0 **/
+	public static final String SZERO = "0";
+	public static final String SONE = "1";
+	public static final String STWO = "2";
+	public static final String ID = "id";
+	/** 中括号 */
+	public static final String ZHONG_LEFT = "[";
+	/**
+	 * 大括号
+	 */
+	public static final String BRACE_LEFT = "{";
+	/**
+	 * 分隔符 逗号','
+	 */
+	public static final String ANGLE_BRACKETS_LEFT = "<";
 }
