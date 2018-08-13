@@ -1,6 +1,5 @@
 package com.cdvcloud.rochecloud.service;
 
-import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -9,10 +8,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -25,7 +20,6 @@ import com.cdvcloud.rochecloud.mdomain.User;
 import com.cdvcloud.rochecloud.mongodao.BasicDao;
 import com.cdvcloud.rochecloud.util.DateUtil;
 import com.cdvcloud.rochecloud.util.JsonUtil;
-import com.cdvcloud.rochecloud.util.StringUtil;
 import com.cdvcloud.wechat.bean.AccessToken;
 import com.cdvcloud.wechat.util.wechat.WeixinUtil;
 import com.mongodb.BasicDBObject;

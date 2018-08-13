@@ -16,7 +16,7 @@
     from wechat_ticket
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <insert id="addTicketTokenM" parameterType="com.cdvcloud.rochecloud.wechar.TicketTokenM">
+  <insert id="addTicketTokenM" parameterType="com.cdvcloud.rochecloud.domain.wechar.TicketTokenM">
     insert into wechat_ticket (id, ticket, expiresIn, 
       createTime, hours, productId)
     values (#{id,jdbcType=VARCHAR}, #{ticket,jdbcType=VARCHAR}, #{expiresIn,jdbcType=VARCHAR}, 

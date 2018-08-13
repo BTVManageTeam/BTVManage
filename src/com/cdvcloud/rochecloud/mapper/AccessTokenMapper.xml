@@ -16,7 +16,7 @@
     from wechat_accesstoken
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <insert id="addAccessTokenM" parameterType="com.cdvcloud.rochecloud.wechar.AccessTokenM">
+  <insert id="addAccessTokenM" parameterType="com.cdvcloud.rochecloud.domain.wechar.AccessTokenM">
     insert into wechat_accesstoken (id, accessToken, expiresIn, 
       createTime, hours, productId)
     values (#{id,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR}, #{expiresIn,jdbcType=INTEGER}, 

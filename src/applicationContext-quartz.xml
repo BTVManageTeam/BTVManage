@@ -25,6 +25,6 @@
 		<property name="targetMethod" value="execute" />   
 		<property name="concurrent" value="false" />
 	</bean>
-	<bean id="importWechatTokenJob" class="com.cdvcloud.wx.schedule.ImportWechatTokenJob" />
+	<bean id="importWechatTokenJob" class="com.cdvcloud.rochecloud.schedule.ImportWechatTokenJob" />
 	
 </beans>  
