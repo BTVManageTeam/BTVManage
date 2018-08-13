@@ -9,6 +9,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +23,9 @@ import com.cdvcloud.rochecloud.mdomain.User;
 import com.cdvcloud.rochecloud.mongodao.BasicDao;
 import com.cdvcloud.rochecloud.util.DateUtil;
 import com.cdvcloud.rochecloud.util.JsonUtil;
+import com.cdvcloud.rochecloud.util.StringUtil;
 import com.cdvcloud.wechat.bean.AccessToken;
 import com.cdvcloud.wechat.util.wechat.WeixinUtil;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 
 /**
  * 业务描述：微信用户信息相关操作
@@ -49,6 +51,11 @@ public class WxUserService{
 	public List<Map<String, Object>> findUser(Map<String, Object> whereParams) throws Exception {
 		return baseDao.find(User.DB_COLLECTION, whereParams,1,Integer.MAX_VALUE);
 	}
+	
+	public Map<String, Object> findUserOne(Map<String, Object> whereParams) throws Exception{
+		return baseDao.findOne(User.DB_COLLECTION, whereParams);
+	}
+	
 	/**
 	 * 获取用户信息进行入库
 	 * 
@@ -77,7 +84,7 @@ public class WxUserService{
 			logger.info("GET UserInfo from wechat, productId=["+productId+"], openId=["+openId+"], access_token{"+accessToken.getAccess_token()+"}.");
 			
 			// 获取用户信息
-//			userInfo = WeixinUtil.getUserInfo(accessToken.getAccess_token(), openId);
+			JSONObject userInfoJson = WeixinUtil.getUserInfo(accessToken.getAccess_token(), openId);
 			/*
 			 * 返回结果列表信息为：{ "subscribe":1,
 			 * "openid":"oAsfGjoCINTknQ6zFHn9G0XSFzU8", "nickname":"kobicc(陈昌)",
@@ -86,6 +93,9 @@ public class WxUserService{
 			 * dEr5LrDkAmbaMHoo2Ih4M6lCVXXCwO22neHJksZ28CY5QHMPm2KRJvoB76R59d4hVIzBjh481TePfAibhte8WicaxquAEXuVLt
 			 * \/0", "subscribe_time":1409215507, "remark":""}
 			 */
+			userInfo.put(User.OPENID,userInfoJson.get("openid"));
+			userInfo.put(User.NICKNAME,userInfoJson.get("nickname"));
+			userInfo.put(User.HEADIMGURL,userInfoJson.get("headimgurl"));
 			logger.info("return UserInfo is {"+userInfo.toString()+"}");
 			
 			userInfo.put(User.PRODUCTID, productId);
@@ -104,6 +114,56 @@ public class WxUserService{
 			logger.error("用户信息入库发生错误：" + e);
 		}
 		return userInfo;
+	}
+	
+	
+	/**
+	 * @param code 用户同意授权之后	的code
+	 * @param state 授权链接中的state的值
+	 * @param productId 项目的id
+	 * @return 用户存在返回该用户，没有返回null
+	 * @throws Exception 
+	 */
+	public Map<String, Object> userIsExist(String code,String state,String productId,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		Map<String, Object> user = null;
+		try {
+			WechatKeyVo wechatKeyVo = InitConfigService.getWechatKeyByProductId(productId);
+			String appid = wechatKeyVo.getAppid();
+			String appsecret = wechatKeyVo.getAppsecret();
+			
+			JSONObject authInfo = WeixinUtil.getAuthorAccessToken(appid,appsecret, code);
+			logger.info("productId为｛"+productId+"｝, authInfo----------------------"+authInfo);
+			
+			String openId = authInfo.getString("openid");
+			HashMap<String, Object> queryUser = new HashMap<String, Object>();
+			queryUser.put(User.OPENID, openId);
+			queryUser.put(User.PRODUCTID, productId);
+			
+			List<Map<String, Object>> userList = baseDao.find(User.DB_COLLECTION, queryUser,1,Integer.MAX_VALUE);
+			
+			if(null == userList || userList.size() == 0) {
+				String scope = authInfo.getString("scope"); // scope值为：snsapi_base/snsapi_userinfo
+				if(!StringUtil.isEmpty(scope) && "snsapi_userinfo".equals(scope)) {
+					user = getUserBySnsapiUserinfo(wechatKeyVo, authInfo);
+				}
+				if(null == user) {
+//					user = createVirtualUser(request,response); //by CC 20150824 如果是未关注用户，则创建一个虚拟用户。
+				}
+			} else {
+				user = userList.get(0);
+				if(user == null || user.get(User.OPENID) == null || user.get(User.OPENID).equals("")){
+					logger.info("2productId为｛"+productId+"｝, not current user, now save user.");
+//					user = createVirtualUser(request,response); //by CC 20150824 如果是未关注用户，则创建一个虚拟用户。
+				} else {
+					String headImgUrl = String.valueOf((null != user.get(User.HEADIMGURL)?user.get(User.HEADIMGURL):""));
+					headImgUrl = (headImgUrl.endsWith("/0"))?(headImgUrl.substring(0, headImgUrl.length()-2)+"/64"):headImgUrl;
+					user.put(User.HEADIMGURL, headImgUrl);
+				}
+			}
+		} catch (Exception e) {
+//			user = createVirtualUser(request,response);
+		}
+		return user;
 	}
 	
 	/**
@@ -171,7 +231,7 @@ public class WxUserService{
 //		return user;
 //	}
 	
-	private DBObject getUserBySnsapiUserinfo(WechatKeyVo wechatKeyVo, JSONObject authInfo) throws Exception {
+	private Map<String, Object> getUserBySnsapiUserinfo(WechatKeyVo wechatKeyVo, JSONObject authInfo) throws Exception {
 		String accessToken = authInfo.getString("access_token");
 		String openId = authInfo.getString("openid");
 		JSONObject userInfo = WeixinUtil.getUserInfoByAccessToken(accessToken, openId);
@@ -188,7 +248,7 @@ public class WxUserService{
 //		DBObject user = baseDao.findObjectById(User.DB_COLLECTION, result);
 		
 		Map<String, Object> userMap = JsonUtil.readJSON2Map(String.valueOf(userInfo));
-		return new BasicDBObject(userMap);
+		return userMap;
 		
 	}
 	

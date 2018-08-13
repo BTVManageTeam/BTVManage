@@ -9,7 +9,7 @@ package com.cdvcloud.rochecloud.mdomain;
 public class User {
 	
 	/**  数据库表  **/
-	public static final String DB_COLLECTION = "user";
+	public static final String DB_COLLECTION = "wx_user";
 	
 	/** mongodb 数据库的id主键 */
 	public static final String ID = "_id";
