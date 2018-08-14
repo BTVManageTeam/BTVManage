@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cdvcloud.rochecloud.common.Pages;
 import com.cdvcloud.rochecloud.common.ParamsUtil;
 import com.cdvcloud.rochecloud.common.ResponseObject;
+import com.cdvcloud.rochecloud.domain.BtvLawyer;
 import com.cdvcloud.rochecloud.mdomain.WechatTemplate;
 import com.cdvcloud.rochecloud.schedule.ImportWechatTokenJob;
+import com.cdvcloud.rochecloud.service.LawyerService;
 import com.cdvcloud.rochecloud.service.XyWechatMessageService;
 import com.cdvcloud.rochecloud.util.Configuration;
 import com.cdvcloud.rochecloud.util.JsonUtil;
@@ -43,13 +45,15 @@ public class XyWechatMessageApiController {
 	private static final Logger logger = Logger.getLogger(XyWechatMessageApiController.class);
 
 	private final XyWechatMessageService xyWechatMessageService;
+	private final LawyerService lawyerService;
 
 	/**
 	 * @Description: spring注入
 	 */
 	@Autowired
-	public XyWechatMessageApiController(XyWechatMessageService xyWechatMessageService) {
+	public XyWechatMessageApiController(XyWechatMessageService xyWechatMessageService,LawyerService lawyerService) {
 		this.xyWechatMessageService = xyWechatMessageService;
+		this.lawyerService = lawyerService;
 	}
 
 	/**
@@ -124,9 +128,11 @@ public class XyWechatMessageApiController {
 	 */
 	@RequestMapping("sendTemlateMessage/")
 	@ResponseBody
-	public ResponseObject sendTemlateMessage(HttpServletRequest request,HttpServletResponse response, @RequestBody String callbackParams){
+	public ResponseObject sendTemlateMessage(HttpServletRequest request,HttpServletResponse response, @RequestBody String params){
 		ResponseObject resObj = new ResponseObject();
 		try {
+			logger.info("推送模板参数 params"+params);
+			Map<String, Object> paramMap = JsonUtil.readJSON2Map(params);
 			String wxTemplateId = Configuration.getConfigValue("WXTEMPLATEID");
 			AccessToken accessToken ;
 			String accessTokenStr="";
@@ -134,17 +140,21 @@ public class XyWechatMessageApiController {
 			Map<String, Object> obj = (Map<String, Object>)ImportWechatTokenJob.wechatKeyMap.get(productId);
 			accessToken=(AccessToken)obj.get("accessToken");
 			accessTokenStr=accessToken.getAccess_token();
+			//查询律师信息
+			BtvLawyer btvLawyer = lawyerService.selectByPrimaryKey(String.valueOf(paramMap.get("lawyerId")));
+			
 			//将参数传给公众号
-			logger.info("推送模板参数 callbackParams"+callbackParams);
+			
 			Map<String, Object> mapPara=new HashMap<String, Object>();
 			mapPara.put(WechatTemplate.USERID, "");
 			mapPara.put(WechatTemplate.TOUSER, "o8Cth1tMLxZBCNlyeo9co-HocZe8");
-			mapPara.put(WechatTemplate.URL, "https://baidu.com");
+			mapPara.put(WechatTemplate.URL, Configuration.getConfigValue("TEMPLATEURL")+btvLawyer.getLawyerId());
 			mapPara.put(WechatTemplate.TEMPLATEID, wxTemplateId);
-			mapPara.put(WechatTemplate.FIRST, "呵呵哒");
-			mapPara.put(WechatTemplate.REMARK, "点击链接查看");
-			mapPara.put(WechatTemplate.KEYWORD+"1","1234");
-			mapPara.put(WechatTemplate.KEYWORD+"2","5678" );
+			mapPara.put(WechatTemplate.FIRST, "精选律师推荐");
+			mapPara.put(WechatTemplate.REMARK, "点击链接预约该律师");
+			mapPara.put(WechatTemplate.KEYWORD+"1",btvLawyer.getLawyerName());
+			mapPara.put(WechatTemplate.KEYWORD+"2",btvLawyer.getProfessionalYear());
+			mapPara.put(WechatTemplate.KEYWORD+"3",btvLawyer.getSpeciality());
 			Map<String,Object> map=WechatTemplate.weChatTemplate(mapPara);
 			String json=JsonUtil.map2Json(map);
 			
