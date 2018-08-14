@@ -53,7 +53,7 @@ public class CommentController {
         String param = null;
         try {
             params = ParamsUtil.getParamsMapWithTrim(request);
-            param = PageParams.getConditionByCAS(request, params);
+            param = PageParams.getConditionByCASOld(request, params);
             page.setCondition(param);
             Integer totalNum = commentService.countFindAll(page);
             page.setTotalNum(totalNum);

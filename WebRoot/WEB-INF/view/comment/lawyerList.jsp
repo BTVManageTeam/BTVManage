@@ -10,7 +10,7 @@
 		<h2><a href="javascript:;" id="serviceSituation" shref="<%=request.getContextPath()%>/comment/queryCommentPage/"  onclick="openurl(this)"><i class="icon-retreat"></i>返回</a></h2>
 	</div>
 	<div class="widget-content tab-content">
-		<form id="vmsform" class="mg" action="<%=request.getContextPath()%>/lawyer/findall/" method="post">
+		<form id="vmsform" class="mg" action="<%=request.getContextPath()%>/comment/queryLawyer/?commentId=${commentId}" method="post">
 
 			<div style="position:relative;  display:inline-block;">
 				<input class="conditions" style="width: 166px; height:28px; " placeholder="律师名" type="text" id="lawyerName" name="lawyerNameLIKE" value="${params.lawyerNameLIKE }" /><i class="search_btn" onclick="selectformbyone()"></i>

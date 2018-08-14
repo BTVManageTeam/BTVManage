@@ -5,6 +5,17 @@
 <div class="widget-box g_mainc">
 	<div class="widget-content tab-content g_mainc_main">
 
+		<form id="vmsform" class="mg" action="<%=request.getContextPath()%>/comment/queryCommentPage" method="post">
+
+			<div style="position:relative;  display:inline-block;">
+				<input class="conditions" style="width: 166px; height:28px; " placeholder="消息发送者" type="text" id="commentNameLIKE" name="commentNameLIKE" value="${params.commentNameLIKE }" /><i class="search_btn" onclick="selectformbyone()"></i>
+			</div>
+			<input style="display:none;" type="text" />
+			<input type="hidden" id="order" name="order" value="${page.order}" />
+			<input type="hidden" id="orderBy" name="orderBy" value="${page.orderBy}" /> <input type="hidden" id="currentPage" name="currentPage" value="${page.currentPage}" />
+			<button value="" type="button" onclick="emptyCon()" class="btn-info btn  b_m_bottom clear_btn">清除</button>
+		</form>
+
 		<div style="clear:both;"></div>
 		<table id="generateTable" class="table table-bordered table-striped" style="border-top:1px solid #DDDDDD;border-bottom:1px solid #DDDDDD;">
 			<caption class="cap"></caption>
