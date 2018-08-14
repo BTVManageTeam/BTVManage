@@ -35,6 +35,14 @@ public class OrderController {
 	@Autowired
 	private LawyerService lawyerService;
 
+	/**
+	 * 分页查询订单信息-服务管理页面根据律师查询的订单列表
+	 * @param request
+	 * @param page
+	 * @param model
+	 * @param lawyerId
+	 * @return
+	 */
 	@RequestMapping(value = "queryOrderPage")
 	public String queryOrderPage(HttpServletRequest request, Pages<BtvOrder> page, Model model,
 							@RequestParam(value = "lawyerId") String lawyerId) {
@@ -99,6 +107,32 @@ public class OrderController {
 			logger.error("更新订单信息异常！异常信息：" + e.getMessage());
 		}
 		return responseObject;
+	}
+
+	/**
+	 *
+	 * @param request
+	 * @param model
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "queryPieceUrls")
+	public String queryPieceUrls(HttpServletRequest request, Model model,
+								 @RequestParam(value = "id") String id) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		String param = null;
+		try {
+			//查询律师信息相关内容并渲染页面
+			BtvOrder btvOrder = orderService.queryOrder(id);
+			//将图片按照，切分放到数组中进行传递
+			String pieceUrls = btvOrder.getPieceUrls();
+			String[] pieceUrlList = pieceUrls.split(",");
+			model.addAttribute("lawyerId", btvOrder.getCreateUserId());
+			model.addAttribute("pieceUrls", pieceUrlList);
+		} catch (Exception e) {
+			logger.error("查询信息异常！[" + e.getMessage() + "]");
+		}
+		return "order/orderPieceUrls";
 	}
 
 }

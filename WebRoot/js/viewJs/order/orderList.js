@@ -1,6 +1,6 @@
 
+//提交订单服务状态
 function toUpdateServiceStatus(id,lawyerId) {
-
     var confirm = $.scojs_confirm({
         content : "确认是否将当前状态设置为已完成？",
         action : function() {
@@ -38,9 +38,27 @@ function toUpdateServiceStatus(id,lawyerId) {
 
     });
     confirm.show();
-
 }
 
+
+//查看订单图片
+function toQueryPieceUrls(id,lawyerId) {
+    $.ajax({
+        type : 'POST',
+        url : ctx + "/order/queryPieceUrls?id=" + id,
+        cache : false,
+        success : function(response) {
+            $.Mark.hide();
+            $("#content").css("display", "none");
+            $("#contenttwo").remove();
+            $("#content").after("<div id='contenttwo'></div>");
+            $("#contenttwo").html(response);
+        },
+        error : function(a, b, c) {
+            $.YSAjax.error(a, b, c);
+        }
+    });
+}
 
 /** *************返回操作***************************** */
 function giveup(url) {

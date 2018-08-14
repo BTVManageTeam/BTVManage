@@ -14,7 +14,7 @@ tr{
 	line-height: 20px;
 }
 </style>
-
+<script src="<%=request.getContextPath()%>/js/upload/uploadify3.1/jquery.uploadify.js"></script>
 <script src="<%=request.getContextPath()%>/js/viewJs/lawyer/lawyer.js"></script>
 <div class="widget-box112">
 	<div class="widget-title">
@@ -83,6 +83,18 @@ tr{
 							<td colspan="3"><textarea style="width: 78%; height: 80px;" name="introduce" id="introduce" datatype="*1-200" ignore="ignore"
 											errormsg="律师介绍最多200字符"></textarea>
 							</td>
+						</tr>
+						<tr>
+							<td align="right">律师缩略图：</td>
+							<td colspan="3">
+								<input type="file" name="file" id="fileUpload" >
+								<input type="hidden" name="systemLogoUrl" id="systemLogoUrl" value=""/>
+								<div id="imgDiv" style="width:240px;height: 160px;">
+									<img  id="thumbnail" style="max-height:100%;max-width:100%;"  src="<%=request.getContextPath()%>/images/loadingImage.png"></img>
+								</div>
+								<span style="color: #bbb">系统logo</span>
+							</td>
+
 						</tr>
 
 						<tr>

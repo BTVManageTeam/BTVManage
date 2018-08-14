@@ -81,7 +81,7 @@
 							</c:if>
 						</td>
 						<td>
-							<button type="button" id="btnQuery" class="btn btn-info btn-mini" onclick="toQueryPieceUrls('${order.orderId}')">查看</button>
+							<button type="button" id="btnQuery" class="btn btn-info btn-mini" onclick="toQueryPieceUrls('${order.orderId}','${order.createUserId}')">查看</button>
 						</td>
 					</tr>
 					<tr>
