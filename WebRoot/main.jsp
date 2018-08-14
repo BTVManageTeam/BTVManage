@@ -37,6 +37,7 @@
 			<link rel="stylesheet" href="<%=request.getContextPath()%>/css/tipso.min.css" />
 			<link rel="stylesheet" href="<%=request.getContextPath()%>/css/viewJs/order/orderList.css" />
 			<link rel="stylesheet" href="<%=request.getContextPath()%>/css/viewJs/common/common.css" />
+			<link rel="stylesheet" href="<%=request.getContextPath()%>/css/viewJs/comment/comment.css" />
 			<script>
 		        var ctx = "<%=request.getContextPath()%>";
 		        var baseCtx = "<%=baseCtx%>";
@@ -98,7 +99,7 @@
 		  <li class="first_nav"><a id="firstOnLoad" href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/findall/" onclick="openurl(this)">律所管理</a></li>
 		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/lawyer/findall/" onclick="openurl(this)">律师管理</a></li>
 		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/lawyer/serviceManageList/" onclick="openurl(this)">服务管理</a></li>
-		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/comment/commentList/" onclick="openurl(this)">在线客服</a></li>
+		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/api/xy/wechatMessage/v1/queryWechatMessage4page/" onclick="openurl(this)">在线客服</a></li>
 		  <%
 		  	}
 		  %>

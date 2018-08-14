@@ -139,4 +139,14 @@
       updateUserId = #{updateUserId,jdbcType=VARCHAR}
     where replayId = #{replayId,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.cdvcloud.rochecloud.common.Pages">
+    select * from btv_commentReply
+    <where>
+      <if test="condition != null">
+        ${condition}
+      </if>
+    </where>
+  </select>
+
 </mapper>
