@@ -43,7 +43,9 @@
 			<tbody>
 				<c:forEach items="${page.list}" var="lawyer" varStatus="i">
 					<tr id="tr${lawyer.lawyerId}">
-						<td>${lawyer.portrait}</td>
+						<td><div class="lawyer_head">
+							<img src="${lawyer.portrait}"/>
+						</div></td>
 						<td>${lawyer.lawyerName}</td>
 						<td>${lawyer.professionalYear}</td>
 						<td>${lawyer.introduce}</td>

@@ -14,8 +14,9 @@ tr{
 	line-height: 20px;
 }
 </style>
-<script src="<%=request.getContextPath()%>/js/upload/uploadify3.1/jquery.uploadify.js"></script>
+<script src="<%=request.getContextPath()%>/plugins/stream/js/stream-v1.js"></script>
 <script src="<%=request.getContextPath()%>/js/viewJs/lawyer/lawyer.js"></script>
+<script src="<%=request.getContextPath()%>/js/viewJs/base.js"></script>
 <div class="widget-box112">
 	<div class="widget-title">
 		<span class="icon"> <i class="icon-th"></i> </span>
@@ -87,12 +88,12 @@ tr{
 						<tr>
 							<td align="right">律师缩略图：</td>
 							<td colspan="3">
-								<input type="file" name="file" id="fileUpload" >
-								<input type="hidden" name="portrait" id="portrait" value=""/>
-								<div id="imgDiv" style="width:240px;height: 160px;">
-									<img  id="thumbnail" style="max-height:100%;max-width:100%;"  src="<%=request.getContextPath()%>/images/loadingImage.png"></img>
+								<div class="main_scjp_dj coverImg">
+									<img src="images/bg_add.png" class="main_scjp_add" id="upload_photo">
+									<img src="" class="hide" id="show_photo">
+									<div class="on_delete hide"></div>
 								</div>
-								<span style="color: #bbb">系统logo</span>
+								<input style="display: none" type="text" value="" name="portrait" id="portrait" errormsg="头像" />
 							</td>
 
 						</tr>
@@ -147,5 +148,7 @@ tr{
 				giveup('/lawyer/findall/');
 			}
 		});
+		//初始化加载图片上传功能
+        initUploadPhotoPlug();
 	});
 </script>
