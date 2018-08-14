@@ -12,6 +12,5 @@ import javax.servlet.http.HttpServletRequest;
 public interface ICoreService {
 
 	public  String processRequest(HttpServletRequest request, WxUserService userService, 
-			UserMessageService messageService, 
-			String productId);
+			UserMessageService messageService);
 }

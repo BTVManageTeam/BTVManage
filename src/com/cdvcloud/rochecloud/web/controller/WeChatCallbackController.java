@@ -64,7 +64,7 @@ public class WeChatCallbackController {
 		String respMessage = "";
 
 		if (checkSignature(request)) {
-			respMessage = CoreBeanFactory.getInstance(productId).processRequest(request, userService, userMessageService,productId);
+			respMessage = CoreBeanFactory.getInstance(productId).processRequest(request, userService, userMessageService);
 		} else {
 			logger.error("请求不是来自微信服务器，不予以处理！");
 			respMessage = "请求不是来自微信服务器，不予以处理！";
