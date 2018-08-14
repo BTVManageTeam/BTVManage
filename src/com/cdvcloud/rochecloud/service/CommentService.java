@@ -2,6 +2,7 @@ package com.cdvcloud.rochecloud.service;
 
 import com.cdvcloud.rochecloud.common.Pages;
 import com.cdvcloud.rochecloud.domain.BtvComment;
+import com.cdvcloud.rochecloud.domain.BtvCommentReply;
 
 import java.util.List;
 
@@ -26,5 +27,12 @@ public interface CommentService {
      * @return
      */
     List<BtvComment> selectFindAll(Pages<BtvComment> page);
+
+    /**
+     * 向回复表插入数据并向微信推送数据
+     * @param btvCommentReply
+     * @return
+     */
+    int insertCommentReply(BtvCommentReply btvCommentReply);
 
 }

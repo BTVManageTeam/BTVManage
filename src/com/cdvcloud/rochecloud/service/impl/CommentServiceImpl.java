@@ -3,8 +3,10 @@ package com.cdvcloud.rochecloud.service.impl;
 import com.cdvcloud.rochecloud.common.Pages;
 import com.cdvcloud.rochecloud.domain.BtvComment;
 import com.cdvcloud.rochecloud.domain.BtvCommentReply;
+import com.cdvcloud.rochecloud.domain.BtvLawyer;
 import com.cdvcloud.rochecloud.mapper.BtvCommentMapper;
 import com.cdvcloud.rochecloud.mapper.BtvCommentReplyMapper;
+import com.cdvcloud.rochecloud.mapper.BtvLawyerMapper;
 import com.cdvcloud.rochecloud.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class CommentServiceImpl implements CommentService {
     private BtvCommentMapper btvCommentMapper;
     @Autowired
     private BtvCommentReplyMapper btvCommentReplyMapper;
+    @Autowired
+    private BtvLawyerMapper btvLawyerMapper;
 
     /**
      * 分页查询总数
@@ -50,9 +54,27 @@ public class CommentServiceImpl implements CommentService {
             String condition = "commentId = '"+btvCommentMap.getCommentId()+"'";
             btvCommentReplyPages.setCondition(condition);
             List<BtvCommentReply> btvCommentReplyList = btvCommentReplyMapper.selectByCondition(btvCommentReplyPages);
+            for (BtvCommentReply btvCommentReply:btvCommentReplyList) {
+                if(btvCommentReply.getStatus() == 0){
+                    BtvLawyer btvLawyer = btvLawyerMapper.selectByPrimaryKey(btvCommentReply.getUserId());
+                    btvCommentReply.setLawyerMap(btvLawyer);
+                }
+            }
             btvCommentMap.setBtvCommentReplyList(btvCommentReplyList);
             btvCommentList1.add(btvCommentMap);
         }
         return btvCommentList1;
     }
+
+    /**
+     * 向回复表插入数据并向微信推送数据
+     * @param btvCommentReply
+     * @return
+     */
+    @Override
+    public int insertCommentReply(BtvCommentReply btvCommentReply) {
+        //TODO 向微信推送数据
+        return btvCommentReplyMapper.insert(btvCommentReply);
+    }
+
 }

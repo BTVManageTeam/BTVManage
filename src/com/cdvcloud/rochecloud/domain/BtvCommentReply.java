@@ -21,6 +21,8 @@ public class BtvCommentReply {
 
     private String updateUserId;
 
+    private BtvLawyer LawyerMap;
+
     public String getReplayId() {
         return replayId;
     }
@@ -91,5 +93,13 @@ public class BtvCommentReply {
 
     public void setUpdateUserId(String updateUserId) {
         this.updateUserId = updateUserId;
+    }
+
+    public BtvLawyer getLawyerMap() {
+        return LawyerMap;
+    }
+
+    public void setLawyerMap(BtvLawyer lawyerMap) {
+        LawyerMap = lawyerMap;
     }
 }

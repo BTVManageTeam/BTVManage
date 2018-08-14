@@ -52,4 +52,12 @@ public interface BtvLawyerMapper {
 	 * @return
 	 */
 	int selectByDeptId(String departmentId);
+
+	/**
+	 * 根据律师id查询律师详情以及律所名称
+	 * @param lawyerId
+	 * @return
+	 */
+	BtvLawyer queryLawyerAndDepartmentById(String lawyerId);
+
 }

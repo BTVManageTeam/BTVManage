@@ -88,7 +88,7 @@ tr{
 							<td align="right">律师缩略图：</td>
 							<td colspan="3">
 								<input type="file" name="file" id="fileUpload" >
-								<input type="hidden" name="systemLogoUrl" id="systemLogoUrl" value=""/>
+								<input type="hidden" name="portrait" id="portrait" value=""/>
 								<div id="imgDiv" style="width:240px;height: 160px;">
 									<img  id="thumbnail" style="max-height:100%;max-width:100%;"  src="<%=request.getContextPath()%>/images/loadingImage.png"></img>
 								</div>
