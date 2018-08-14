@@ -72,3 +72,46 @@ function giveup(url) {
 		}
 	});
 };
+
+/**
+ * 上传系统logo
+ */
+function uploadSystemLogo(){
+    $("#fileUpload").uploadify({
+        'debug':false,
+        'swf' : ctx+'/js/upload/uploadify3.1/uploadify.swf',
+        'uploader' : ctx+'/systems/uploadSystemLogo/',
+        'fileObjName' : 'thumbnailfile',
+        'queueID' : 'fileQueue',
+        'fileSizeLimit' : 2147483648,
+        'auto' : true,
+        'multi' : false,
+        'width' : 130,
+        'height' :32,
+        'fileTypeExts' : '*.jpg;*.png;*.jpeg;*.bmp;*.gif;',
+        'buttonImage' : ctx+'/js/upload/uploadify3.1/img/uploadbtn.png',
+        'progressData':'speed',
+        'preventCaching':true,
+        'successTimeout':99999,
+        'removeTimeout':'1',
+        'removeCompleted':true,
+        'removeTimeout':3,
+        'onUploadStart':function(file){
+            $("#thumbnail").hide();
+            $("#imgDiv").addClass("imgProgress");
+            $("#imgDiv").html("0%")
+        },
+        'onUploadProgress':function(a, b, c, d, e){
+            var tPercentagenum=parseInt(parseFloat(b)/parseFloat(e)*100);
+            if(tPercentagenum>100){tPercentagenum=100}
+            $("#imgDiv").html(tPercentagenum+"%")
+        },
+        'onUploadSuccess':function(a,b,c){
+            $("#imgDiv").removeClass("imgProgress");
+            var image=jQuery.parseJSON(b);
+            $("#systemLogoUrl").val(image.httpPath);
+            var html = "<img  style='max-height:180px;max-width:240px;' id='thumbnail'  src='"+image.localPath+"'></img>";
+            $("#imgDiv").html(html);
+        }
+    });
+}

@@ -92,14 +92,26 @@
     <li class="submenu active open">
       <ul style="display:block" class="left_nav">
 		  <%
-		  	if("1".equals(role_code) || "2".equals(role_code)){
+		  	if("2".equals(role_code)){
+
+		  %>
+		  <li class="first_nav"><a id="firstOnLoad" href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/findall/" onclick="openurl(this)">律所管理</a></li>
+		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/lawyer/findall/" onclick="openurl(this)">律师管理</a></li>
+		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/lawyer/serviceManageList/" onclick="openurl(this)">服务管理</a></li>
+		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/comment/commentList/" onclick="openurl(this)">在线客服</a></li>
+		  <%
+		  	}
+		  %>
+
+		  <%
+			  if("1".equals(role_code)){
 
 		  %>
 		  <li class="first_nav"><a id="firstOnLoad" href="javascript:void(0)" shref="<%=request.getContextPath()%>/department/findall/" onclick="openurl(this)">律所管理</a></li>
 		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/lawyer/findall/" onclick="openurl(this)">律师管理</a></li>
 		  <li><a href="javascript:void(0)" shref="<%=request.getContextPath()%>/lawyer/serviceManageList/" onclick="openurl(this)">服务管理</a></li>
 		  <%
-		  	}
+			  }
 		  %>
 
 		  <%
