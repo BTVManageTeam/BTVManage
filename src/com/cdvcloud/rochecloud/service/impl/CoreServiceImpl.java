@@ -1,13 +1,10 @@
 package com.cdvcloud.rochecloud.service.impl;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.cdvcloud.rochecloud.common.Constants;
@@ -18,7 +15,6 @@ import com.cdvcloud.wechat.bean.reponse.Image;
 import com.cdvcloud.wechat.bean.reponse.ImageMessage;
 import com.cdvcloud.wechat.bean.reponse.TextMessage;
 import com.cdvcloud.wechat.util.wechat.MessageUtil;
-import com.mongodb.DBObject;
 
 /**
  * 核心服务类 (保存用户信息)
