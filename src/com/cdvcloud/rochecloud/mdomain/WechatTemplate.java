@@ -38,7 +38,7 @@ public class WechatTemplate {
 		for(Map.Entry<String,Object> entry:mapPara.entrySet()){
 			Map<String,Object>tempMap=new HashMap<String, Object>();
 			if(WechatTemplate.TOUSER.equals(entry.getKey())||WechatTemplate.TEMPLATEID.equals(entry.getKey())
-					||WechatTemplate.USERID.equals(entry.getKey())){
+					||WechatTemplate.USERID.equals(entry.getKey()) || WechatTemplate.URL.equals(entry.getKey())){
 				tempMap.put(entry.getKey(), entry.getValue());
 				map.putAll(tempMap);
 			}else{
