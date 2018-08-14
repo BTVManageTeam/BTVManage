@@ -1,6 +1,7 @@
 package com.cdvcloud.rochecloud.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class BtvComment {
     private String commentId;
@@ -20,6 +21,8 @@ public class BtvComment {
     private Date updateTime;
 
     private String updateUserId;
+
+    private List<BtvCommentReply> btvCommentReplyList;
 
     public String getCommentId() {
         return commentId;
@@ -91,5 +94,13 @@ public class BtvComment {
 
     public void setUpdateUserId(String updateUserId) {
         this.updateUserId = updateUserId;
+    }
+
+    public List <BtvCommentReply> getBtvCommentReplyList() {
+        return btvCommentReplyList;
+    }
+
+    public void setBtvCommentReplyList(List <BtvCommentReply> btvCommentReplyList) {
+        this.btvCommentReplyList = btvCommentReplyList;
     }
 }

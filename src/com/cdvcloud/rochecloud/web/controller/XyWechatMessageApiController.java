@@ -63,14 +63,14 @@ public class XyWechatMessageApiController {
 		try {
 			params = ParamsUtil.getParamsMapWithTrim(request);
 			List<Map<String, Object>> list = xyWechatMessageService.queryWechatMessage4page(params,page);
-			
 			page.setList(list);
+			model.addAttribute("page", page);
+			model.addAttribute("params", params);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return "";
+		return "comment/commentList";
 	}
 
 	/**
