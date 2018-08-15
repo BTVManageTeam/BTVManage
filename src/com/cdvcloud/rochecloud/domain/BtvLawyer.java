@@ -2,6 +2,7 @@ package com.cdvcloud.rochecloud.domain;
 
 import java.util.Date;
 
+
 public class BtvLawyer {
     private String lawyerId;
 
@@ -192,4 +193,6 @@ public class BtvLawyer {
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
+
+
 }

@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cdvcloud.rochecloud.util.Configuration;
 import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -84,7 +85,7 @@ public class XyWechatMessageServiceImpl implements XyWechatMessageService{
      */
     @Override
     public long replyWechatMessage(Map<String, Object> mapJson, HttpServletRequest request)throws Exception {
-        String productId = "";
+        String productId = Configuration.getConfigValue("PRODUCTID");
         String token = getToken(productId);
         String content = String.valueOf(mapJson.get(XyWechatMessage.CONTENT));
         String openId = String.valueOf(mapJson.get(XyWechatMessage.OPENID));
@@ -112,11 +113,12 @@ public class XyWechatMessageServiceImpl implements XyWechatMessageService{
             Map<String, Object> replayContent = new ConcurrentHashMap<>(16);
             //            replayContent.put(XyWechatMessage.USERID,commonParameters.getUserId());
             //            replayContent.put(XyWechatMessage.USERNAME,userName);
+            replayContent.put(XyWechatMessage.CARD,"2");
             replayContent.put(XyWechatMessage.CONTENT,mapJson.get(XyWechatMessage.CONTENT));
             replayContent.put(XyWechatMessage.CTIME, DateUtil.getCurrentDateTime());
             params.put(QueryOperators.ADDTOSET,new Document(XyWechatMessage.REPLAYCONTENT,replayContent));
             params.put(QueryOperators.SET,new Document(XyWechatMessage.REPLAYED, Constants.SONE));
-            return baseDao.updateOneBySet(XyWechatMessage.XYWECHATMESSAGE, filter, params);
+            return baseDao.updateOne(XyWechatMessage.XYWECHATMESSAGE, filter, params);
         }
         return 0;
     }
