@@ -24,7 +24,7 @@
 					<div class="message_list m_table_div">
 						<div id="5b5fcfff1996b026088fa10f" class="message_item">
 							<div class="message_info clearfloat">
-								<div class="item_img fl"><img src="http://thirdwx.qlogo.cn/mmopen/EoyAs8cQgbECZMLyPDBapLVIRSOGNufVcwwRfzjr6HkvicXMHdjRZb6tyNWicUNicsVIvYicX6ReoibambYiaUQWsGZ5e5Aib0FtC0J/132" alt="user_info" onerror="dazzleUtil.imgError(this)"></div>
+								<div class="item_img fl"><img src="${order.headimgurl}" alt="user_info" onerror="dazzleUtil.imgError(this)"></div>
 								<div class="fl message_gro">
 									<ul class="about_msg clearfloat">
 										<li class="fl">${order.nickname}</li>
@@ -70,7 +70,7 @@
 							<div id="${order._id}" class="js_quick_reply_box quick_reply_box"><label for="" class="frm_label">快速回复:</label>
 								<div class="emoion_editor_wrp js_editor">
 									<div class="emotion_editor">
-										<textarea id="${order.fromWechatId}txtContent" name="saytext" class="edit_area js_editorArea input" onfocus="statInputNum('${order._id}')" ></textarea>
+										<textarea id="txtContent" name="saytext" class="edit_area js_editorArea input" onfocus="statInputNum('${order._id}')" ></textarea>
 										<div class="editor_toolbar">
 											<a id="emotion5b5fcfff1996b026088fa10f" href="javascript:void(0);" title="表情" class="icon_emotion emotion_switch js_switch emotion">表情</a>
 											<p class="editor_tip js_editorTip replay_num"><span  class="wordwrap">还可以输入<var class="word">140</var>个字</span></p>

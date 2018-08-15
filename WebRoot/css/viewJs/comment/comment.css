@@ -22,6 +22,7 @@
 .reply_msg li {
     line-height: 1.8;
     word-break: break-all;
+    margin-bottom: 5px;
 }
 
 .quick_replay {

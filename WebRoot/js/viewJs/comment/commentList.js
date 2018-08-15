@@ -108,3 +108,27 @@ function giveup(url) {
 		}
 	});
 };
+
+/**/
+function replayBtn(e) {
+    $(e).parents(".message_list").find(".quick_reply_box").show();
+    $(e).parents(".message_list").siblings().find(".quick_reply_box").hide();
+}
+$(function () {
+    $(".replay_up").click(function () {
+        $(".quick_reply_box").hide();
+    });
+})
+/*计数*/
+function statInputNum(id) {
+    var textArea = $("#" + id).find("textArea");
+    var numItem = $("#" + id).find(".word");
+    var max = numItem.text(),
+        curLength;
+    textArea[0].setAttribute("maxlength", max);
+    curLength = textArea.val().length;
+    numItem.text(max - curLength);
+    textArea.on('input propertychange', function() {
+        numItem.text(max - $(this).val().length);
+    });
+}
