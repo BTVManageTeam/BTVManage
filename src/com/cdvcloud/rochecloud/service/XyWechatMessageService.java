@@ -25,6 +25,8 @@ public interface XyWechatMessageService {
      */
 	List<Map<String, Object>> queryWechatMessage4page(Map<String, Object> params,Pages<Map<String, Object>> mapJson)throws Exception;
 
+    int  queryWechatMessage4pageCount(Map<String, Object> params,Pages<Map<String, Object>> mapJson)throws Exception;
+
     /**
      * 消息回复
      * @param commonParameters

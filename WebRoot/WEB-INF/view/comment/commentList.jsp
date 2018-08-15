@@ -27,38 +27,27 @@
 								<div class="item_img fl"><img src="http://thirdwx.qlogo.cn/mmopen/EoyAs8cQgbECZMLyPDBapLVIRSOGNufVcwwRfzjr6HkvicXMHdjRZb6tyNWicUNicsVIvYicX6ReoibambYiaUQWsGZ5e5Aib0FtC0J/132" alt="user_info" onerror="dazzleUtil.imgError(this)"></div>
 								<div class="fl message_gro">
 									<ul class="about_msg clearfloat">
-										<li class="fl">${order.commentName}</li>
-										<li class="fl"><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd HH:mm" /></li>
-										<c:if test="${order.status == 1}">
+										<li class="fl">${order.nickname}</li>
+										<li class="fl">${order.ctime}</li>
+										<c:if test="${order.replayed == 1}">
 											<li class="message_status fl" v-if="item.hasOwnProperty('replayContent')&&item.replayContent.length>0">已回复</li>
 										</c:if>
-										<c:if test="${order.status == 0}">
+										<c:if test="${order.replayed == 0}">
 											<li class="message_status fl" v-if="item.hasOwnProperty('replayContent')&&item.replayContent.length>0">未回复</li>
 										</c:if>
 										<li class="fr quick_replay"><img src="img/visitingCard.svg" shref="<%=request.getContextPath()%>/comment/queryLawyer/?commentId=${order.commentId}" onclick="openurl(this)" /><i id="quick_replay5b5fcfff1996b026088fa10f" class="icon-comment"></i></li>
 									</ul>
-									<p>${order.commentContent}</p>
+									<p>${order.content}</p>
 								</div>
 							</div>
 							<div>
-								<c:if test="${order.status == 1}">
+								<c:if test="${order.replayed == 1}">
 									<ul class="reply_msg message_gro">
-									<c:forEach items="${order.btvCommentReplyList}" var="order1" varStatus="i">
-										<c:if test="${order1.status == 1}">
-											<li><span>回复：</span><span>${order1.txtContent}</span></li>
-										</c:if>
-										<c:if test="${order1.status == 0}">
-											<li><span>回复：</span><div class="lawyer_card">
-												<div class="lawyer_details">
-													<div class="lawyer_head">
-														<img src="${order1.lawyerMap.portrait}" />
-													</div>
-													<div class="lawyer_introduce">
-														<p class="change_line verticalcenter">${order1.lawyerMap.introduce}</p>
-													</div>
-												</div>
-											</div></li>
-										</c:if>
+									<c:forEach items="${order.replayContent}" var="order1" varStatus="i">
+
+											<li><span>回复：</span><span>${order1.content}</span></li>
+
+
 									</c:forEach>
 									</ul>
 								</c:if>
