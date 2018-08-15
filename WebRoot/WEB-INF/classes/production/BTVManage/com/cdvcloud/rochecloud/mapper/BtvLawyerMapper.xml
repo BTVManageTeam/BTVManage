@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdvcloud.rochecloud.mapper.BtvLawyerMapper">
+  <resultMap id="BaseResultMap" type="com.cdvcloud.rochecloud.domain.BtvLawyer">
+    <id column="lawyerId" jdbcType="VARCHAR" property="lawyerId" />
+    <result column="lawyerName" jdbcType="VARCHAR" property="lawyerName" />
+    <result column="professionalYear" jdbcType="VARCHAR" property="professionalYear" />
+    <result column="speciality" jdbcType="VARCHAR" property="speciality" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="portrait" jdbcType="VARCHAR" property="portrait" />
+    <result column="average" jdbcType="DOUBLE" property="average" />
+    <result column="serviceNum" jdbcType="INTEGER" property="serviceNum" />
+    <result column="commentNum" jdbcType="INTEGER" property="commentNum" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="updateUserId" jdbcType="VARCHAR" property="updateUserId" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="departmentId" jdbcType="VARCHAR" property="departmentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    lawyerId, lawyerName, professionalYear, speciality, region, introduce, portrait,
+    average, serviceNum, commentNum, email, phone, createTime, createUserId, updateTime,
+    updateUserId, userId, departmentId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from btv_lawyer
+    where lawyerId = #{lawyerId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from btv_lawyer
+    where lawyerId = #{lawyerId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cdvcloud.rochecloud.domain.BtvLawyer">
+    insert into btv_lawyer (lawyerId, lawyerName, professionalYear,
+    speciality, region, introduce,
+    portrait, average, serviceNum,
+    commentNum, email, phone,
+    createTime, createUserId, updateTime,
+    updateUserId, userId, departmentId
+    )
+    values (#{lawyerId,jdbcType=VARCHAR}, #{lawyerName,jdbcType=VARCHAR}, #{professionalYear,jdbcType=VARCHAR},
+    #{speciality,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR},
+    #{portrait,jdbcType=VARCHAR}, #{average,jdbcType=DOUBLE}, #{serviceNum,jdbcType=INTEGER},
+    #{commentNum,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+    #{updateUserId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdvcloud.rochecloud.domain.BtvLawyer">
+    insert into btv_lawyer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lawyerId != null">
+        lawyerId,
+      </if>
+      <if test="lawyerName != null">
+        lawyerName,
+      </if>
+      <if test="professionalYear != null">
+        professionalYear,
+      </if>
+      <if test="speciality != null">
+        speciality,
+      </if>
+      <if test="region != null">
+        region,
+      </if>
+      <if test="introduce != null">
+        introduce,
+      </if>
+      <if test="portrait != null">
+        portrait,
+      </if>
+      <if test="average != null">
+        average,
+      </if>
+      <if test="serviceNum != null">
+        serviceNum,
+      </if>
+      <if test="commentNum != null">
+        commentNum,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="createUserId != null">
+        createUserId,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="updateUserId != null">
+        updateUserId,
+      </if>
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="departmentId != null">
+        departmentId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lawyerId != null">
+        #{lawyerId,jdbcType=VARCHAR},
+      </if>
+      <if test="lawyerName != null">
+        #{lawyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalYear != null">
+        #{professionalYear,jdbcType=VARCHAR},
+      </if>
+      <if test="speciality != null">
+        #{speciality,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null">
+        #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="average != null">
+        #{average,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceNum != null">
+        #{serviceNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdvcloud.rochecloud.domain.BtvLawyer">
+    update btv_lawyer
+    <set>
+      <if test="lawyerName != null">
+        lawyerName = #{lawyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalYear != null">
+        professionalYear = #{professionalYear,jdbcType=VARCHAR},
+      </if>
+      <if test="speciality != null">
+        speciality = #{speciality,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null">
+        portrait = #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="average != null">
+        average = #{average,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceNum != null">
+        serviceNum = #{serviceNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        commentNum = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        updateUserId = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        departmentId = #{departmentId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lawyerId = #{lawyerId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdvcloud.rochecloud.domain.BtvLawyer">
+    update btv_lawyer
+    set lawyerName = #{lawyerName,jdbcType=VARCHAR},
+      professionalYear = #{professionalYear,jdbcType=VARCHAR},
+      speciality = #{speciality,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      portrait = #{portrait,jdbcType=VARCHAR},
+      average = #{average,jdbcType=DOUBLE},
+      serviceNum = #{serviceNum,jdbcType=INTEGER},
+      commentNum = #{commentNum,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      updateUserId = #{updateUserId,jdbcType=VARCHAR},
+      userId = #{userId,jdbcType=VARCHAR},
+      departmentId = #{departmentId,jdbcType=VARCHAR}
+    where lawyerId = #{lawyerId,jdbcType=VARCHAR}
+  </update>
+
+
+  <!--根据loginId查询 -->
+  <select id="findLawyerByUserId" resultMap="BaseResultMap"
+          parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from btv_lawyer
+    where userId = #{userId,jdbcType=VARCHAR}
+  </select>
+
+
+  <!--按条件查询所有总数 -->
+  <select id="countFindAll" parameterType="com.cdvcloud.rochecloud.common.Pages"
+          resultType="java.lang.Integer">
+    select count(lawyer.lawyerId) from btv_lawyer lawyer,btv_department dept,btv_user user
+    where  lawyer.userId = user.userId and lawyer.departmentId = dept.departmentId
+    <if test="condition != null">
+      ${condition}
+    </if>
+    and user.deleteStatus = 0 and user.userType in (0,1)
+    <if test="tempParam != null">
+      and user.userId = #{tempParam}
+    </if>
+  </select>
+
+  <!--按条件查询所有信息 -->
+  <select id="selectFindAll" resultType="java.util.Map"
+          parameterType="com.cdvcloud.rochecloud.common.Pages">
+    select lawyer.*,user.accountName,dept.departmentName from btv_lawyer lawyer,btv_department dept,btv_user user
+    where  lawyer.userId = user.userId and lawyer.departmentId = dept.departmentId
+    <if test="condition != null">
+      ${condition}
+    </if>
+    and user.deleteStatus = 0 and user.userType in (0,1)
+    <if test="tempParam != null">
+      and user.userId = #{tempParam}
+    </if>
+    <if test="order!= null &amp;&amp; orderBy!= null">
+      order by ${order} ${orderBy}
+    </if>
+    <if test="currentNum != null &amp;&amp; numPerPage != null">
+      limit #{currentNum}, #{numPerPage}
+    </if>
+  </select>
+
+  <!--根据loginId查询 -->
+  <select id="selectByDeptId" resultType="java.lang.Integer"
+          parameterType="java.lang.String">
+    select count(lawyerId) from btv_lawyer  where departmentId =  #{departmentId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="queryLawyerAndDepartmentById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+     lawyerId, lawyerName, professionalYear, speciality, region, introduce, portrait,
+    average, serviceNum, commentNum, email, phone, ly.createTime, ly.createUserId, ly.updateTime,
+    ly.updateUserId, ly.userId, ly.departmentId,dp.departmentName
+    from btv_lawyer as ly left JOIN btv_department as dp ON ly.departmentId = dp.departmentId
+    where lawyerId = #{lawyerId,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

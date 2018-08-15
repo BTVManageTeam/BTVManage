@@ -1,0 +1,105 @@
+* {
+	margin: 0;
+	padding:0;
+	font-family: "PingFangSC-Light","Lantinghei SC", "Helvetica Neue", "Luxi Sans", "DejaVu Sans","Microsoft YaHei", Tahoma, "Hiragino Sans GB", STHeiti, simsun,sans-serif;
+}
+html,body,h1,h2,h3,h4,h5,h6,div,ul,ol,li,dl,dt,dd,iframe,textarea,input,button,p,strong,b,a,span,del,pre,table,tr,th,td{
+	margin:0;
+	padding:0; 
+}
+h1,h2,h3,h4,h5,h6,em,del {
+	font-style:normal; 
+	font-weight:normal;
+}
+ul,li {
+	list-style:none;
+}
+a {
+	text-decoration:none;
+}
+img {
+	display: block;
+	border:none;
+}
+.hide {
+	display:none;
+}
+.fl {
+	float:left;
+}
+.fr {
+	float:right;
+}
+.tl{
+	text-align: left;
+}
+.tc{
+	text-align: center;
+}
+.tr{
+	text-align: right;
+}
+.fw{
+	font-weight: 400;
+}
+.fwb{
+	font-weight: bold;
+}
+.clearfloat:after {
+	display:block;
+	height:0;
+	clear:both;
+	content:"";
+	visibility:hidden;
+}
+.clearfloat {
+	zoom:1
+}
+
+a{
+	color: inherit;
+	cursor: pointer;
+}
+i {
+	display: inline-block;
+}
+.verticalcenter{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+*{
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+/*解决火狐浏览器中文字3行不显示...的问题
+这种解决方式在火狐浏览器中超出3行后不显示...
+需要给定宽度  和font-size值  默认是14px
+*/
+.change_line{
+	font-size: 14px;
+	/*显示3行...*/
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+	/*强制换行*/
+	word-break: break-all;       /* 只对英文起作用，以字母作为换行依据。 */
+	word-wrap: break-word;      /* 只对英文起作用，以单词作为换行依据。*/
+	white-space: pre-wrap;     /* 只对中文起作用，强制换行。*/
+	line-height: 1.5em;
+	max-height: 4.5em;/*根据你的行高来决定*/
+}
+/* 强制换行 */
+.compulsory_transfer{
+	word-break: break-all;       /* 只对英文起作用，以字母作为换行依据。 */
+	word-wrap: break-word;      /* 只对英文起作用，以单词作为换行依据。*/
+	white-space: pre-wrap;     /* 只对中文起作用，强制换行。*/
+}
+/*单行显示..*/
+.single_line_change{
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdvcloud.rochecloud.mapper.BtvOrderMapper">
+  <resultMap id="BaseResultMap" type="com.cdvcloud.rochecloud.domain.BtvOrder">
+    <id column="orderId" jdbcType="VARCHAR" property="orderId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="pieceName" jdbcType="VARCHAR" property="pieceName" />
+    <result column="serviceType" jdbcType="VARCHAR" property="serviceType" />
+    <result column="score" jdbcType="DOUBLE" property="score" />
+    <result column="commentStatus" jdbcType="INTEGER" property="commentStatus" />
+    <result column="serviceStatus" jdbcType="INTEGER" property="serviceStatus" />
+    <result column="openId" jdbcType="VARCHAR" property="openId" />
+    <result column="headUrl" jdbcType="VARCHAR" property="headUrl" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="updateUserId" jdbcType="VARCHAR" property="updateUserId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cdvcloud.rochecloud.domain.BtvOrder">
+    <result column="pieceUrls" jdbcType="LONGVARCHAR" property="pieceUrls" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    orderId, userName, phone, pieceName, serviceType, score, commentStatus, serviceStatus,
+    openId, headUrl, createTime, createUserId, updateTime, updateUserId
+  </sql>
+  <sql id="Blob_Column_List">
+    pieceUrls
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from btv_order
+    where orderId = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from btv_order
+    where orderId = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cdvcloud.rochecloud.domain.BtvOrder">
+    insert into btv_order (orderId, userName, phone,
+    pieceName, serviceType, score,
+    commentStatus, serviceStatus, openId,
+    headUrl, createTime, createUserId,
+    updateTime, updateUserId, pieceUrls
+    )
+    values (#{orderId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+    #{pieceName,jdbcType=VARCHAR}, #{serviceType,jdbcType=VARCHAR}, #{score,jdbcType=DOUBLE},
+    #{commentStatus,jdbcType=INTEGER}, #{serviceStatus,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR},
+    #{headUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}, #{pieceUrls,jdbcType=LONGVARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdvcloud.rochecloud.domain.BtvOrder">
+    insert into btv_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        orderId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="pieceName != null">
+        pieceName,
+      </if>
+      <if test="serviceType != null">
+        serviceType,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="commentStatus != null">
+        commentStatus,
+      </if>
+      <if test="serviceStatus != null">
+        serviceStatus,
+      </if>
+      <if test="openId != null">
+        openId,
+      </if>
+      <if test="headUrl != null">
+        headUrl,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="createUserId != null">
+        createUserId,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="updateUserId != null">
+        updateUserId,
+      </if>
+      <if test="pieceUrls != null">
+        pieceUrls,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pieceName != null">
+        #{pieceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null">
+        #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="commentStatus != null">
+        #{commentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="serviceStatus != null">
+        #{serviceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="headUrl != null">
+        #{headUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="pieceUrls != null">
+        #{pieceUrls,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdvcloud.rochecloud.domain.BtvOrder">
+    update btv_order
+    <set>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pieceName != null">
+        pieceName = #{pieceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null">
+        serviceType = #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="commentStatus != null">
+        commentStatus = #{commentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="serviceStatus != null">
+        serviceStatus = #{serviceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null">
+        openId = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="headUrl != null">
+        headUrl = #{headUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        updateUserId = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="pieceUrls != null">
+        pieceUrls = #{pieceUrls,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where orderId = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cdvcloud.rochecloud.domain.BtvOrder">
+    update btv_order
+    set userName = #{userName,jdbcType=VARCHAR},
+    phone = #{phone,jdbcType=VARCHAR},
+    pieceName = #{pieceName,jdbcType=VARCHAR},
+    serviceType = #{serviceType,jdbcType=VARCHAR},
+    score = #{score,jdbcType=DOUBLE},
+    commentStatus = #{commentStatus,jdbcType=INTEGER},
+    serviceStatus = #{serviceStatus,jdbcType=INTEGER},
+    openId = #{openId,jdbcType=VARCHAR},
+    headUrl = #{headUrl,jdbcType=VARCHAR},
+    createTime = #{createTime,jdbcType=TIMESTAMP},
+    createUserId = #{createUserId,jdbcType=VARCHAR},
+    updateTime = #{updateTime,jdbcType=TIMESTAMP},
+    updateUserId = #{updateUserId,jdbcType=VARCHAR},
+    pieceUrls = #{pieceUrls,jdbcType=LONGVARCHAR}
+    where orderId = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdvcloud.rochecloud.domain.BtvOrder">
+    update btv_order
+    set userName = #{userName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      pieceName = #{pieceName,jdbcType=VARCHAR},
+      serviceType = #{serviceType,jdbcType=VARCHAR},
+      score = #{score,jdbcType=DOUBLE},
+      commentStatus = #{commentStatus,jdbcType=INTEGER},
+      serviceStatus = #{serviceStatus,jdbcType=INTEGER},
+      openId = #{openId,jdbcType=VARCHAR},
+      headUrl = #{headUrl,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      updateUserId = #{updateUserId,jdbcType=VARCHAR}
+    where orderId = #{orderId,jdbcType=VARCHAR}
+  </update>
+
+  <!--按照条件查询总个数-->
+  <select id="countFindAll" parameterType="com.cdvcloud.rochecloud.common.Pages"  resultType="java.lang.Integer">
+    select count(*) from btv_order
+    <where>
+      <if test="condition != null">
+        ${condition}
+      </if>
+    </where>
+  </select>
+
+  <!--分页查询数据-->
+  <select id="selectFindAll" resultMap="BaseResultMap" parameterType="com.cdvcloud.rochecloud.common.Pages">
+    select * from btv_order
+    <where>
+      <if test="condition != null">
+        ${condition}
+      </if>
+    </where>
+    <if test="order!= null &amp;&amp; orderBy!= null">
+      order by ${order} ${orderBy}
+    </if>
+    <if test="currentNum != null &amp;&amp; numPerPage != null">
+      limit #{currentNum}, #{numPerPage}
+    </if>
+  </select>
+
+  <select id="countSum" parameterType="java.lang.String"  resultType="java.lang.Integer">
+    select count(*) from btv_order
+    where commentStatus = 1 and createUserId = #{orderId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="countScoreSum" parameterType="java.lang.String"  resultType="java.lang.Integer">
+    select sum(score) from btv_order
+    where commentStatus = 1 and createUserId = #{orderId,jdbcType=VARCHAR}
+  </select>
+
+</mapper>
