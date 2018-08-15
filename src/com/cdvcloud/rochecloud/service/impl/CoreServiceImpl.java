@@ -1,5 +1,7 @@
 package com.cdvcloud.rochecloud.service.impl;
+import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -7,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,8 +79,26 @@ public class CoreServiceImpl implements ICoreService {
 			String imgId = "";
 
 			// xml请求解析
-			Map<String, String> requestMap = MessageUtil.parseXml(request);
+			logger.info("开始处理微信发来的信息--开始解析xml.");
+//			Map<String, String> requestMap = MessageUtil.parseXml(request);
+			Map<String, String> requestMap = new ConcurrentHashMap<>();
+			InputStream inputStream = request.getInputStream();
+			logger.info("拿到流了.");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(inputStream);
+			logger.info("获取到document了.");
+			Element root = document.getRootElement();
+			logger.info("获取到root节点了了.");
+			List<Element> elementList = root.elements();
+			logger.info("获取到root字段list了了.");
+			for (Element e : elementList) {
+				requestMap.put(e.getName(), e.getText());
+			}
 
+			inputStream.close();
+			inputStream = null;
+
+			logger.info("开始处理微信发来的信息---requestMap["+requestMap+"].");
 			// 发送方帐号（open_id）
 			String fromUserName = requestMap.get("FromUserName");
 			// 公众帐号
@@ -119,7 +142,7 @@ public class CoreServiceImpl implements ICoreService {
 				messageMap.put(XyWechatMessage.MSGID, "");
 				messageMap.put(XyWechatMessage.REPLAYED, Constants.SZERO);
 					messageMap.put(XyWechatMessage.CONTENT, content);
-					baseDao.insert(XyWechatMessage.XYWECHATMESSAGE,map);
+					baseDao.insert(XyWechatMessage.XYWECHATMESSAGE,messageMap);
 
 				}
 				// 图片消息
@@ -184,8 +207,6 @@ public class CoreServiceImpl implements ICoreService {
 
 	/**
 	 * 添加关注者信息
-	 * 
-	 * @param fromUserName
 	 *            关注者openid
 	 * @param toUserName
 	 *            公众号appid

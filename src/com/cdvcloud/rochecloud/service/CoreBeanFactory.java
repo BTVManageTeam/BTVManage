@@ -8,7 +8,7 @@ public class CoreBeanFactory {
 	public static ICoreService getInstance(String productId) {
 		try {
 			logger.info("create productId=["+productId+"] bean factory.");
-			String classBean = InitConfigService.getWechatKeyByProductId(productId).getClassBean();
+			String classBean = "com.cdvcloud.rochecloud.service.impl.CoreServiceImpl";
 			if(null == classBean || "".equals(classBean)) {
 				classBean = "com.cdvcloud.wx.service.wechat.coreImpl.CoreServiceImpl"; //走公共的类
 			}

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cdvcloud.rochecloud.service.ICoreService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import com.cdvcloud.rochecloud.service.WxUserService;
 import com.cdvcloud.wechat.util.wechat.SignUtil;
 
 @Controller
+@RequestMapping("api")
 public class WeChatCallbackController {
 	
 	private static final Logger logger = Logger.getLogger(WeChatCallbackController.class);
@@ -27,6 +29,9 @@ public class WeChatCallbackController {
 	
 	@Autowired
 	private UserMessageService userMessageService;
+
+	@Autowired
+	private ICoreService iCoreService;
 	
 	/**
 	 * 确认请求来自微信服务器
@@ -64,7 +69,8 @@ public class WeChatCallbackController {
 		String respMessage = "";
 
 		if (checkSignature(request)) {
-			respMessage = CoreBeanFactory.getInstance(productId).processRequest(request, userService, userMessageService);
+			logger.info("开始处理微信发来的信息---["+request+"].");
+			respMessage = iCoreService.processRequest(request, userService, userMessageService);
 		} else {
 			logger.error("请求不是来自微信服务器，不予以处理！");
 			respMessage = "请求不是来自微信服务器，不予以处理！";
