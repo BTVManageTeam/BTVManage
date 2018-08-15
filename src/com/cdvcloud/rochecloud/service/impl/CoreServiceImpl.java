@@ -111,9 +111,9 @@ public class CoreServiceImpl implements ICoreService {
 					messageMap.put(XyWechatMessage.NICKNAME, map.get(User.NICKNAME));
 				}
 
-				messageMap.put(XyWechatMessage.TOWECHATAPPID, "");
+				messageMap.put(XyWechatMessage.TOWECHATAPPID, toUserName);
 				messageMap.put(XyWechatMessage.PRODUCTID, "");
-				messageMap.put(XyWechatMessage.FROMWECHATID, "");
+				messageMap.put(XyWechatMessage.FROMWECHATID, fromUserName);
 				messageMap.put(XyWechatMessage.CTIME, DateUtil.getCurrentDateTime());
 				messageMap.put(XyWechatMessage.MSGTYPE, "text");
 				messageMap.put(XyWechatMessage.MSGID, "");

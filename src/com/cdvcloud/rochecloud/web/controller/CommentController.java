@@ -75,7 +75,7 @@ public class CommentController {
      */
     @RequestMapping(value = "queryLawyer/")
     public String queryLawyer(HttpServletRequest request, Pages<Map<String, Object>> page, Model model,
-                            @RequestParam(value = "commentId") String commentId) {
+                            @RequestParam(value = "commentId") String commentId, @RequestParam(value = "openId") String openId) {
         Map<String, Object> params = new HashMap<String, Object>();
         String param = null;
 
@@ -92,6 +92,7 @@ public class CommentController {
             model.addAttribute("roleCode", roleCode);
             model.addAttribute("strUserId", strUserId);
             model.addAttribute("commentId", commentId);
+            model.addAttribute("openId", openId);
             Integer totalNum = lawyerService.countFindAll(page);
             page.setTotalNum(totalNum);
             page.setList(lawyerService.selectFindAll(page));

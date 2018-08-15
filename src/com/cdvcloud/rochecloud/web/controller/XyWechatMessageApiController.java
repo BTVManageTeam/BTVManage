@@ -1,5 +1,6 @@
 package com.cdvcloud.rochecloud.web.controller;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +9,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cdvcloud.rochecloud.common.PageParams;
+import com.cdvcloud.rochecloud.common.*;
+import com.cdvcloud.rochecloud.mdomain.XyWechatMessage;
+import com.cdvcloud.rochecloud.mongodao.BasicDao;
+import com.cdvcloud.rochecloud.mongodao.QueryOperators;
+import com.cdvcloud.rochecloud.util.DateUtil;
 import org.apache.log4j.Logger;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +25,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cdvcloud.rochecloud.common.Pages;
-import com.cdvcloud.rochecloud.common.ParamsUtil;
-import com.cdvcloud.rochecloud.common.ResponseObject;
 import com.cdvcloud.rochecloud.domain.BtvLawyer;
 import com.cdvcloud.rochecloud.mdomain.WechatTemplate;
 import com.cdvcloud.rochecloud.schedule.ImportWechatTokenJob;
@@ -47,14 +51,16 @@ public class XyWechatMessageApiController {
 
 	private final XyWechatMessageService xyWechatMessageService;
 	private final LawyerService lawyerService;
+	private final BasicDao baseDao;
 
 	/**
 	 * @Description: spring注入
 	 */
 	@Autowired
-	public XyWechatMessageApiController(XyWechatMessageService xyWechatMessageService,LawyerService lawyerService) {
+	public XyWechatMessageApiController(XyWechatMessageService xyWechatMessageService,LawyerService lawyerService,BasicDao baseDao) {
 		this.xyWechatMessageService = xyWechatMessageService;
 		this.lawyerService = lawyerService;
+		this.baseDao = baseDao;
 	}
 
 	/**
@@ -141,7 +147,7 @@ public class XyWechatMessageApiController {
 
 			Map<String, Object> mapPara=new HashMap<String, Object>();
 			mapPara.put(WechatTemplate.USERID, "");
-			mapPara.put(WechatTemplate.TOUSER, "o8Cth1iiestsk7lEqp6Ygl5Jw0DE");
+			mapPara.put(WechatTemplate.TOUSER, paramMap.get("openId"));
 			mapPara.put(WechatTemplate.URL, Configuration.getConfigValue("TEMPLATEURL")+btvLawyer.getLawyerId());
 			mapPara.put(WechatTemplate.TEMPLATEID, wxTemplateId);
 			mapPara.put(WechatTemplate.FIRST, "精选律师推荐");
@@ -156,23 +162,58 @@ public class XyWechatMessageApiController {
 			logger.info("推送模板参数 errcode"+String.valueOf(data.get("errcode")));
 			if("0".equals(String.valueOf(data.get("errcode")))){
 				logger.info("走进成功");
+				//保存评论数据
+				Map<String, Object> filter = new ConcurrentHashMap<>(16);
+				String id = String.valueOf(paramMap.get(Constants.ID));
+				filter.put(XyWechatMessage.ID,new ObjectId(id));
+				Map<String, Object> update = new ConcurrentHashMap<>(16);
+				Map<String, Object> replayContent = objectToMap(btvLawyer);
+
+				replayContent.put(XyWechatMessage.CARD,"1");
+
+				replayContent.put(XyWechatMessage.CTIME, DateUtil.getCurrentDateTime());
+				update.put(QueryOperators.ADDTOSET,new Document(XyWechatMessage.REPLAYCONTENT,replayContent));
+				update.put(QueryOperators.SET,new Document(XyWechatMessage.REPLAYED, Constants.SONE));
+				baseDao.updateOne(XyWechatMessage.XYWECHATMESSAGE, filter, update);
 				resObj.setCode(0);
-				resObj.setMessage("成功");
-				resObj.setData(data);
+//				resObj.setData(data);
 			}else{
 				logger.info("走进失败");
 				resObj.setCode(1);
-				resObj.setMessage("失败");
-				resObj.setData(data);
+
+//				resObj.setData(data);
 			}
-			
+			return resObj;
 		} catch (Exception e) {
 			e.printStackTrace();
 			resObj.setCode(1);
-			resObj.setMessage("失败");
-			resObj.setData(e.getMessage());
+
+//			resObj.setData(e.getMessage());
+			return resObj;
 		}
-		return resObj;
+
 	
 	}
+
+
+	/**
+	 * 获取利用反射获取类里面的值和名称
+	 *
+	 * @param obj
+	 * @return
+	 * @throws IllegalAccessException
+	 */
+	public static Map<String, Object> objectToMap(Object obj) throws IllegalAccessException {
+		Map<String, Object> map = new HashMap<>();
+		Class<?> clazz = obj.getClass();
+		System.out.println(clazz);
+		for (Field field : clazz.getDeclaredFields()) {
+			field.setAccessible(true);
+			String fieldName = field.getName();
+			Object value = field.get(obj);
+			map.put(fieldName, value);
+		}
+		return map;
+	}
+
 }

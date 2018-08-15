@@ -35,7 +35,7 @@
 										<c:if test="${order.replayed == 0}">
 											<li class="message_status fl" v-if="item.hasOwnProperty('replayContent')&&item.replayContent.length>0">未回复</li>
 										</c:if>
-										<li class="fr quick_replay"><img src="img/visitingCard.svg" shref="<%=request.getContextPath()%>/comment/queryLawyer/?commentId=${order.commentId}" onclick="openurl(this)" /><i id="quick_replay5b5fcfff1996b026088fa10f" class="icon-comment"></i></li>
+										<li class="fr quick_replay"><img src="img/visitingCard.svg" shref="<%=request.getContextPath()%>/comment/queryLawyer/?commentId=${order._id}&openId=${order.fromWechatId}" onclick="openurl(this)" /><i id="quick_replay5b5fcfff1996b026088fa10f" class="icon-comment"></i></li>
 									</ul>
 									<p>${order.content}</p>
 								</div>
@@ -44,10 +44,23 @@
 								<c:if test="${order.replayed == 1}">
 									<ul class="reply_msg message_gro">
 									<c:forEach items="${order.replayContent}" var="order1" varStatus="i">
-
+										<c:if test="${order.card == '2'}">
 											<li><span>回复：</span><span>${order1.content}</span></li>
-
-
+										</c:if>
+										<c:if test="${order1.card == '1'}">
+											<li><span>回复：</span>
+												<div class="lawyer_card">
+													<div class="lawyer_details">
+														<div class="lawyer_head">
+															<img src="${order1.portrait}">
+														</div>
+														<div class="lawyer_introduce">
+															<p class="change_line verticalcenter">${order1.lawyerName}:${order1.introduce}</p>
+														</div>
+													</div>
+												</div>
+											</li>
+										</c:if>
 									</c:forEach>
 									</ul>
 								</c:if>
@@ -55,14 +68,14 @@
 
 							<div id="msag_replay_5b5fcfff1996b026088fa10f" class="js_quick_reply_box quick_reply_box" style="display: block;"><label for="" class="frm_label">快速回复:</label>
 								<div class="emoion_editor_wrp js_editor">
-									<div class="emotion_editor"><textarea id="txtContent" name="saytext" class="edit_area js_editorArea input"></textarea>
+									<div class="emotion_editor"><textarea id="${order.fromWechatId}txtContent" name="saytext" class="edit_area js_editorArea input"></textarea>
 										<div class="editor_toolbar">
 											<a id="emotion5b5fcfff1996b026088fa10f" href="javascript:void(0);" title="表情" class="icon_emotion emotion_switch js_switch emotion">表情</a>
 											<p class="editor_tip js_editorTip replay_num"><span id="wordwrap5b5fcfff1996b026088fa10f" class="wordwrap">还可以输入<var class="word">140</var>个字</span></p>
 										</div>
 									</div>
 								</div>
-								<p class="quick_reply_box_tool_bar"><button id="sub_btn5b5fcfff1996b026088fa10f" class="js_reply_OK sub_btn  btn1 btn1_primary btn1_input" onclick="sendLawyer('','${order.commentId}')">发送</button>
+								<p class="quick_reply_box_tool_bar"><button id="sub_btn5b5fcfff1996b026088fa10f" class="js_reply_OK sub_btn  btn1 btn1_primary btn1_input" onclick="sendLawyer('','${order.fromWechatId}','${order._id}')">发送</button>
 									<a href="javascript:;" id="replay_up5b5fcfff1996b026088fa10f" class="js_reply_pickup btn1 btn1_default pickup replay_up">收起</a>
 								</p>
 							</div>

@@ -79,4 +79,7 @@ public class XyWechatMessage{
     public static final String USERNAME = "userName";
     /** 创建时间 */
     public static final String CTIME = "ctime";
+
+	/** 是否是卡片，1卡片 2为评论 */
+	public static final String CARD = "card";
 }

@@ -51,7 +51,7 @@
 						<td>${lawyer.introduce}</td>
 						<td><fmt:formatDate value="${lawyer.createTime}" pattern="yyyy-MM-dd HH:mm" /></td>
 						<td>
-							<button type="button" id="btnUpdatePwd" class="btn btn-info btn-mini" onclick="sendLawyer('${lawyer.lawyerId}','${commentId}')">发送</button>
+							<button type="button" id="btnUpdatePwd" class="btn btn-info btn-mini" onclick="sendTemlateMessage('${lawyer.lawyerId}','${openId}','${commentId}')">发送</button>
 					</tr>
 					<tr>
 						<td class="white_td"></td>
