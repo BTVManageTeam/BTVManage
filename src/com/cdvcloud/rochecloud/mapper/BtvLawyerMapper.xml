@@ -297,5 +297,13 @@
     select count(lawyerId) from btv_lawyer  where departmentId =  #{departmentId,jdbcType=VARCHAR}
   </select>
 
+  <select id="queryLawyerAndDepartmentById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+     lawyerId, lawyerName, professionalYear, speciality, region, introduce, portrait,
+    average, serviceNum, commentNum, email, phone, ly.createTime, ly.createUserId, ly.updateTime,
+    ly.updateUserId, ly.userId, ly.departmentId,dp.departmentName
+    from btv_lawyer as ly left JOIN btv_department as dp ON ly.departmentId = dp.departmentId
+    where lawyerId = #{lawyerId,jdbcType=VARCHAR}
+  </select>
 
 </mapper>

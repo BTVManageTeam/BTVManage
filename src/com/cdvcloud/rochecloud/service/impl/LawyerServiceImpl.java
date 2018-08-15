@@ -95,4 +95,14 @@ public class LawyerServiceImpl implements LawyerService {
 		return btvLawyerMapper.selectByPrimaryKey(lawyerId);
 	}
 
+	/**
+	 * 根据律师id查询律师详情以及律所名称
+	 * @param lawyerId
+	 * @return
+	 */
+	@Override
+	public BtvLawyer queryLawyerAndDepartmentById(String lawyerId) {
+		return btvLawyerMapper.queryLawyerAndDepartmentById(lawyerId);
+	}
+
 }

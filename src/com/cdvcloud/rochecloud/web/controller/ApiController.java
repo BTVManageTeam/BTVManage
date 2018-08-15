@@ -226,13 +226,13 @@ public class ApiController {
 										 @RequestParam(value = "lawyerId") String lawyerId) {
 		ResponseObject responseObject = new ResponseObject(ReturnState.failure.status,ReturnState.failure.detail,ReturnState.failure.enDetail);
 		try {
-			logger.info("更新订单入参：[lawyerId="+lawyerId+"]");
-			BtvLawyer btvLawyer =lawyerService.queryLawyerById(lawyerId);
+			logger.info("查询律师详情：[lawyerId="+lawyerId+"]");
+			BtvLawyer btvLawyer =lawyerService.queryLawyerAndDepartmentById(lawyerId);
 			responseObject.setCode(ReturnState.success.status);
 			responseObject.setMessage(ReturnState.success.detail);
 			responseObject.setData(btvLawyer);
 		} catch (Exception e) {
-			logger.error("根据id查询订单信息异常！异常信息：" + e.getMessage());
+			logger.error("根据id查询律师详情信息异常！异常信息：" + e.getMessage());
 		}
 		return responseObject;
 	}

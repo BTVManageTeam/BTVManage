@@ -172,6 +172,8 @@ public class LawyerController {
 			String departmentId = request.getParameter("departmentId");
 			//律师介绍
 			String introduce = request.getParameter("introduce");
+			//头像
+			String portrait = request.getParameter("portrait");
 
 			logger.info("新增律师 accountName：" + accountName + "lawyerName:" + lawyerName + " departmentId: " + departmentId);
 			String strUserId = UserUtil.getUserByRequest(request, Constants.CURRENT_USER_ID);
@@ -203,6 +205,7 @@ public class LawyerController {
 			lawyer.setAverage(0.0);
 			lawyer.setCommentNum(0);
 			lawyer.setServiceNum(0);
+			lawyer.setPortrait(portrait);
 			long num = lawyerService.insertSelective(lawyer);
 			if (num > 0) {
 				strResult = "success";

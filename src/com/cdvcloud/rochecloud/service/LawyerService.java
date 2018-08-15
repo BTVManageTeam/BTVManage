@@ -81,4 +81,11 @@ public interface LawyerService {
 	 */
 	BtvLawyer queryLawyerById(String lawyerId);
 
+	/**
+	 * 根据律师id查询律师详情以及律所名称
+	 * @param lawyerId
+	 * @return
+	 */
+	BtvLawyer queryLawyerAndDepartmentById(String lawyerId);
+
 }
