@@ -1,0 +1,73 @@
+.overallData_cont{
+    margin-top: 20px;
+
+}
+.service_title h3{
+    font-size: 17px;
+    color: #696969;
+    padding: 20px 0;
+}
+.table>tbody>tr>td.noComplete{
+    color: #2e9ef7;
+    cursor: pointer;
+}
+.lawyer_head{
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.photocopies_img{
+    float: left;
+    padding: 20px;
+    overflow: hidden;
+    width: 400px;
+    height: 400px;
+    text-align: center;
+}
+.photocopies_img img{
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+}
+#gridPager tr{
+    margin-bottom: 10px;
+    height: 40px;
+}
+#gridPager label{
+    margin-bottom: 0;
+}
+.coverImg{
+    width: 86px;
+    height: 86px;
+    overflow: hidden;
+    border: solid 1px #ccc;
+}
+.widget-title img{
+    height:16px;
+}
+.overallData_cont.alldata {
+    padding: 18px 0;
+    margin-bottom: 10px;
+}
+.overallNum_div:first-child {
+    border-left: 0;
+}
+.overallNum_div {
+    width: 33.2%;
+    border-left: 1px solid #ededed;
+}
+.alldata p {
+    text-align: center;
+    font-size: 22px;
+    color: #333;
+    line-height: 1.3em;
+}
+.alldata p span {
+    font-size: 16px;
+    color: #178af5;
+}
+.overallData_cont {
+    border: 1px solid #ededed;
+    border-radius: 2px;
+}

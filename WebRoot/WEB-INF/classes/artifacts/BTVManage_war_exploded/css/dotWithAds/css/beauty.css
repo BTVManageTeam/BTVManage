@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+* { margin:0; padding:0; font-family:"宋体"; font-size:14px;}
+img { display:block;}
+a { text-decoration:none;}
+a img { border:none;}
+.clear { clear:both;}
+
+
+.header { width:100%; background:url(../images/header_bg_01.jpg) no-repeat center top;}
+.headerinner { width:1200px; margin:0 auto; padding:16px 0 17px;} 
+.content { width:100%;}
+.contentinner { width:1200px; margin:0 auto; padding:40px 0 110px;}
+.contentinner h2 { font-family:"微软雅黑"; font-size:24px; color:#999999; font-weight:normal;}
+.juji { width:1198px; border:1px solid #e8e8e8; margin-top:14px; padding:20px 0;}
+.juji p { float:left; color:#999999; margin-left:20px; height:24px; line-height:24px;}
+.juji a { display:block; float:left; margin-left:20px; height:24px; line-height:24px; padding:0 22px; background:#f1f1f1; color:#777777; font-family:"Courier New", Courier, monospace; font-size:16px;}
+.juji a.active { background:#ff0000; color:#FFF;}
+.left { float:left; width:212px; border-right:3px solid #e8e8e8; padding-top:42px; padding-bottom:14px;}
+.thum { position:relative; background:url(../images/suo_bg_03.png) no-repeat left top; width:170px; height:130px; margin-bottom:330px;}
+.thum p { font-family:"微软雅黑"; font-size:12px; color:#FFF; padding:7px 0 4px 50px; }
+.thum img { border:1px solid #e8e8e8; margin-left:10px;}
+.thum i { position:absolute; right:-62px; top:46px;}
+.thum i img { border:none;}
+
+
+
+.right { float:left; padding:98px 0 0 4px;}
+.rightinner { padding-bottom:48px; clear:both;}
+.rightinner h3 { font-family:"微软雅黑"; background:url(../images/h3_bg_07.png) no-repeat left center; color:#aaaaaa; padding-left:56px; margin-left:46px;}
+.bao { border:1px solid #e8e8e8; width:278px; margin:26px 0 0 46px; float:left;}
+.more { padding:24px 16px;}
+.more h4 { font-family:Verdana, Geneva, sans-serif; font-size:20px; color:#ff4400;}
+.more p { color:#bbbbbb; font-size:12px; line-height:1.5em;}
+.more a p { color:#3d3d3d; margin:10px 0;}
+
+
+
+
+.footer { width:100%;}
+.footerinner { width:1200px; border-top:1px solid #dddddd; padding:42px 0; margin:0 auto;}
+.footerinner p { text-align:center; font-size:12px; font-family:"微软雅黑"; color:#909090;}
