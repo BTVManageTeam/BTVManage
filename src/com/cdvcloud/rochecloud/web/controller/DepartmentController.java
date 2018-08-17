@@ -205,9 +205,7 @@ public class DepartmentController {
 		listStr.add("东城区");
 		listStr.add("西城区");
 		listStr.add("朝阳区");
-		listStr.add("崇文区");
 		listStr.add("海淀区");
-		listStr.add("宣武区");
 		listStr.add("丰台区");
 		listStr.add("房山区");
 		listStr.add("大兴区");

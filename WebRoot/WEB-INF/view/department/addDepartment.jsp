@@ -53,9 +53,7 @@ tr{
 									<option value="东城区">东城区</option>
 									<option value="西城区">西城区</option>
 									<option value="朝阳区">朝阳区</option>
-									<option value="崇文区">崇文区</option>
 									<option value="海淀区">海淀区</option>
-									<option value="宣武区">宣武区</option>
 									<option value="丰台区">丰台区</option>
 									<option value="房山区">房山区</option>
 									<option value="大兴区">大兴区</option>
